@@ -113,7 +113,9 @@
       box-shadow: 0 0 0 6px rgba(240,138,26,.12);
     }
 
-    /* Header */
+    /* =========================
+       HEADER (LOGO FIX)
+       ========================= */
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
@@ -126,20 +128,32 @@
     }
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width: 220px;
+      min-width: 260px; /* etwas mehr, damit Logo/Name nicht gequetscht werden */
     }
+
+    /* Logo: größer + weniger “Rand” + wirkt gefüllt */
     .brand img{
-      width:46px; height:46px; object-fit:contain;
-      border-radius: 12px;
+      width:56px; height:56px;
+      border-radius: 14px;
       background: rgba(255,255,255,.03);
       border: 1px solid rgba(255,255,255,.10);
-      padding:6px;
+
+      /* WICHTIG: padding weg = Logo füllt wirklich */
+      padding:0;
+
+      /* Sicher: kein Cropping bei Logos mit Rand/Transparenz */
+      object-fit: contain;
+
+      /* Optional: wenn dein Logo viel Rand hat, hilft das optisch */
+      transform: scale(1.02);
     }
+
     .brand .name{
       display:flex; flex-direction:column; line-height:1.05;
     }
     .brand .name strong{font-size:14px; letter-spacing:.2px}
     .brand .name span{font-size:12px; color: var(--muted2)}
+
     nav ul{
       display:flex; gap:18px; list-style:none; margin:0; padding:0;
       align-items:center;
@@ -232,9 +246,11 @@
     }
     .drawer .brandMini{display:flex; align-items:center; gap:10px}
     .drawer .brandMini img{
-      width:44px; height:44px; object-fit:contain;
-      border-radius:12px; border:1px solid rgba(255,255,255,.10);
-      padding:6px; background: rgba(255,255,255,.04);
+      width:52px; height:52px;
+      object-fit: contain;
+      border-radius:14px; border:1px solid rgba(255,255,255,.10);
+      padding:0;
+      background: rgba(255,255,255,.04);
     }
     .drawer nav a{
       display:block;
@@ -246,7 +262,9 @@
     .drawer nav a:hover{background: rgba(255,255,255,.06)}
     .drawer .actions{display:grid; gap:10px; margin-top:12px}
 
-    /* Hero */
+    /* =========================
+       HERO
+       ========================= */
     .hero{
       padding:56px 0 28px;
       position:relative;
@@ -309,6 +327,44 @@
     }
     .trust .t strong{display:block; color: rgba(255,255,255,.92); font-size:13px; margin-bottom:4px}
 
+    /* =========================
+       IMAGE PRESENTATION FIX (GLOBAL)
+       - Foreground: contain (immer ganzes Bild sichtbar)
+       - Background: cover + blur (Rahmen bleibt gefüllt)
+       ========================= */
+
+    .imgFrame{
+      position:relative;
+      width:100%;
+      height:100%;
+      min-height: inherit;
+      overflow:hidden;
+      background: rgba(0,0,0,.18);
+    }
+    .imgFrame .bg{
+      position:absolute; inset:0;
+      background-position:center;
+      background-size: cover;
+      filter: blur(18px) brightness(.72) saturate(1.05);
+      transform: scale(1.12);
+      opacity: .95;
+    }
+    .imgFrame .bg::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(70% 60% at 50% 35%, rgba(255,255,255,.10), rgba(0,0,0,.55) 70%);
+      opacity:.9;
+    }
+    .imgFrame img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit: contain;   /* <- WICHTIG: kein Crop */
+      object-position: center;
+      filter: contrast(1.02) saturate(1.02);
+      transform:none;        /* <- WICHTIG: kein Zoom */
+      padding: 14px;         /* etwas Luft, damit Labels nicht “beißen” */
+    }
+
     /* Before/After card */
     .baCard{
       border: 1px solid rgba(255,255,255,.10);
@@ -350,17 +406,42 @@
       position:relative;
       height: 100%;
       min-height: 360px;
+      background: rgba(0,0,0,.14);
     }
-    .baViewport img{
+
+    /* BEFORE/AFTER: contain + blur background */
+    .baViewport .layer{
+      position:absolute; inset:0;
+    }
+    .baViewport .layer .bg{
+      position:absolute; inset:0;
+      background-position:center;
+      background-size: cover;
+      filter: blur(18px) brightness(.72) saturate(1.05);
+      transform: scale(1.12);
+      opacity: .95;
+    }
+    .baViewport .layer .bg::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(70% 60% at 50% 35%, rgba(255,255,255,.10), rgba(0,0,0,.55) 70%);
+      opacity:.9;
+    }
+    .baViewport .layer img{
       position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit: cover;
+      object-fit: contain;     /* <- kein Crop */
+      object-position: center;
+      transform:none;          /* <- kein Zoom */
+      padding: 14px;
       filter: contrast(1.02) saturate(1.02);
-      transform: scale(1.02);
     }
-    .baViewport .after{
+
+    /* Clip nur die AFTER-Layer (inkl. bg + img) */
+    .baViewport .afterLayer{
       clip-path: inset(0 0 0 50%);
     }
+
     .baHandle{
       position:absolute; top:0; bottom:0; left:50%;
       width:2px;
@@ -368,6 +449,7 @@
       transform: translateX(-1px);
       box-shadow: 0 0 0 10px rgba(0,0,0,.12);
       cursor: col-resize;
+      z-index:5;
     }
     .baKnob{
       position:absolute; top:50%; left:50%;
@@ -381,6 +463,7 @@
       gap:8px;
       box-shadow: 0 18px 35px rgba(0,0,0,.35);
       cursor: col-resize;
+      z-index:6;
     }
     .arrow{
       width:10px; height:10px; border:2px solid rgba(255,255,255,.85);
@@ -393,6 +476,7 @@
       position:absolute; inset:auto 12px 12px 12px;
       display:flex; justify-content:space-between; gap:10px;
       pointer-events:none;
+      z-index:7;
     }
     .tag{
       padding:8px 10px;
@@ -419,6 +503,7 @@
       letter-spacing:-.5px;
     }
     .sectionHead p{margin:0; color: var(--muted); max-width: 62ch; line-height:1.55}
+
     .cards{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -505,16 +590,14 @@
       position:relative;
       min-height: 340px;
     }
-    .shot img{
-      width:100%; height:100%;
-      object-fit: cover;
-      transform: scale(1.02);
-      filter: contrast(1.02) saturate(1.02);
-    }
+
+    /* ALT: .shot img { object-fit: cover; transform: scale(1.02); ... } -> cropt
+       NEU: wir nutzen imgFrame (contain + blur bg) */
     .shot .cap{
       position:absolute; left:12px; right:12px; bottom:12px;
       display:flex; gap:10px; align-items:center; justify-content:space-between;
       pointer-events:none;
+      z-index:4;
     }
     .cap .label{
       padding:10px 12px;
@@ -846,9 +929,17 @@
             </div>
 
             <div class="baViewport" id="ba">
-              <!-- requested filenames -->
-              <img class="before" src="IMG_7437.jpg" alt="Vorher: Raum mit Gegenständen">
-              <img class="after"  src="IMG_7438.jpg" alt="Nachher: Raum geräumt und sauber">
+              <!-- BEFORE layer -->
+              <div class="layer beforeLayer">
+                <div class="bg" style="background-image:url('IMG_7437.jpg')"></div>
+                <img class="before" src="IMG_7437.jpg" alt="Vorher: Raum mit Gegenständen">
+              </div>
+
+              <!-- AFTER layer (geclippt) -->
+              <div class="layer afterLayer" id="afterLayer">
+                <div class="bg" style="background-image:url('IMG_7438.jpg')"></div>
+                <img class="after" src="IMG_7438.jpg" alt="Nachher: Raum geräumt und sauber">
+              </div>
 
               <div class="baHandle" id="baHandle" aria-hidden="true"></div>
               <div class="baKnob" id="baKnob" aria-label="Vergleichsregler" role="slider"
@@ -1003,7 +1094,10 @@
 
         <div class="gallery">
           <div class="shot reveal">
-            <img src="IMG_7439.jpg" alt="Vorher Nachher Beispiel groß">
+            <div class="imgFrame">
+              <div class="bg" style="background-image:url('IMG_7439.jpg')"></div>
+              <img src="IMG_7439.jpg" alt="Vorher Nachher Beispiel groß">
+            </div>
             <div class="cap">
               <span class="label">Beispiel 1 – klarer Unterschied</span>
               <span class="label" style="border-color:rgba(240,138,26,.28);">Besenrein</span>
@@ -1012,14 +1106,20 @@
 
           <div class="shotSmallGrid">
             <div class="shot reveal delay1" style="min-height: 162px;">
-              <img src="IMG_7440.jpg" alt="Vorher Nachher Beispiel 2">
+              <div class="imgFrame">
+                <div class="bg" style="background-image:url('IMG_7440.jpg')"></div>
+                <img src="IMG_7440.jpg" alt="Vorher Nachher Beispiel 2">
+              </div>
               <div class="cap">
                 <span class="label">Beispiel 2</span>
                 <span class="label" style="opacity:.85;">Garage</span>
               </div>
             </div>
             <div class="shot reveal delay2" style="min-height: 162px;">
-              <img src="IMG_7438.jpg" alt="Vorher Nachher Beispiel 3">
+              <div class="imgFrame">
+                <div class="bg" style="background-image:url('IMG_7438.jpg')"></div>
+                <img src="IMG_7438.jpg" alt="Vorher Nachher Beispiel 3">
+              </div>
               <div class="cap">
                 <span class="label">Beispiel 3</span>
                 <span class="label" style="opacity:.85;">Wohnraum</span>
@@ -1164,7 +1264,7 @@
     <div class="container">
       <div class="foot">
         <div style="display:flex; gap:12px; align-items:flex-start;">
-          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo" style="width:44px;height:44px;object-fit:contain;border-radius:12px;border:1px solid rgba(255,255,255,.10);padding:6px;background:rgba(255,255,255,.04)">
+          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo" style="width:52px;height:52px;object-fit:contain;border-radius:14px;border:1px solid rgba(255,255,255,.10);padding:0;background:rgba(255,255,255,.04)">
           <div>
             <div style="font-weight:900">Räumdienst Borken</div>
             <small>
@@ -1229,7 +1329,7 @@
 
     // ===== Before/After slider
     const ba = qs('#ba');
-    const afterImg = qs('#ba .after');
+    const afterLayer = qs('#afterLayer');
     const knob = qs('#baKnob');
     const handle = qs('#baHandle');
 
@@ -1238,7 +1338,7 @@
 
     function setBA(p){
       percent = clamp(p, 0, 100);
-      afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+      afterLayer.style.clipPath = `inset(0 0 0 ${percent}%)`;
       handle.style.left = percent + '%';
       knob.style.left = percent + '%';
       knob.setAttribute('aria-valuenow', Math.round(percent));
