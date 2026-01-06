@@ -804,6 +804,37 @@
 
       .floatCta{display:flex}
     }
+
+    /* ==========================================================
+       NEU: SWIPE-HINWEIS (nur Mobile) – Desktop bleibt unverändert
+       ========================================================== */
+    @media (max-width: 560px){
+      .swipeHint{ position:relative; }
+      .swipeHint::after{
+        content:"Wischen";
+        position:absolute;
+        left:50%;
+        bottom:8px;
+        transform:translateX(-50%);
+        font-size:11px;
+        font-weight:900;
+        letter-spacing:.25px;
+        color: rgba(255,255,255,.82);
+        background: rgba(0,0,0,.45);
+        border: 1px solid rgba(255,255,255,.14);
+        padding:6px 12px;
+        border-radius:999px;
+        pointer-events:none;
+        opacity:0;
+        animation: swipeHintFade 3.8s var(--ease) 1 forwards;
+      }
+      @keyframes swipeHintFade{
+        0%{opacity:0; transform:translateX(-50%) translateY(6px)}
+        18%{opacity:1; transform:translateX(-50%) translateY(0)}
+        75%{opacity:1; transform:translateX(-50%) translateY(0)}
+        100%{opacity:0; transform:translateX(-50%) translateY(6px)}
+      }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -905,7 +936,8 @@
               <a class="btn ghost" href="#referenzen">Referenzen ansehen</a>
             </div>
 
-            <div class="trust">
+            <!-- NEU: swipeHint Klasse -->
+            <div class="trust swipeHint">
               <div class="t reveal in delay1">
                 <strong>Kostenlose Besichtigung</strong>
                 Aufwand einschätzen, Details klären, ohne Risiko.
@@ -919,6 +951,7 @@
                 Nach Absprache oft auch kurzfristig möglich.
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -934,7 +967,8 @@
           </div>
         </div>
 
-        <div class="cards">
+        <!-- NEU: swipeHint Klasse -->
+        <div class="cards swipeHint">
           <div class="card reveal in">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V11z"/></svg>
@@ -972,7 +1006,8 @@
           </div>
         </div>
 
-        <div class="steps">
+        <!-- NEU: swipeHint Klasse -->
+        <div class="steps swipeHint">
           <div class="step reveal in">
             <div class="n">1</div>
             <h3>Kostenlose Besichtigung</h3>
@@ -1024,7 +1059,8 @@
             </div>
           </div>
 
-          <div class="trackWrap">
+          <!-- NEU: swipeHint Klasse -->
+          <div class="trackWrap swipeHint">
             <div class="track" id="track" aria-label="Referenz Carousel">
               <article class="slide" data-title="Projekt 01 – Wohnzimmer" data-badge="Wohnung" data-img="IMG_7439.jpg">
                 <div class="slideMedia">
@@ -1257,6 +1293,131 @@
       dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
 
+    function currentIndex(){
+      const w = slideWidth();
+      if(!w) return 0;
+      return Math.round(track.scrollLeft / w);
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      pauseAutoplay(true);
+      const i = Math.max(0, currentIndex() - 1);
+      scrollToIndex(i);
+    });
+    nextBtn?.addEventListener('click', () => {
+      pauseAutoplay(true);
+      const i = Math.min(slides.length - 1, currentIndex() + 1);
+      scrollToIndex(i);
+    });
+
+    let t;
+    track?.addEventListener('scroll', () => {
+      window.clearTimeout(t);
+      t = window.setTimeout(() => setActiveDot(currentIndex()), 60);
+    });
+
+    buildDots();
+
+    // Lightbox (Click = Bild groß)
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbClose = document.getElementById('lbClose');
+
+    function openLb(src, title){
+      lbImg.src = src;
+      lbTitle.textContent = title || 'Vorschau';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      pauseAutoplay(false); // wenn offen: Autoplay aus
+    }
+    function closeLb(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden','true');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+      resumeAutoplay(); // nach close wieder an
+    }
+
+    slides.forEach(s => {
+      const img = s.querySelector('img');
+      img?.addEventListener('click', () => {
+        openLb(s.dataset.img || img.src, s.dataset.title || 'Vorschau');
+      });
+    });
+
+    lbClose?.addEventListener('click', closeLb);
+    lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
+    window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
+
+    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let autoplayTimer = null;
+    let autoplayEnabled = !prefersReduced;
+    let userPausedUntil = 0;
+    let carouselInView = false;
+
+    function nextIndexLoop(){
+      const i = currentIndex();
+      return (i + 1) % Math.max(1, slides.length);
+    }
+
+    function startAutoplay(){
+      if(!autoplayEnabled || !track || slides.length < 2) return;
+      if(autoplayTimer) return;
+      autoplayTimer = window.setInterval(() => {
+        if(!carouselInView) return;
+        if(lightbox.classList.contains('open')) return;
+        if(Date.now() < userPausedUntil) return;
+        scrollToIndex(nextIndexLoop());
+      }, 3600);
+    }
+
+    function stopAutoplay(){
+      if(autoplayTimer){
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function pauseAutoplay(withResumeDelay){
+      stopAutoplay();
+      if(withResumeDelay){
+        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
+      } else {
+        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
+      }
+    }
+
+    function resumeAutoplay(){
+      if(!autoplayEnabled) return;
+      userPausedUntil = Date.now() + 900; // kurzer Buffer
+      startAutoplay();
+    }
+
+    // Interaktionen = Pause
+    const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
+    pauseEvents.forEach(ev => {
+      track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
+    });
+
+    // Nur wenn Carousel sichtbar
+    const carouselEl = document.getElementById('refCarousel');
+    const inViewIO = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        carouselInView = !!en.isIntersecting;
+        if(carouselInView) startAutoplay();
+      });
+    }, {threshold: 0.25});
+    if(carouselEl) inViewIO.observe(carouselEl);
+
+    // Start
+    startAutoplay();
+  </script>
+</body>
+</html>
     function currentIndex(){
       const w = slideWidth();
       if(!w) return 0;
