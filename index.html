@@ -1,1545 +1,243 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0B2A6F" />
-  <meta name="description" content="Entrümpelung & Haushaltsauflösung in Borken: zuverlässig, diskret, sauber. Kostenlose Besichtigung, fairer Festpreis. Kurzfristige Termine möglich." />
-  <title>Räumdienst Borken – Entrümpelung & Haushaltsauflösung</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Räumdienst Borken – Entrümpelung & Haushaltsauflösung</title>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Räumdienst Borken – Entrümpelung & Haushaltsauflösung" />
-  <meta property="og:description" content="Kostenlose Besichtigung. Fairer Festpreis. Diskret & zügig. Raum Borken & Umgebung." />
-  <meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060912;
+  --panel:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.14);
+  --text:#fff;
+  --muted:rgba(255,255,255,.7);
+  --orange:#F08A1A;
+  --radius:22px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
 
-  <link rel="icon" href="IMG_7436.jpg" />
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Manrope,system-ui;
+  color:var(--text);
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(40,90,180,.45), transparent),
+    radial-gradient(700px 400px at 90% 20%, rgba(240,138,26,.35), transparent),
+    linear-gradient(#050812,#02040a);
+}
 
-  <style>
-    :root{
-      --bg:#05070d;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.09);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.90);
-      --muted: rgba(255,255,255,.68);
-      --muted2: rgba(255,255,255,.52);
+.container{max-width:1200px;margin:0 auto;padding:20px}
 
-      --blue:#0B2A6F;
-      --blue2:#1E4AAE;
-      --orange:#F08A1A;
-      --red:#E13B3B;
+header{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(14px);
+  background:rgba(5,7,15,.75);
+  border-bottom:1px solid var(--border);
+}
+header .container{
+  display:flex;align-items:center;justify-content:space-between;
+}
+header strong{font-weight:800}
 
-      --shadow: 0 20px 70px rgba(0,0,0,.55);
-      --shadow2: 0 12px 30px rgba(0,0,0,.35);
-      --radius: 22px;
-      --radius2: 16px;
+.btn{
+  padding:14px 18px;
+  border-radius:14px;
+  font-weight:800;
+  background:linear-gradient(135deg,#F08A1A,#E24A2A);
+  border:none;
+  color:#fff;
+}
 
-      --max: 1240px;
-      --ease: cubic-bezier(.2,.8,.2,1);
-    }
+.hero{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+  margin-top:24px;
+}
+.heroBox{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px;
+}
+.hero h1{
+  font-size:clamp(28px,4vw,46px);
+  margin:0 0 12px;
+}
+.hero p{color:var(--muted)}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1100px 650px at 15% 10%, rgba(30,74,174,.45), transparent 60%),
-                  radial-gradient(900px 550px at 85% 20%, rgba(240,138,26,.35), transparent 55%),
-                  radial-gradient(900px 650px at 60% 90%, rgba(225,59,59,.22), transparent 55%),
-                  linear-gradient(180deg, #04060c 0%, #04060c 50%, #03050a 100%);
-      color: var(--text);
-      overflow-x:hidden;
-    }
+.carouselCard{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px;
+}
 
-    a{color:inherit; text-decoration:none}
-    button, input, textarea{font-family:inherit}
-    ::selection{background: rgba(240,138,26,.35)}
+.track{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+.slide{
+  flex:0 0 88%;
+  scroll-snap-align:start;
+  border-radius:18px;
+  overflow:hidden;
+}
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  cursor:pointer;
+}
 
-    .mesh{
-      position:fixed; inset:-20%;
-      z-index:-2;
-      filter: blur(30px) saturate(120%);
-      opacity:.65;
-      pointer-events:none;
-      transform: translateZ(0);
-      animation: floatMesh 14s var(--ease) infinite alternate;
-      background:
-        radial-gradient(closest-side at 15% 25%, rgba(30,74,174,.45), transparent 60%),
-        radial-gradient(closest-side at 70% 15%, rgba(240,138,26,.35), transparent 62%),
-        radial-gradient(closest-side at 80% 75%, rgba(225,59,59,.20), transparent 60%),
-        radial-gradient(closest-side at 30% 80%, rgba(30,74,174,.25), transparent 60%);
-    }
-    @keyframes floatMesh{
-      from{transform: translate3d(-1.5%, -1.5%, 0) scale(1.02)}
-      to{transform: translate3d(1.5%, 1.0%, 0) scale(1.06)}
-    }
+/* Swipe hint */
+.swipeHint{
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:800;
+  background:rgba(0,0,0,.45);
+  border-radius:999px;
+  opacity:0;
+  transform:translateY(8px);
+  transition:.25s var(--ease);
+  pointer-events:none;
+}
+.swipeHint.show{
+  opacity:1;
+  transform:translateY(0);
+}
 
-    .noise{
-      position:fixed; inset:0;
-      z-index:-1;
-      pointer-events:none;
-      opacity:.08;
-      mix-blend-mode: overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-    }
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+}
+.lightbox.open{display:flex}
+.lightbox img{
+  max-width:92vw;
+  max-height:85vh;
+  border-radius:18px;
+}
 
-    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 14px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.05);
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-      color: var(--muted);
-      font-weight:600;
-      letter-spacing:.2px;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--orange), var(--red));
-      box-shadow: 0 0 0 6px rgba(240,138,26,.12);
-    }
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(5,7,13,.78), rgba(5,7,13,.45));
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-    }
-    .brand{display:flex; align-items:center; gap:12px; min-width: 220px;}
-    .brand img{
-      width:46px; height:46px;
-      object-fit: cover;
-      object-position:center;
-      border-radius: 14px;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.10);
-      overflow:hidden;
-    }
-    .brand .name{display:flex; flex-direction:column; line-height:1.05}
-    .brand .name strong{font-size:14px; letter-spacing:.2px}
-    .brand .name span{font-size:12px; color: var(--muted2)}
-
-    nav ul{
-      display:flex; gap:18px; list-style:none; margin:0; padding:0;
-      align-items:center;
-    }
-    nav a{
-      color: var(--muted);
-      font-weight:700;
-      font-size:13px;
-      padding:10px 10px;
-      border-radius: 10px;
-      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
-    }
-    nav a:hover{background: rgba(255,255,255,.06); color: var(--text); transform: translateY(-1px)}
-    .nav-cta{display:flex; gap:10px; align-items:center}
-
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-weight:800;
-      font-size:13px;
-      cursor:pointer;
-      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
-      box-shadow: 0 10px 24px rgba(0,0,0,.25);
-      user-select:none;
-    }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22)}
-    .btn.primary{
-      border: 1px solid rgba(240,138,26,.35);
-      background: linear-gradient(135deg, rgba(240,138,26,.95), rgba(225,59,59,.86));
-      box-shadow: 0 18px 35px rgba(240,138,26,.22), 0 12px 22px rgba(0,0,0,.30);
-    }
-    .btn.primary:hover{transform: translateY(-2px)}
-    .btn.ghost{
-      background: rgba(255,255,255,.04);
-      border-color: rgba(255,255,255,.12);
-      color: rgba(255,255,255,.78);
-    }
-
-    .hamburger{
-      display:none;
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      align-items:center; justify-content:center;
-      cursor:pointer;
-    }
-    .hamburger span{
-      width:18px; height:2px; background: rgba(255,255,255,.82);
-      display:block; position:relative;
-    }
-    .hamburger span::before,.hamburger span::after{
-      content:""; position:absolute; left:0;
-      width:18px; height:2px; background: rgba(255,255,255,.82);
-      transition: transform .2s var(--ease), top .2s var(--ease), opacity .2s var(--ease);
-    }
-    .hamburger span::before{top:-6px}
-    .hamburger span::after{top:6px}
-    .hamburger.active span{background:transparent}
-    .hamburger.active span::before{top:0; transform: rotate(45deg)}
-    .hamburger.active span::after{top:0; transform: rotate(-45deg)}
-
-    /* Mobile drawer */
-    .drawer{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
-      z-index:99;
-      display:none;
-    }
-    .drawer.open{display:block}
-    .drawer .panel{
-      position:absolute; right:0; top:0; height:100%;
-      width:min(420px, 92vw);
-      background: rgba(8,10,16,.94);
-      border-left: 1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(16px);
-      padding:18px;
-      transform: translateX(105%);
-      transition: transform .25s var(--ease);
-      box-shadow: -30px 0 70px rgba(0,0,0,.55);
-    }
-    .drawer.open .panel{transform: translateX(0)}
-    .drawer .top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.08);
-      margin-bottom:10px;
-    }
-    .drawer .brandMini{display:flex; align-items:center; gap:10px}
-    .drawer .brandMini img{
-      width:44px; height:44px;
-      object-fit: cover;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-    }
-    .drawer nav a{
-      display:block;
-      padding:14px 12px;
-      border-radius: 14px;
-      color: rgba(255,255,255,.86);
-      font-weight:800;
-    }
-    .drawer nav a:hover{background: rgba(255,255,255,.06)}
-    .drawer .actions{display:grid; gap:10px; margin-top:12px}
-
-    /* Hero */
-    .hero{padding:56px 0 16px; position:relative;}
-    .hero .wrap{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:18px;
-      align-items:start;
-    }
-    .headline{
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border-radius: var(--radius);
-      padding:26px;
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .headline::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(850px 280px at 20% 0%, rgba(30,74,174,.38), transparent 60%),
-        radial-gradient(600px 220px at 85% 15%, rgba(240,138,26,.30), transparent 60%),
-        radial-gradient(700px 260px at 75% 95%, rgba(225,59,59,.18), transparent 60%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .headline > *{position:relative}
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(30px, 3.4vw, 52px);
-      line-height:1.02;
-      letter-spacing:-0.8px;
-    }
-    .lead{
-      margin:0 0 18px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height:1.6;
-      max-width: 70ch;
-    }
-    .heroActions{display:flex; flex-wrap:wrap; gap:10px; margin-top: 6px}
-    .trust{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap:12px;
-      margin-top:16px;
-    }
-    .trust .t{
-      padding:12px 12px;
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.78);
-      font-weight:700;
-      font-size:12px;
-      line-height:1.25;
-    }
-    .trust .t strong{display:block; color: rgba(255,255,255,.92); font-size:13px; margin-bottom:4px}
-
-    /* Sections */
-    section{padding:34px 0}
-    .sectionHead{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:16px;
-      margin-bottom:16px;
-    }
-    .sectionHead h2{
-      margin:0;
-      font-size: clamp(22px, 2.4vw, 32px);
-      letter-spacing:-.5px;
-    }
-    .sectionHead p{margin:0; color: var(--muted); max-width: 72ch; line-height:1.55}
-
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-    }
-    .card{
-      grid-column: span 4;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      padding:16px;
-      box-shadow: var(--shadow2);
-      position:relative;
-      overflow:hidden;
-      transform: translateY(0);
-      transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
-    }
-    .card:hover{
-      transform: translateY(-3px);
-      background: rgba(255,255,255,.07);
-      border-color: rgba(255,255,255,.18);
-    }
-    .icon{
-      width:46px; height:46px; border-radius: 16px;
-      display:flex; align-items:center; justify-content:center;
-      border:1px solid rgba(255,255,255,.14);
-      background: radial-gradient(40px 40px at 20% 20%, rgba(30,74,174,.35), rgba(255,255,255,.04)),
-                  radial-gradient(40px 40px at 80% 80%, rgba(240,138,26,.22), transparent 65%);
-      margin-bottom:12px;
-    }
-    .icon svg{width:22px; height:22px; fill: rgba(255,255,255,.88)}
-    .card h3{margin:0 0 8px; font-size:15px; letter-spacing:-.2px}
-    .card p{margin:0; color: var(--muted); font-size:13px; line-height:1.55}
-
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-    }
-    .step{
-      grid-column: span 3;
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      padding:16px;
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-      position:relative;
-      overflow:hidden;
-    }
-    .step::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(400px 150px at 10% 0%, rgba(30,74,174,.25), transparent 60%),
-                  radial-gradient(340px 150px at 90% 0%, rgba(240,138,26,.18), transparent 60%);
-      opacity:.8;
-      pointer-events:none;
-    }
-    .step > *{position:relative}
-    .n{
-      width:34px; height:34px; border-radius: 12px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:900;
-      background: rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.14);
-      margin-bottom:10px;
-    }
-    .step h3{margin:0 0 8px; font-size:14px}
-    .step p{margin:0; color: var(--muted); font-size:13px; line-height:1.5}
-
-    /* ===== Referenzen: manuelles Carousel (plus Auto-Play via JS) ===== */
-    .carouselCard{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .carouselTop{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:14px;
-      padding:16px 16px 12px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .carouselTop .meta strong{display:block; font-size:14px}
-    .carouselTop .meta span{display:block; font-size:12px; color: var(--muted2); margin-top:3px}
-    .carouselTop .controls{display:flex; gap:10px; align-items:center}
-    .iconBtn{
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      color: rgba(255,255,255,.90);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer;
-      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
-      user-select:none;
-    }
-    .iconBtn:hover{transform: translateY(-1px); background: rgba(0,0,0,.26); border-color: rgba(255,255,255,.22)}
-    .iconBtn:active{transform: translateY(0)}
-    .iconBtn svg{width:18px; height:18px; fill: rgba(255,255,255,.90)}
-
-    .trackWrap{position:relative; padding:16px;}
-    .track{
-      display:flex;
-      gap:14px;
-      overflow:auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior:smooth;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 10px;
-    }
-    .track::-webkit-scrollbar{height:10px}
-    .track::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius: 999px}
-    .track::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius: 999px}
-
-    .slide{
-      flex: 0 0 auto;
-      width: min(520px, 86vw);
-      scroll-snap-align: start;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.20);
-      border-radius: 18px;
-      overflow:hidden;
-      position:relative;
-      box-shadow: 0 12px 30px rgba(0,0,0,.30);
-    }
-
-    .slideMedia{aspect-ratio: 16/9; background: rgba(0,0,0,.18);}
-    .slideMedia img{
-      width:100%; height:100%;
-      object-fit: cover;
-      object-position:center;
-      display:block;
-      cursor: zoom-in;
-      transform: scale(1.01);
-      transition: transform .25s var(--ease);
-    }
-    .slide:hover .slideMedia img{transform: scale(1.04)}
-
-    .slideCap{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 12px;
-      border-top:1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.20);
-    }
-    .badge{
-      padding:8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.82);
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.2px;
-      white-space:nowrap;
-    }
-    .note{
-      color: var(--muted2);
-      font-size:12px;
-      font-weight:800;
-      white-space:nowrap;
-    }
-
-    .dots{display:flex; justify-content:center; gap:8px; padding: 0 16px 14px;}
-    .dotBtn{
-      width:8px; height:8px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.10);
-      cursor:pointer;
-      transition: transform .2s var(--ease), background .2s var(--ease);
-    }
-    .dotBtn.active{background: linear-gradient(135deg, rgba(240,138,26,.95), rgba(225,59,59,.86)); transform: scale(1.2)}
-    .dotBtn:hover{transform: scale(1.2)}
-
-    /* Lightbox */
-    .lightbox{
-      position:fixed; inset:0;
-      z-index:120;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(10px);
-      display:none;
-      align-items:center; justify-content:center;
-      padding: 18px;
-    }
-    .lightbox.open{display:flex}
-    .lbPanel{
-      width:min(1080px, 96vw);
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(10,12,18,.86);
-      box-shadow: 0 30px 90px rgba(0,0,0,.65);
-      overflow:hidden;
-      position:relative;
-    }
-    .lbTop{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:12px 12px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .lbTop .title{
-      font-weight:900;
-      font-size:13px;
-      color: rgba(255,255,255,.85);
-    }
-    .lbClose{
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.85);
-      cursor:pointer;
-      font-weight:900;
-    }
-    .lbImg{
-      width:100%;
-      max-height: 78vh;
-      display:block;
-      object-fit: contain;
-      background: rgba(0,0,0,.28);
-    }
-
-    /* FAQ */
-    .faq{display:grid; grid-template-columns: 1fr 1fr; gap:14px;}
-    details{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      padding:14px 14px;
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-    summary{
-      cursor:pointer;
-      list-style:none;
-      font-weight:900;
-      font-size:14px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-    }
-    summary::-webkit-details-marker{display:none}
-    .chev{
-      width:10px; height:10px;
-      border:2px solid rgba(255,255,255,.72);
-      border-left:none; border-top:none;
-      transform: rotate(45deg);
-      transition: transform .2s var(--ease);
-      flex: 0 0 auto;
-      margin-left:10px;
-    }
-    details[open] .chev{transform: rotate(225deg)}
-    details p{margin:10px 0 0; color: var(--muted); font-size:13px; line-height:1.55}
-
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .contactCard{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow);
-      padding:16px;
-      overflow:hidden;
-      position:relative;
-    }
-    .contactCard::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 220px at 15% 10%, rgba(30,74,174,.22), transparent 60%),
-        radial-gradient(520px 220px at 85% 20%, rgba(240,138,26,.18), transparent 60%);
-      pointer-events:none;
-      opacity:.8;
-    }
-    .contactCard > *{position:relative}
-    .kv{display:grid; gap:10px; margin-top:10px;}
-    .kv .line{
-      display:flex; gap:10px; align-items:flex-start;
-      color: var(--muted);
-      font-size:13px;
-      line-height:1.45;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
-      padding:12px;
-    }
-    .kv strong{color: rgba(255,255,255,.90)}
-    .form{display:grid; gap:10px; margin-top:10px;}
-    .field{display:grid; gap:6px;}
-    label{font-size:12px; color: var(--muted2); font-weight:800}
-    input, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      color: rgba(255,255,255,.90);
-      outline:none;
-      transition: border-color .2s var(--ease), background .2s var(--ease);
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(240,138,26,.45);
-      background: rgba(0,0,0,.28);
-    }
-    textarea{min-height: 120px; resize: vertical}
-    .fine{color: var(--muted2); font-size:12px; line-height:1.45; margin-top:10px;}
-
-    footer{
-      padding:24px 0 34px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
-    }
-    .foot{
-      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .foot small{color: var(--muted2); line-height:1.55}
-    .foot a{color: rgba(255,255,255,.78); font-weight:800}
-    .foot a:hover{text-decoration:underline}
-
-    .reveal{opacity:0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease)}
-    .reveal.in{opacity:1; transform: translateY(0)}
-    .delay1{transition-delay:.05s}
-    .delay2{transition-delay:.10s}
-    .delay3{transition-delay:.15s}
-
-    .floatCta{
-      position:fixed;
-      left:14px; right:14px; bottom:14px;
-      z-index:70;
-      display:none;
-      gap:10px;
-    }
-    .floatCta a{flex:1}
-
-    /* =========================
-       MOBILE-ONLY: moderner & “luftiger”
-       Desktop bleibt 1:1 – nur <980 & <560 angepasst
-       ========================= */
-    @media (max-width: 980px){
-      .container{padding: 0 16px}
-      section{padding:24px 0}
-      .nav{padding:10px 0}
-
-      .hero{padding:30px 0 8px}
-      .headline{
-        padding:18px;
-        box-shadow: 0 12px 38px rgba(0,0,0,.36);
-        background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02));
-      }
-      .pill{box-shadow:none}
-      .lead{font-size:14px; margin-bottom:14px}
-
-      .heroActions{gap:8px}
-      .btn{box-shadow: 0 8px 18px rgba(0,0,0,.20)}
-      .btn.primary{box-shadow: 0 12px 26px rgba(240,138,26,.16), 0 10px 18px rgba(0,0,0,.22)}
-
-      /* Trust = swipe statt 3 Boxen übereinander */
-      .trust{
-        display:flex;
-        gap:10px;
-        overflow:auto;
-        padding-bottom: 6px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-      }
-      .trust .t{
-        flex: 0 0 auto;
-        min-width: min(340px, 86vw);
-        scroll-snap-align: start;
-        padding:12px;
-        border-radius: 18px;
-        border-color: rgba(255,255,255,.09);
-        background: rgba(255,255,255,.028);
-      }
-      .trust::-webkit-scrollbar{height:10px}
-      .trust::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius: 999px}
-      .trust::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius: 999px}
-
-      .sectionHead{flex-direction:column; align-items:flex-start; gap:8px}
-
-      /* etwas weniger “Card-Look” */
-      .card, .step, .contactCard, details{
-        box-shadow: 0 10px 22px rgba(0,0,0,.20);
-        border-color: rgba(255,255,255,.09);
-        background: rgba(255,255,255,.032);
-      }
-
-      .cards .card{grid-column: span 6}
-      .steps .step{grid-column: span 6}
-
-      .faq{grid-template-columns: 1fr}
-      .contact{grid-template-columns: 1fr}
-
-      nav ul{display:none}
-      .hamburger{display:flex}
-      .nav-cta .btn.ghost{display:none}
-      .carouselTop .note{display:none}
-    }
-
-    @media (max-width: 560px){
-      .container{padding: 0 14px}
-      section{padding:20px 0}
-      .nav{padding:9px 0}
-
-      .brand img{width:42px; height:42px; border-radius: 14px}
-      .brand{min-width:auto}
-      .brand .name{display:none}
-
-      /* Hero: klarer, weniger “Box” */
-      .hero{padding:22px 0 6px}
-      .headline{
-        padding:16px;
-        border-radius: 20px;
-        border-color: rgba(255,255,255,.085);
-      }
-      .headline::before{opacity:.75}
-      .pill{
-        padding:8px 12px;
-        font-size:12px;
-        border-color: rgba(255,255,255,.09);
-        background: rgba(255,255,255,.035);
-      }
-      h1{font-size: clamp(26px, 8vw, 38px)}
-      .lead{
-        font-size:14px;
-        line-height:1.55;
-        margin-bottom:12px;
-      }
-
-      .heroActions{
-        display:grid;
-        grid-template-columns: 1fr;
-        gap:10px;
-      }
-      .heroActions .btn{width:100%}
-
-      /* Leistungen & Ablauf: “modern” = horizontales Snap-Rack statt viele Kacheln untereinander */
-      .cards, .steps{
-        display:flex;
-        gap:12px;
-        overflow:auto;
-        padding-bottom: 6px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-      }
-      .cards::-webkit-scrollbar, .steps::-webkit-scrollbar{height:10px}
-      .cards::-webkit-scrollbar-thumb, .steps::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius:999px}
-      .cards::-webkit-scrollbar-track, .steps::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius:999px}
-
-      .cards .card, .steps .step{
-        flex: 0 0 auto;
-        width: 86vw;
-        scroll-snap-align: start;
-        padding:14px;
-        border-radius: 20px;
-        background: rgba(255,255,255,.028);
-      }
-      /* weniger Text-Block-Gefühl */
-      .card p, .step p{
-        display:-webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow:hidden;
-      }
-
-      /* Referenzen etwas cleaner */
-      .trackWrap{padding: 14px}
-      .track{gap:12px}
-      .slide{width: 88vw}
-
-      /* Kontakt kompakter */
-      .contactCard{padding:14px; border-radius: 20px}
-      .kv .line{padding:11px; border-radius: 14px}
-
-      .floatCta{display:flex}
-    }
-
-    /* ==========================================================
-       NEU: SWIPE-HINWEIS (nur Mobile) – Desktop bleibt unverändert
-       ========================================================== */
-    @media (max-width: 560px){
-      .swipeHint{ position:relative; }
-      .swipeHint::after{
-        content:"Wischen";
-        position:absolute;
-        left:50%;
-        bottom:8px;
-        transform:translateX(-50%);
-        font-size:11px;
-        font-weight:900;
-        letter-spacing:.25px;
-        color: rgba(255,255,255,.82);
-        background: rgba(0,0,0,.45);
-        border: 1px solid rgba(255,255,255,.14);
-        padding:6px 12px;
-        border-radius:999px;
-        pointer-events:none;
-        opacity:0;
-        animation: swipeHintFade 3.8s var(--ease) 1 forwards;
-      }
-      @keyframes swipeHintFade{
-        0%{opacity:0; transform:translateX(-50%) translateY(6px)}
-        18%{opacity:1; transform:translateX(-50%) translateY(0)}
-        75%{opacity:1; transform:translateX(-50%) translateY(0)}
-        100%{opacity:0; transform:translateX(-50%) translateY(6px)}
-      }
-    }
-  </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Räumdienst Borken",
-    "description": "Entrümpelung & Haushaltsauflösung in Borken: zuverlässig, diskret, sauber. Kostenlose Besichtigung, fairer Festpreis.",
-    "areaServed": "Borken und Umgebung",
-    "telephone": "+49 176 46620710",
-    "image": ["IMG_7436.jpg","IMG_7437.jpg","IMG_7438.jpg","IMG_7439.jpg","IMG_7440.jpg"]
-  }
-  </script>
+/* Mobile */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
-  <div class="mesh" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
 
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
-      <div class="top">
-        <div class="brandMini">
-          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
-          <div>
-            <div style="font-weight:900">Räumdienst Borken</div>
-            <div style="color:rgba(255,255,255,.58); font-size:12px; font-weight:700">Entrümpelung & Haushaltsauflösung</div>
-          </div>
-        </div>
-        <button class="btn ghost" id="closeDrawer" type="button" aria-label="Menü schließen">Schließen</button>
-      </div>
-      <nav>
-        <a href="#leistungen">Leistungen</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#referenzen">Referenzen</a>
-        <a href="#faq">FAQ</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <div class="actions">
-        <a class="btn primary" href="tel:+4917646620710">Jetzt anrufen</a>
-        <a class="btn" href="#kontakt">Kostenlose Besichtigung</a>
-      </div>
-      <p class="fine">
-        Hinweis: Bitte passen Sie Impressum/Datenschutz/Adresse an, sobald die finalen Unternehmensdaten vorliegen.
-      </p>
-    </div>
+<header>
+  <div class="container">
+    <strong>Räumdienst Borken</strong>
+    <a class="btn" href="tel:+4917646620710">Besichtigung</a>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <div class="heroBox">
+    <h1>Entrümpelung & Haushaltsauflösung in Borken</h1>
+    <p>Diskret. Sauber. Fairer Festpreis nach kostenloser Besichtigung.</p>
   </div>
 
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="#top" aria-label="Startseite">
-          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
-          <div class="name">
-            <strong>Räumdienst Borken</strong>
-            <span>Entrümpelung & Haushaltsauflösung</span>
-          </div>
-        </a>
-
-        <nav aria-label="Hauptnavigation">
-          <ul>
-            <li><a href="#leistungen">Leistungen</a></li>
-            <li><a href="#ablauf">Ablauf</a></li>
-            <li><a href="#referenzen">Referenzen</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-          </ul>
-        </nav>
-
-        <div class="nav-cta">
-          <a class="btn ghost" href="tel:+4917646620710" aria-label="Telefon">📞 0176 46620710</a>
-          <a class="btn primary" href="#kontakt">Kostenlose Besichtigung</a>
-          <button class="hamburger" id="burger" aria-label="Menü öffnen" type="button">
-            <span></span>
-          </button>
-        </div>
-      </div>
+  <div class="carouselCard" id="refCarousel">
+    <div class="track" id="track">
+      <div class="slide"><img src="IMG_7436.jpg"></div>
+      <div class="slide"><img src="IMG_7437.jpg"></div>
+      <div class="slide"><img src="IMG_7438.jpg"></div>
+      <div class="slide"><img src="IMG_7439.jpg"></div>
     </div>
-  </header>
-
-  <main id="top">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <div class="wrap">
-          <div class="headline reveal in">
-            <span class="pill"><span class="dot"></span> Diskret. Sauber. Planbar.</span>
-            <h1>Entrümpelung & Haushaltsauflösung<br>in <span style="background:linear-gradient(135deg,var(--orange),var(--red)); -webkit-background-clip:text; background-clip:text; color:transparent;">Borken</span></h1>
-            <p class="lead">
-              Sie möchten wieder Platz, Ordnung und Ruhe? Wir übernehmen Entrümpelungen und Haushaltsauflösungen zuverlässig – inklusive
-              Sortierung, Räumung und besenreiner Übergabe. <strong>Vorab kostenlos besichtigen</strong>, danach <strong>fairer Festpreis</strong>.
-            </p>
-
-            <div class="heroActions">
-              <a class="btn primary" href="#kontakt">Festpreis anfragen</a>
-              <a class="btn" href="tel:+4917646620710">Sofort anrufen</a>
-              <a class="btn ghost" href="#referenzen">Referenzen ansehen</a>
-            </div>
-
-            <!-- NEU: swipeHint Klasse -->
-            <div class="trust swipeHint">
-              <div class="t reveal in delay1">
-                <strong>Kostenlose Besichtigung</strong>
-                Aufwand einschätzen, Details klären, ohne Risiko.
-              </div>
-              <div class="t reveal in delay2">
-                <strong>Fairer Festpreis</strong>
-                Sie wissen vorher, womit Sie rechnen können.
-              </div>
-              <div class="t reveal in delay3">
-                <strong>Kurzfristige Termine</strong>
-                Nach Absprache oft auch kurzfristig möglich.
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Leistungen -->
-    <section id="leistungen">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Leistungen</h2>
-            <p>Konsequent organisiert, sauber umgesetzt. Für Privatpersonen, Vermieter, Erbengemeinschaften und Gewerbe – im Raum Borken & Umgebung.</p>
-          </div>
-        </div>
-
-        <!-- NEU: swipeHint Klasse -->
-        <div class="cards swipeHint">
-          <div class="card reveal in">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V11z"/></svg>
-            </div>
-            <h3>Wohnungen & Häuser</h3>
-            <p>Entrümpelung kompletter Objekte inkl. Nebenräume. Besenreine Übergabe auf Wunsch mit Schlüsselübergabe.</p>
-          </div>
-
-          <div class="card reveal in delay1">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 10h16v10H4V10zm2-6h12l2 4H4l2-4z"/></svg>
-            </div>
-            <h3>Haushaltsauflösungen</h3>
-            <p>Strukturiert bei sensiblen Fällen (Umzug, Auszug, Nachlass). Diskret und ohne unnötigen Stress.</p>
-          </div>
-
-          <div class="card reveal in delay2">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7 7h10v10H7V7zm-4 4h3v6H3v-6zm15 0h3v6h-3v-6z"/></svg>
-            </div>
-            <h3>Keller, Dachboden, Garage</h3>
-            <p>Schnell wieder nutzbare Flächen. Mit System sortiert, geräumt, sauber abgeschlossen.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ablauf -->
-    <section id="ablauf">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Ablauf</h2>
-            <p>Transparent und planbar – damit Sie wissen, was passiert und wann.</p>
-          </div>
-        </div>
-
-        <!-- NEU: swipeHint Klasse -->
-        <div class="steps swipeHint">
-          <div class="step reveal in">
-            <div class="n">1</div>
-            <h3>Kostenlose Besichtigung</h3>
-            <p>Wir schauen uns alles vor Ort an, klären Umfang, Zugänge und Timing.</p>
-          </div>
-          <div class="step reveal in delay1">
-            <div class="n">2</div>
-            <h3>Festpreis-Angebot</h3>
-            <p>Sie bekommen einen klaren Preis – ohne Überraschungen und ohne Kleingedrucktes.</p>
-          </div>
-          <div class="step reveal in delay2">
-            <div class="n">3</div>
-            <h3>Entrümpelung</h3>
-            <p>Wir räumen organisiert, zügig und diskret – mit sauberer Arbeitsweise.</p>
-          </div>
-          <div class="step reveal in delay3">
-            <div class="n">4</div>
-            <h3>Besenreine Übergabe</h3>
-            <p>Am Ende übergeben wir ordentlich und besenrein. Optional inkl. Schlüsselübergabe.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Referenzen (Carousel) -->
-    <section id="referenzen">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Referenzen</h2>
-            <p>Wischen oder ziehen Sie die Beispiele. Das Carousel läuft automatisch – bei Interaktion stoppt es kurz.</p>
-          </div>
-        </div>
-
-        <div class="carouselCard reveal in" id="refCarousel">
-          <div class="carouselTop">
-            <div class="meta">
-              <strong>Projekte aus Borken & Umgebung</strong>
-              <span>Klick aufs Bild = groß ansehen</span>
-            </div>
-            <div class="controls">
-              <span class="note">Auto • Drag/Swipe • Pfeile • Dots</span>
-              <button class="iconBtn" type="button" id="prevBtn" aria-label="Vorheriges Bild">
-                <svg viewBox="0 0 24 24"><path d="M15.5 4.5 7 12l8.5 7.5 1.5-1.7L10.5 12 17 6.2z"/></svg>
-              </button>
-              <button class="iconBtn" type="button" id="nextBtn" aria-label="Nächstes Bild">
-                <svg viewBox="0 0 24 24"><path d="M8.5 19.5 17 12 8.5 4.5 7 6.2 13.5 12 7 17.8z"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <!-- NEU: swipeHint Klasse -->
-          <div class="trackWrap swipeHint">
-            <div class="track" id="track" aria-label="Referenz Carousel">
-              <article class="slide" data-title="Projekt 01 – Wohnzimmer" data-badge="Wohnung" data-img="IMG_7439.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7439.jpg" alt="Referenz Projekt 01">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Wohnung</span>
-                  <span class="note">Projekt 01</span>
-                </div>
-              </article>
-
-              <article class="slide" data-title="Projekt 02 – Raum" data-badge="Besenrein" data-img="IMG_7440.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7440.jpg" alt="Referenz Projekt 02">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Besenrein</span>
-                  <span class="note">Projekt 02</span>
-                </div>
-              </article>
-
-              <article class="slide" data-title="Projekt 03 – Vorher" data-badge="Vorher" data-img="IMG_7437.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7437.jpg" alt="Referenz Projekt 03">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Vorher</span>
-                  <span class="note">Projekt 03</span>
-                </div>
-              </article>
-
-              <article class="slide" data-title="Projekt 04 – Nachher" data-badge="Nachher" data-img="IMG_7438.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7438.jpg" alt="Referenz Projekt 04">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Nachher</span>
-                  <span class="note">Projekt 04</span>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="dots" id="dots" aria-label="Carousel Navigation"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>FAQ</h2>
-            <p>Die häufigsten Fragen – kurz beantwortet.</p>
-          </div>
-        </div>
-
-        <div class="faq">
-          <details class="reveal in">
-            <summary>Wie schnell sind Termine möglich? <span class="chev"></span></summary>
-            <p>Je nach Auslastung oft kurzfristig. Am besten direkt anrufen oder über das Formular anfragen.</p>
-          </details>
-
-          <details class="reveal in delay1">
-            <summary>Gibt es einen Festpreis? <span class="chev"></span></summary>
-            <p>Ja. Nach der kostenlosen Besichtigung erhalten Sie ein transparentes Festpreis-Angebot.</p>
-          </details>
-
-          <details class="reveal in delay2">
-            <summary>Ist die Besichtigung wirklich kostenlos? <span class="chev"></span></summary>
-            <p>Ja. Sie dient dazu, den Aufwand realistisch einzuschätzen und Ihnen ein seriöses Angebot zu machen.</p>
-          </details>
-
-          <details class="reveal in delay3">
-            <summary>Wie läuft die Übergabe ab? <span class="chev"></span></summary>
-            <p>Wir übergeben besenrein. Auf Wunsch auch mit Schlüsselübergabe bzw. Abstimmung mit Vermieter/Verwaltung.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="kontakt">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Kontakt</h2>
-            <p>Kurze Anfrage reicht. Sie bekommen schnell eine Rückmeldung zur kostenlosen Besichtigung.</p>
-          </div>
-        </div>
-
-        <div class="contact">
-          <div class="contactCard reveal in">
-            <h3>Direktkontakt</h3>
-            <div class="kv">
-              <div class="line"><strong>Telefon:</strong> <span><a href="tel:+4917646620710">0176 46620710</a></span></div>
-              <div class="line"><strong>Region:</strong> <span>Borken & Umgebung</span></div>
-              <div class="line"><strong>Leistung:</strong> <span>Entrümpelung, Haushaltsauflösung, Nebenräume</span></div>
-            </div>
-            <p class="fine">Hinweis: Impressum/Datenschutz/Adresse bitte mit finalen Unternehmensdaten ergänzen.</p>
-          </div>
-
-          <div class="contactCard reveal in delay1">
-            <h3>Festpreis anfragen</h3>
-            <form class="form" action="mailto:deinemail@domain.de" method="post" enctype="text/plain">
-              <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="Name" placeholder="Vor- und Nachname" required>
-              </div>
-              <div class="field">
-                <label for="phone">Telefon</label>
-                <input id="phone" name="Telefon" placeholder="0176 ..." required>
-              </div>
-              <div class="field">
-                <label for="msg">Kurzbeschreibung</label>
-                <textarea id="msg" name="Nachricht" placeholder="Objekt (Wohnung/Haus), grobe Größe, Etage, Terminwunsch..." required></textarea>
-              </div>
-              <button class="btn primary" type="submit">Anfrage senden</button>
-              <p class="fine">Formular nutzt aktuell <strong>mailto</strong>. Für professionell: später per Backend/Form-Service (z. B. Netlify Forms) ersetzen.</p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="floatCta" aria-hidden="true">
-      <a class="btn" href="tel:+4917646620710">Anrufen</a>
-      <a class="btn primary" href="#kontakt">Besichtigung</a>
-    </div>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="foot">
-        <small>
-          © <span id="y"></span> Räumdienst Borken — Entrümpelung & Haushaltsauflösung<br>
-          <span style="opacity:.75">Impressum & Datenschutz bitte ergänzen (rechtlich notwendig).</span>
-        </small>
-        <small><a href="#top">Nach oben</a></small>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lbPanel" role="dialog" aria-modal="true" aria-label="Bildvorschau">
-      <div class="lbTop">
-        <div class="title" id="lbTitle">Vorschau</div>
-        <button class="lbClose" id="lbClose" type="button" aria-label="Schließen">✕</button>
-      </div>
-      <img class="lbImg" id="lbImg" alt="Großansicht">
-    </div>
+    <div class="swipeHint" id="swipeHint">Wischen →</div>
   </div>
+</section>
 
-  <script>
-    // Footer year
-    document.getElementById('y').textContent = new Date().getFullYear();
+</main>
 
-    // Mobile drawer
-    const burger = document.getElementById('burger');
-    const drawer = document.getElementById('drawer');
-    const closeDrawer = document.getElementById('closeDrawer');
+<div class="lightbox" id="lightbox">
+  <img id="lbImg">
+</div>
 
-    function openDrawer(){
-      burger.classList.add('active');
-      drawer.classList.add('open');
-      drawer.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
+<script>
+/* ===== Carousel Autoplay ===== */
+const track = document.getElementById('track');
+const slides = [...track.children];
+let autoplayTimer = null;
+let userPausedUntil = 0;
+
+function currentIndex(){
+  const w = slides[0].offsetWidth;
+  return Math.round(track.scrollLeft / w);
+}
+function scrollToIndex(i){
+  track.scrollTo({left:slides[i].offsetLeft,behavior:'smooth'});
+}
+function startAutoplay(){
+  if(autoplayTimer) return;
+  autoplayTimer = setInterval(()=>{
+    if(Date.now() < userPausedUntil) return;
+    scrollToIndex((currentIndex()+1)%slides.length);
+  },3600);
+}
+function pauseAutoplay(ms=6000){
+  userPausedUntil = Date.now()+ms;
+}
+
+track.addEventListener('scroll',()=>pauseAutoplay());
+
+/* ===== Lightbox ===== */
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+slides.forEach(s=>{
+  s.querySelector('img').onclick=()=>{
+    lbImg.src=s.querySelector('img').src;
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+    pauseAutoplay(9999999);
+  };
+});
+lb.onclick=()=>{
+  lb.classList.remove('open');
+  document.body.style.overflow='';
+  pauseAutoplay(1000);
+};
+
+/* ===== Swipe Hint (re-trigger on view) ===== */
+const swipeHint=document.getElementById('swipeHint');
+let hintCooldown=0;
+
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && Date.now()>hintCooldown){
+      hintCooldown=Date.now()+8000;
+      swipeHint.classList.add('show');
+      setTimeout(()=>swipeHint.classList.remove('show'),2200);
     }
-    function closeDrawerFn(){
-      burger.classList.remove('active');
-      drawer.classList.remove('open');
-      drawer.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-    }
-    burger?.addEventListener('click', () => {
-      drawer.classList.contains('open') ? closeDrawerFn() : openDrawer();
-    });
-    closeDrawer?.addEventListener('click', closeDrawerFn);
-    drawer?.addEventListener('click', (e) => {
-      if(e.target === drawer) closeDrawerFn();
-    });
+  });
+},{threshold:.45});
 
-    // Reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => { if(en.isIntersecting) en.target.classList.add('in'); });
-    }, {threshold: 0.15});
-    revealEls.forEach(el => io.observe(el));
+io.observe(document.getElementById('refCarousel'));
 
-    // Carousel
-    const track = document.getElementById('track');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const dotsWrap = document.getElementById('dots');
-    const slides = track ? Array.from(track.querySelectorAll('.slide')) : [];
+startAutoplay();
+</script>
 
-    function slideWidth(){
-      if(!slides.length) return 0;
-      const r0 = slides[0].getBoundingClientRect();
-      const r1 = slides[1] ? slides[1].getBoundingClientRect() : null;
-      const gap = r1 ? Math.max(0, r1.left - r0.right) : 14;
-      return r0.width + gap;
-    }
-
-    function scrollToIndex(i){
-      const w = slideWidth();
-      track.scrollTo({ left: w * i, behavior: 'smooth' });
-    }
-
-    // Dots
-    function buildDots(){
-      if(!dotsWrap) return;
-      dotsWrap.innerHTML = '';
-      slides.forEach((_, i) => {
-        const b = document.createElement('button');
-        b.className = 'dotBtn';
-        b.type = 'button';
-        b.setAttribute('aria-label', 'Zu Slide ' + (i+1));
-        b.addEventListener('click', () => { pauseAutoplay(true); scrollToIndex(i); });
-        dotsWrap.appendChild(b);
-      });
-      setActiveDot(0);
-    }
-
-    function setActiveDot(idx){
-      if(!dotsWrap) return;
-      const dots = Array.from(dotsWrap.querySelectorAll('.dotBtn'));
-      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-    }
-
-    function currentIndex(){
-      const w = slideWidth();
-      if(!w) return 0;
-      return Math.round(track.scrollLeft / w);
-    }
-
-    prevBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.max(0, currentIndex() - 1);
-      scrollToIndex(i);
-    });
-    nextBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.min(slides.length - 1, currentIndex() + 1);
-      scrollToIndex(i);
-    });
-
-    let t;
-    track?.addEventListener('scroll', () => {
-      window.clearTimeout(t);
-      t = window.setTimeout(() => setActiveDot(currentIndex()), 60);
-    });
-
-    buildDots();
-
-    // Lightbox (Click = Bild groß)
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbTitle = document.getElementById('lbTitle');
-    const lbClose = document.getElementById('lbClose');
-
-    function openLb(src, title){
-      lbImg.src = src;
-      lbTitle.textContent = title || 'Vorschau';
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      pauseAutoplay(false); // wenn offen: Autoplay aus
-    }
-    function closeLb(){
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden','true');
-      lbImg.src = '';
-      document.body.style.overflow = '';
-      resumeAutoplay(); // nach close wieder an
-    }
-
-    slides.forEach(s => {
-      const img = s.querySelector('img');
-      img?.addEventListener('click', () => {
-        openLb(s.dataset.img || img.src, s.dataset.title || 'Vorschau');
-      });
-    });
-
-    lbClose?.addEventListener('click', closeLb);
-    lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
-    window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
-
-    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let autoplayTimer = null;
-    let autoplayEnabled = !prefersReduced;
-    let userPausedUntil = 0;
-    let carouselInView = false;
-
-    function nextIndexLoop(){
-      const i = currentIndex();
-      return (i + 1) % Math.max(1, slides.length);
-    }
-
-    function startAutoplay(){
-      if(!autoplayEnabled || !track || slides.length < 2) return;
-      if(autoplayTimer) return;
-      autoplayTimer = window.setInterval(() => {
-        if(!carouselInView) return;
-        if(lightbox.classList.contains('open')) return;
-        if(Date.now() < userPausedUntil) return;
-        scrollToIndex(nextIndexLoop());
-      }, 3600);
-    }
-
-    function stopAutoplay(){
-      if(autoplayTimer){
-        window.clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    }
-
-    function pauseAutoplay(withResumeDelay){
-      stopAutoplay();
-      if(withResumeDelay){
-        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
-      } else {
-        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
-      }
-    }
-
-    function resumeAutoplay(){
-      if(!autoplayEnabled) return;
-      userPausedUntil = Date.now() + 900; // kurzer Buffer
-      startAutoplay();
-    }
-
-    // Interaktionen = Pause
-    const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
-    pauseEvents.forEach(ev => {
-      track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
-    });
-
-    // Nur wenn Carousel sichtbar
-    const carouselEl = document.getElementById('refCarousel');
-    const inViewIO = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        carouselInView = !!en.isIntersecting;
-        if(carouselInView) startAutoplay();
-      });
-    }, {threshold: 0.25});
-    if(carouselEl) inViewIO.observe(carouselEl);
-
-    // Start
-    startAutoplay();
-  </script>
-</body>
-</html>
-    function currentIndex(){
-      const w = slideWidth();
-      if(!w) return 0;
-      return Math.round(track.scrollLeft / w);
-    }
-
-    prevBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.max(0, currentIndex() - 1);
-      scrollToIndex(i);
-    });
-    nextBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.min(slides.length - 1, currentIndex() + 1);
-      scrollToIndex(i);
-    });
-
-    let t;
-    track?.addEventListener('scroll', () => {
-      window.clearTimeout(t);
-      t = window.setTimeout(() => setActiveDot(currentIndex()), 60);
-    });
-
-    buildDots();
-
-    // Lightbox (Click = Bild groß)
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbTitle = document.getElementById('lbTitle');
-    const lbClose = document.getElementById('lbClose');
-
-    function openLb(src, title){
-      lbImg.src = src;
-      lbTitle.textContent = title || 'Vorschau';
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      pauseAutoplay(false); // wenn offen: Autoplay aus
-    }
-    function closeLb(){
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden','true');
-      lbImg.src = '';
-      document.body.style.overflow = '';
-      resumeAutoplay(); // nach close wieder an
-    }
-
-    slides.forEach(s => {
-      const img = s.querySelector('img');
-      img?.addEventListener('click', () => {
-        openLb(s.dataset.img || img.src, s.dataset.title || 'Vorschau');
-      });
-    });
-
-    lbClose?.addEventListener('click', closeLb);
-    lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
-    window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
-
-    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let autoplayTimer = null;
-    let autoplayEnabled = !prefersReduced;
-    let userPausedUntil = 0;
-    let carouselInView = false;
-
-    function nextIndexLoop(){
-      const i = currentIndex();
-      return (i + 1) % Math.max(1, slides.length);
-    }
-
-    function startAutoplay(){
-      if(!autoplayEnabled || !track || slides.length < 2) return;
-      if(autoplayTimer) return;
-      autoplayTimer = window.setInterval(() => {
-        if(!carouselInView) return;
-        if(lightbox.classList.contains('open')) return;
-        if(Date.now() < userPausedUntil) return;
-        scrollToIndex(nextIndexLoop());
-      }, 3600);
-    }
-
-    function stopAutoplay(){
-      if(autoplayTimer){
-        window.clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    }
-
-    function pauseAutoplay(withResumeDelay){
-      stopAutoplay();
-      if(withResumeDelay){
-        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
-      } else {
-        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
-      }
-    }
-
-    function resumeAutoplay(){
-      if(!autoplayEnabled) return;
-      userPausedUntil = Date.now() + 900; // kurzer Buffer
-      startAutoplay();
-    }
-
-    // Interaktionen = Pause
-    const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
-    pauseEvents.forEach(ev => {
-      track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
-    });
-
-    // Nur wenn Carousel sichtbar
-    const carouselEl = document.getElementById('refCarousel');
-    const inViewIO = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        carouselInView = !!en.isIntersecting;
-        if(carouselInView) startAutoplay();
-      });
-    }, {threshold: 0.25});
-    if(carouselEl) inViewIO.observe(carouselEl);
-
-    // Start
-    startAutoplay();
-  </script>
 </body>
 </html>
