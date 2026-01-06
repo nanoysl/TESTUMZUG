@@ -261,13 +261,8 @@
       padding:56px 0 28px;
       position:relative;
     }
-
-    /* FIX: dein HTML hatte "hero wrap" auf einem Element.
-       Dadurch hat ".hero .wrap" NICHT gegriffen.
-       -> wir nutzen jetzt ".hero .wrap" korrekt (siehe HTML unten) */
     .hero .wrap{
       display:grid;
-      /* FIX: rechter Container größer */
       grid-template-columns: 0.95fr 1.05fr;
       gap:18px;
       align-items:stretch;
@@ -325,18 +320,28 @@
     }
     .trust .t strong{display:block; color: rgba(255,255,255,.92); font-size:13px; margin-bottom:4px}
 
-    /* Before/After card */
+    /* ==============================
+       VORHER/NACHHER – FINAL FIX
+       Desktop + Mobile kontrolliert
+       ============================== */
+
     .baCard{
+      display:flex;
+      flex-direction:column;
       border: 1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
-      /* FIX: höher + mehr Platz fürs Bild */
-      min-height: 520px;
+
+      /* statt riesiger min-height: kontrollierte Höhe */
+      height: clamp(420px, 52vh, 560px);
+      min-height: unset;
     }
+
     .baTop{
+      flex: 0 0 auto;
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 14px 10px;
       border-bottom:1px solid rgba(255,255,255,.08);
@@ -364,16 +369,14 @@
       display:inline-block;
     }
 
-    /* GANZES BILD SICHTBAR (contain) + blurred background */
     .baViewport{
+      flex: 1 1 auto;
+      min-height: 0;
       position:relative;
-      height:100%;
-      /* FIX: sichtbarer Bereich größer */
-      min-height: 460px;
       background: rgba(0,0,0,.22);
       isolation:isolate;
       overflow:hidden;
-      --ba-bg: none; /* wird per JS gesetzt */
+      --ba-bg: none;
     }
     .baViewport::before{
       content:"";
@@ -397,12 +400,12 @@
     .baViewport img{
       position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit: contain;      /* wichtig: kompletter Frame sichtbar */
+      object-fit: contain;
       object-position: center;
-      transform:none;
-      filter:none;
       z-index:1;
-      padding:14px;
+
+      /* weniger Padding = Bild wirkt größer */
+      padding: 10px;
     }
     .baViewport .after{
       clip-path: inset(0 0 0 50%);
@@ -722,8 +725,11 @@
     /* Responsive */
     @media (max-width: 980px){
       .hero .wrap{grid-template-columns: 1fr}
-      .baCard{min-height: 520px}
-      .baViewport{min-height: 460px}
+
+      /* Vorher/Nachher: Tablet kompakter */
+      .baCard{height: clamp(380px, 50vh, 520px)}
+      .baViewport img{padding: 8px}
+
       .trust{grid-template-columns: 1fr; gap:10px}
       .cards .card{grid-column: span 6}
       .steps .step{grid-column: span 6}
@@ -742,6 +748,11 @@
       .floatCta{display:flex}
       .brand{min-width:auto}
       .brand .name{display:none}
+
+      /* Vorher/Nachher: Mobile kleiner */
+      .baCard{height: clamp(320px, 44vh, 420px)}
+      .baViewport img{padding: 6px}
+      .baKnob{width:46px; height:46px}
     }
   </style>
 
@@ -830,7 +841,6 @@
   <main id="top">
     <section class="hero">
       <div class="container">
-        <!-- FIX: wrap ist jetzt ein echtes Child-Element -> CSS greift korrekt -->
         <div class="wrap">
           <div class="headline reveal in">
             <span class="pill"><span class="dot"></span> Diskret. Sauber. Planbar.</span>
