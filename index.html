@@ -763,7 +763,7 @@
       }
       .heroActions .btn{width:100%}
 
-      /* Leistungen & Ablauf: “modern” = horizontales Snap-Rack statt viele Kacheln untereinander */
+      /* Leistungen & Ablauf: horizontales Snap-Rack */
       .cards, .steps{
         display:flex;
         gap:12px;
@@ -785,7 +785,6 @@
         border-radius: 20px;
         background: rgba(255,255,255,.028);
       }
-      /* weniger Text-Block-Gefühl */
       .card p, .step p{
         display:-webkit-box;
         -webkit-line-clamp: 3;
@@ -793,12 +792,10 @@
         overflow:hidden;
       }
 
-      /* Referenzen etwas cleaner */
       .trackWrap{padding: 14px}
       .track{gap:12px}
       .slide{width: 88vw}
 
-      /* Kontakt kompakter */
       .contactCard{padding:14px; border-radius: 20px}
       .kv .line{padding:11px; border-radius: 14px}
 
@@ -806,16 +803,17 @@
     }
 
     /* ==========================================================
-       NEU: SWIPE-HINWEIS (nur Mobile) – Desktop bleibt unverändert
+       SWIPE-HINWEIS (nur Mobile) – wird per JS bei Viewport-Eintritt getriggert
        ========================================================== */
     @media (max-width: 560px){
       .swipeHint{ position:relative; }
+
       .swipeHint::after{
         content:"Wischen";
         position:absolute;
         left:50%;
         bottom:8px;
-        transform:translateX(-50%);
+        transform:translateX(-50%) translateY(6px);
         font-size:11px;
         font-weight:900;
         letter-spacing:.25px;
@@ -826,8 +824,12 @@
         border-radius:999px;
         pointer-events:none;
         opacity:0;
-        animation: swipeHintFade 3.8s var(--ease) 1 forwards;
       }
+
+      .swipeHint.swipeHint--play::after{
+        animation: swipeHintFade 3.8s var(--ease) 1;
+      }
+
       @keyframes swipeHintFade{
         0%{opacity:0; transform:translateX(-50%) translateY(6px)}
         18%{opacity:1; transform:translateX(-50%) translateY(0)}
@@ -936,7 +938,7 @@
               <a class="btn ghost" href="#referenzen">Referenzen ansehen</a>
             </div>
 
-            <!-- NEU: swipeHint Klasse -->
+            <!-- swipeHint -->
             <div class="trust swipeHint">
               <div class="t reveal in delay1">
                 <strong>Kostenlose Besichtigung</strong>
@@ -967,7 +969,6 @@
           </div>
         </div>
 
-        <!-- NEU: swipeHint Klasse -->
         <div class="cards swipeHint">
           <div class="card reveal in">
             <div class="icon" aria-hidden="true">
@@ -1006,7 +1007,6 @@
           </div>
         </div>
 
-        <!-- NEU: swipeHint Klasse -->
         <div class="steps swipeHint">
           <div class="step reveal in">
             <div class="n">1</div>
@@ -1059,7 +1059,6 @@
             </div>
           </div>
 
-          <!-- NEU: swipeHint Klasse -->
           <div class="trackWrap swipeHint">
             <div class="track" id="track" aria-label="Referenz Carousel">
               <article class="slide" data-title="Projekt 01 – Wohnzimmer" data-badge="Wohnung" data-img="IMG_7439.jpg">
@@ -1415,131 +1414,40 @@
 
     // Start
     startAutoplay();
-  </script>
-</body>
-</html>
-    function currentIndex(){
-      const w = slideWidth();
-      if(!w) return 0;
-      return Math.round(track.scrollLeft / w);
+
+    // ===== Swipe-Hint: bei jedem Re-Entry in den Viewport neu abspielen (nur Mobile) =====
+    const prefersReducedSwipe = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function restartSwipeHint(el){
+      el.classList.remove('swipeHint--play');
+      void el.offsetWidth; // reflow erzwingen
+      el.classList.add('swipeHint--play');
+      window.setTimeout(() => el.classList.remove('swipeHint--play'), 3900);
     }
 
-    prevBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.max(0, currentIndex() - 1);
-      scrollToIndex(i);
-    });
-    nextBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.min(slides.length - 1, currentIndex() + 1);
-      scrollToIndex(i);
-    });
+    if(!prefersReducedSwipe){
+      const swipeHints = Array.from(document.querySelectorAll('.swipeHint'));
 
-    let t;
-    track?.addEventListener('scroll', () => {
-      window.clearTimeout(t);
-      t = window.setTimeout(() => setActiveDot(currentIndex()), 60);
-    });
+      const swipeIO = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          const el = en.target;
+          if(en.isIntersecting){
+            if(el.dataset.swipePlayed !== "1"){
+              el.dataset.swipePlayed = "1";
+              restartSwipeHint(el);
+            }
+          } else {
+            el.dataset.swipePlayed = "0";
+            el.classList.remove('swipeHint--play');
+          }
+        });
+      }, { threshold: 0.35 });
 
-    buildDots();
-
-    // Lightbox (Click = Bild groß)
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbTitle = document.getElementById('lbTitle');
-    const lbClose = document.getElementById('lbClose');
-
-    function openLb(src, title){
-      lbImg.src = src;
-      lbTitle.textContent = title || 'Vorschau';
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      pauseAutoplay(false); // wenn offen: Autoplay aus
-    }
-    function closeLb(){
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden','true');
-      lbImg.src = '';
-      document.body.style.overflow = '';
-      resumeAutoplay(); // nach close wieder an
-    }
-
-    slides.forEach(s => {
-      const img = s.querySelector('img');
-      img?.addEventListener('click', () => {
-        openLb(s.dataset.img || img.src, s.dataset.title || 'Vorschau');
+      swipeHints.forEach(el => {
+        el.dataset.swipePlayed = "0";
+        swipeIO.observe(el);
       });
-    });
-
-    lbClose?.addEventListener('click', closeLb);
-    lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
-    window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
-
-    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let autoplayTimer = null;
-    let autoplayEnabled = !prefersReduced;
-    let userPausedUntil = 0;
-    let carouselInView = false;
-
-    function nextIndexLoop(){
-      const i = currentIndex();
-      return (i + 1) % Math.max(1, slides.length);
     }
-
-    function startAutoplay(){
-      if(!autoplayEnabled || !track || slides.length < 2) return;
-      if(autoplayTimer) return;
-      autoplayTimer = window.setInterval(() => {
-        if(!carouselInView) return;
-        if(lightbox.classList.contains('open')) return;
-        if(Date.now() < userPausedUntil) return;
-        scrollToIndex(nextIndexLoop());
-      }, 3600);
-    }
-
-    function stopAutoplay(){
-      if(autoplayTimer){
-        window.clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    }
-
-    function pauseAutoplay(withResumeDelay){
-      stopAutoplay();
-      if(withResumeDelay){
-        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
-      } else {
-        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
-      }
-    }
-
-    function resumeAutoplay(){
-      if(!autoplayEnabled) return;
-      userPausedUntil = Date.now() + 900; // kurzer Buffer
-      startAutoplay();
-    }
-
-    // Interaktionen = Pause
-    const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
-    pauseEvents.forEach(ev => {
-      track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
-    });
-
-    // Nur wenn Carousel sichtbar
-    const carouselEl = document.getElementById('refCarousel');
-    const inViewIO = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        carouselInView = !!en.isIntersecting;
-        if(carouselInView) startAutoplay();
-      });
-    }, {threshold: 0.25});
-    if(carouselEl) inViewIO.observe(carouselEl);
-
-    // Start
-    startAutoplay();
   </script>
 </body>
 </html>
