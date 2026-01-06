@@ -58,7 +58,6 @@
     button, input, textarea{font-family:inherit}
     ::selection{background: rgba(240,138,26,.35)}
 
-    /* Subtle animated “mesh” */
     .mesh{
       position:fixed; inset:-20%;
       z-index:-2;
@@ -78,7 +77,6 @@
       to{transform: translate3d(1.5%, 1.0%, 0) scale(1.06)}
     }
 
-    /* Noise overlay */
     .noise{
       position:fixed; inset:0;
       z-index:-1;
@@ -88,7 +86,6 @@
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
     }
 
-    /* Layout helpers */
     .container{max-width:var(--max); margin:0 auto; padding:0 20px}
     .row{display:flex; gap:18px}
     .grid{display:grid; gap:18px}
@@ -110,7 +107,6 @@
       box-shadow: 0 0 0 6px rgba(240,138,26,.12);
     }
 
-    /* Header */
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(14px);
@@ -126,7 +122,6 @@
       min-width: 220px;
     }
 
-    /* Logo: sauber, rund, ohne "Ränder" im Bild */
     .brand img{
       width:46px; height:46px;
       object-fit: cover;
@@ -208,7 +203,6 @@
     .hamburger.active span::before{top:0; transform: rotate(45deg)}
     .hamburger.active span::after{top:0; transform: rotate(-45deg)}
 
-    /* Mobile drawer */
     .drawer{
       position:fixed; inset:0;
       background: rgba(0,0,0,.55);
@@ -253,7 +247,6 @@
     .drawer nav a:hover{background: rgba(255,255,255,.06)}
     .drawer .actions{display:grid; gap:10px; margin-top:12px}
 
-    /* Hero */
     .hero{
       padding:56px 0 28px;
       position:relative;
@@ -316,7 +309,6 @@
     }
     .trust .t strong{display:block; color: rgba(255,255,255,.92); font-size:13px; margin-bottom:4px}
 
-    /* Before/After card */
     .baCard{
       border: 1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
@@ -354,46 +346,32 @@
       display:inline-block;
     }
 
-    /* ========= FIX: GANZES BILD SICHTBAR (contain) + blurred background ========= */
+    /* FIX: GANZES BILD SICHTBAR (contain) + blurred background */
     .baViewport{
       position:relative;
       height:100%;
       min-height:360px;
-      background: rgba(0,0,0,.22);
+      background: #000;
       isolation:isolate;
       overflow:hidden;
-      /* Wird per JS gesetzt */
-      --ba-bg: none; 
     }
-    .baViewport::before{
-      content:"";
-      position:absolute; inset:-12%;
-      background-image: var(--ba-bg);
+    /* Verschwommener Hintergrund für die Ästhetik */
+    .baViewport::before {
+      content: "";
+      position: absolute;
+      inset: -20px;
+      background-image: url('IMG_7437.jpg');
       background-size: cover;
       background-position: center;
-      filter: blur(26px) saturate(1.1) contrast(1.05);
-      opacity:.32;
-      transform: scale(1.05);
-      z-index:0;
-      pointer-events:none;
+      filter: blur(20px) opacity(0.3);
+      z-index: 0;
     }
-    .baViewport::after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(800px 280px at 20% 10%, rgba(255,255,255,.08), transparent 60%);
-      z-index:0;
-      pointer-events:none;
-    }
-    /* HIER ist der wichtige Teil für das vollständige Bild */
     .baViewport img{
       position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit: contain;       /* Zeigt das ganze Bild statt es zu beschneiden */
+      object-fit: contain; /* Zeigt das ganze Foto ohne Crop */
       object-position: center;
-      transform:none;
-      filter:none;
       z-index:1;
-      padding:14px;              /* Kleiner Abstand zum Rand, sieht schicker aus */
     }
     .baViewport .after{
       clip-path: inset(0 0 0 50%);
@@ -447,7 +425,6 @@
       text-transform: uppercase;
     }
 
-    /* Sections */
     section{padding:34px 0}
     .sectionHead{
       display:flex; align-items:flex-end; justify-content:space-between;
@@ -494,7 +471,6 @@
     .card h3{margin:0 0 8px; font-size:15px; letter-spacing:-.2px}
     .card p{margin:0; color: var(--muted); font-size:13px; line-height:1.55}
 
-    /* Process */
     .steps{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -530,7 +506,6 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color: var(--muted); font-size:13px; line-height:1.5}
 
-    /* Gallery */
     .gallery{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
@@ -552,95 +527,7 @@
       transform: scale(1.02);
       filter: contrast(1.02) saturate(1.02);
     }
-    .shot .cap{
-      position:absolute; left:12px; right:12px; bottom:12px;
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
-      pointer-events:none;
-    }
-    .cap .label{
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.25);
-      backdrop-filter: blur(10px);
-      font-weight:900;
-      font-size:12px;
-      color: rgba(255,255,255,.90);
-    }
-    .shotSmallGrid{
-      display:grid;
-      grid-template-rows: 1fr 1fr;
-      gap:14px;
-    }
 
-    /* Pricing / Info panel */
-    .infoPanel{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-      padding:16px;
-    }
-    .infoPanel h3{margin:0 0 10px; font-size:15px}
-    .list{margin:0; padding:0; list-style:none; display:grid; gap:10px}
-    .list li{
-      display:flex; gap:10px; align-items:flex-start;
-      color: var(--muted);
-      font-size:13px;
-      line-height:1.45;
-    }
-    .check{
-      width:18px; height:18px; border-radius: 6px;
-      border:1px solid rgba(255,255,255,.18);
-      background: linear-gradient(135deg, rgba(30,74,174,.35), rgba(240,138,26,.22));
-      display:inline-flex; align-items:center; justify-content:center;
-      flex: 0 0 auto;
-      margin-top:1px;
-    }
-    .check svg{width:12px; height:12px; fill: rgba(255,255,255,.92)}
-
-    /* FAQ */
-    .faq{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-    }
-    details{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      padding:14px 14px;
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-    summary{
-      cursor:pointer;
-      list-style:none;
-      font-weight:900;
-      font-size:14px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-    }
-    summary::-webkit-details-marker{display:none}
-    .chev{
-      width:10px; height:10px;
-      border:2px solid rgba(255,255,255,.72);
-      border-left:none; border-top:none;
-      transform: rotate(45deg);
-      transition: transform .2s var(--ease);
-      flex: 0 0 auto;
-      margin-left:10px;
-    }
-    details[open] .chev{transform: rotate(225deg)}
-    details p{margin:10px 0 0; color: var(--muted); font-size:13px; line-height:1.55}
-
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
     .contactCard{
       border:1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
@@ -650,38 +537,7 @@
       overflow:hidden;
       position:relative;
     }
-    .contactCard::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 220px at 15% 10%, rgba(30,74,174,.22), transparent 60%),
-        radial-gradient(520px 220px at 85% 20%, rgba(240,138,26,.18), transparent 60%);
-      pointer-events:none;
-      opacity:.8;
-    }
-    .contactCard > *{position:relative}
-    .kv{
-      display:grid; gap:10px; margin-top:10px;
-    }
-    .kv .line{
-      display:flex; gap:10px; align-items:flex-start;
-      color: var(--muted);
-      font-size:13px;
-      line-height:1.45;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
-      padding:12px;
-    }
-    .kv strong{color: rgba(255,255,255,.90)}
-    .form{
-      display:grid; gap:10px;
-      margin-top:10px;
-    }
-    .field{
-      display:grid; gap:6px;
-    }
-    label{font-size:12px; color: var(--muted2); font-weight:800}
+
     input, textarea{
       width:100%;
       padding:12px 12px;
@@ -690,135 +546,34 @@
       background: rgba(0,0,0,.22);
       color: rgba(255,255,255,.90);
       outline:none;
-      transition: border-color .2s var(--ease), background .2s var(--ease);
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(240,138,26,.45);
-      background: rgba(0,0,0,.28);
-    }
-    textarea{min-height: 120px; resize: vertical}
-    .fine{
-      color: var(--muted2);
-      font-size:12px;
-      line-height:1.45;
-      margin-top:10px;
     }
 
-    /* Footer */
-    footer{
-      padding:24px 0 34px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
-    }
-    .foot{
-      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .foot small{color: var(--muted2); line-height:1.55}
-    .foot a{color: rgba(255,255,255,.78); font-weight:800}
-    .foot a:hover{text-decoration:underline}
-
-    /* Reveal animations */
-    .reveal{opacity:0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease)}
-    .reveal.in{opacity:1; transform: translateY(0)}
-    .delay1{transition-delay:.05s}
-    .delay2{transition-delay:.10s}
-    .delay3{transition-delay:.15s}
-
-    /* Floating CTA (mobile) */
-    .floatCta{
-      position:fixed;
-      left:14px; right:14px; bottom:14px;
-      z-index:70;
-      display:none;
-      gap:10px;
-    }
-    .floatCta a{flex:1}
-
-    /* Responsive */
     @media (max-width: 980px){
       .hero .wrap{grid-template-columns: 1fr}
       .baCard{min-height: 460px}
-      .trust{grid-template-columns: 1fr; gap:10px}
       .cards .card{grid-column: span 6}
       .steps .step{grid-column: span 6}
-      .gallery{grid-template-columns: 1fr}
-      .shotSmallGrid{grid-template-rows: auto; grid-template-columns: 1fr 1fr}
-      .faq{grid-template-columns: 1fr}
-      .contact{grid-template-columns: 1fr}
       nav ul{display:none}
       .hamburger{display:flex}
-      .nav-cta .btn.ghost{display:none}
-    }
-    @media (max-width: 560px){
-      .cards .card{grid-column: span 12}
-      .steps .step{grid-column: span 12}
-      .shotSmallGrid{grid-template-columns: 1fr}
-      .floatCta{display:flex}
-      .brand{min-width:auto}
-      .brand .name{display:none}
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Räumdienst Borken",
-    "description": "Entrümpelung & Haushaltsauflösung in Borken: zuverlässig, diskret, sauber. Kostenlose Besichtigung, fairer Festpreis.",
-    "areaServed": "Borken und Umgebung",
-    "telephone": "+49 176 46620710",
-    "image": ["IMG_7436.jpg","IMG_7437.jpg","IMG_7438.jpg","IMG_7439.jpg","IMG_7440.jpg"]
-  }
-  </script>
 </head>
 
 <body>
   <div class="mesh" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
 
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
-      <div class="top">
-        <div class="brandMini">
-          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
-          <div>
-            <div style="font-weight:900">Räumdienst Borken</div>
-            <div style="color:rgba(255,255,255,.58); font-size:12px; font-weight:700">Entrümpelung & Haushaltsauflösung</div>
-          </div>
-        </div>
-        <button class="btn ghost" id="closeDrawer" type="button" aria-label="Menü schließen">Schließen</button>
-      </div>
-      <nav>
-        <a href="#leistungen">Leistungen</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#referenzen">Vorher/Nachher</a>
-        <a href="#faq">FAQ</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <div class="actions">
-        <a class="btn primary" href="tel:+4917646620710">Jetzt anrufen</a>
-        <a class="btn" href="#kontakt">Kostenlose Besichtigung</a>
-      </div>
-      <p class="fine">
-        Hinweis: Bitte passen Sie Impressum/Datenschutz/Adresse an, sobald die finalen Unternehmensdaten vorliegen.
-      </p>
-    </div>
-  </div>
-
   <header>
     <div class="container">
       <div class="nav">
-        <a class="brand" href="#top" aria-label="Startseite">
-          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
+        <a class="brand" href="#top">
+          <img src="IMG_7436.jpg" alt="Logo">
           <div class="name">
             <strong>Räumdienst Borken</strong>
             <span>Entrümpelung & Haushaltsauflösung</span>
           </div>
         </a>
-
-        <nav aria-label="Hauptnavigation">
+        <nav>
           <ul>
             <li><a href="#leistungen">Leistungen</a></li>
             <li><a href="#ablauf">Ablauf</a></li>
@@ -827,13 +582,9 @@
             <li><a href="#kontakt">Kontakt</a></li>
           </ul>
         </nav>
-
         <div class="nav-cta">
-          <a class="btn ghost" href="tel:+4917646620710" aria-label="Telefon">📞 0176 46620710</a>
+          <a class="btn ghost" href="tel:+4917646620710">📞 0176 46620710</a>
           <a class="btn primary" href="#kontakt">Kostenlose Besichtigung</a>
-          <button class="hamburger" id="burger" aria-label="Menü öffnen" type="button">
-            <span></span>
-          </button>
         </div>
       </div>
     </div>
@@ -843,63 +594,39 @@
     <section class="hero">
       <div class="container">
         <div class="hero wrap">
-          <div class="headline reveal in">
+          <div class="headline">
             <span class="pill"><span class="dot"></span> Diskret. Sauber. Planbar.</span>
             <h1>Entrümpelung & Haushaltsauflösung<br>in <span style="background:linear-gradient(135deg,var(--orange),var(--red)); -webkit-background-clip:text; background-clip:text; color:transparent;">Borken</span></h1>
             <p class="lead">
               Sie möchten wieder Platz, Ordnung und Ruhe? Wir übernehmen Entrümpelungen und Haushaltsauflösungen zuverlässig – inklusive
               Sortierung, Räumung und besenreiner Übergabe. <strong>Vorab kostenlos besichtigen</strong>, danach <strong>fairer Festpreis</strong>.
             </p>
-
             <div class="heroActions">
               <a class="btn primary" href="#kontakt">Festpreis anfragen</a>
               <a class="btn" href="tel:+4917646620710">Sofort anrufen</a>
               <a class="btn ghost" href="#referenzen">Vorher/Nachher sehen</a>
             </div>
-
             <div class="trust">
-              <div class="t reveal in delay1">
-                <strong>Kostenlose Besichtigung</strong>
-                Aufwand einschätzen, Details klären, ohne Risiko.
-              </div>
-              <div class="t reveal in delay2">
-                <strong>Fairer Festpreis</strong>
-                Sie wissen vorher, womit Sie rechnen können.
-              </div>
-              <div class="t reveal in delay3">
-                <strong>Kurzfristige Termine</strong>
-                Nach Absprache oft auch kurzfristig möglich.
-              </div>
+              <div class="t"><strong>Kostenlose Besichtigung</strong>Aufwand einschätzen.</div>
+              <div class="t"><strong>Fairer Festpreis</strong>Keine versteckten Kosten.</div>
+              <div class="t"><strong>Kurzfristige Termine</strong>Nach Absprache möglich.</div>
             </div>
           </div>
 
-          <div class="baCard reveal in delay1" aria-label="Vorher Nachher Vergleich">
+          <div class="baCard" id="referenzen">
             <div class="baTop">
-              <div class="title">
-                <strong>Vorher / Nachher</strong>
-                <span>Schieben Sie den Regler, um den Unterschied zu sehen</span>
-              </div>
+              <div class="title"><strong>Vorher / Nachher</strong><span>Schieben Sie den Regler</span></div>
               <div class="miniPill"><i></i> Ergebnis zählt</div>
             </div>
-
             <div class="baViewport" id="ba">
-              <img class="before" src="IMG_7437.jpg" alt="Vorher: Raum mit Gegenständen">
-              <img class="after"  src="IMG_7438.jpg" alt="Nachher: Raum geräumt und sauber">
-
-              <div class="baHandle" id="baHandle" aria-hidden="true"></div>
-              <div class="baKnob" id="baKnob" aria-label="Vergleichsregler" role="slider"
-                   aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
-                <span class="arrow"></span>
-                <span class="arrow r"></span>
-              </div>
-
-              <div class="baLabels">
-                <span class="tag">Vorher</span>
-                <span class="tag">Nachher</span>
+              <img class="before" src="IMG_7437.jpg" alt="Vorher">
+              <img class="after" src="IMG_7438.jpg" alt="Nachher">
+              <div class="baHandle" id="baHandle"></div>
+              <div class="baKnob" id="baKnob">
+                <span class="arrow"></span><span class="arrow r"></span>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -907,109 +634,48 @@
     <section id="leistungen">
       <div class="container">
         <div class="sectionHead">
-          <div>
-            <h2>Leistungen</h2>
-            <p>Konsequent organisiert, sauber umgesetzt. Für Privatpersonen, Vermieter, Erbengemeinschaften und Gewerbe – im Raum Borken & Umgebung.</p>
-          </div>
+          <h2>Leistungen</h2>
+          <p>Konsequent organisiert, sauber umgesetzt.</p>
         </div>
-
         <div class="cards">
-          <div class="card reveal">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V11z"/></svg>
-            </div>
-            <h3>Wohnungen & Häuser</h3>
-            <p>Entrümpelung kompletter Objekte inkl. Nebenräume. Besenreine Übergabe auf Wunsch mit Schlüsselübergabe.</p>
-          </div>
-
-          <div class="card reveal delay1">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 10h16v10H4V10zm2-6h12l2 4H4l2-4z"/></svg>
-            </div>
-            <h3>Haushaltsauflösungen</h3>
-            <p>Strukturiert bei sensiblen Fällen (Umzug, Auszug, Nachlass). Diskret und ohne unnötigen Stress.</p>
-          </div>
-          
-          </div>
+          <div class="card"><h3>Wohnungen & Häuser</h3><p>Entrümpelung kompletter Objekte.</p></div>
+          <div class="card"><h3>Haushaltsauflösungen</h3><p>Strukturiert bei sensiblen Fällen.</p></div>
+          <div class="card"><h3>Gewerbe & Büro</h3><p>Schnelle Räumung von Arbeitsplätzen.</p></div>
+        </div>
       </div>
+    </section>
+
+    <section id="kontakt">
+        <div class="container">
+            <div class="contactCard">
+                <h2>Kontaktieren Sie uns</h2>
+                <p>Nutzen Sie unser Formular oder rufen Sie direkt an.</p>
+                <div class="heroActions">
+                    <a class="btn primary" href="tel:+4917646620710">Anrufen: 0176 46620710</a>
+                </div>
+            </div>
+        </div>
     </section>
   </main>
 
-  <div class="floatCta">
-    <a href="tel:+4917646620710" class="btn primary">📞 Anrufen</a>
-    <a href="#kontakt" class="btn">Anfrage</a>
-  </div>
-
   <script>
-    // Reveal Animations
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add('in');
-      });
-    }, {threshold:.1});
-    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-    // Mobile Menu
-    const burger = document.getElementById('burger');
-    const drawer = document.getElementById('drawer');
-    const closeDrawer = document.getElementById('closeDrawer');
-    const links = drawer.querySelectorAll('a');
-
-    const toggleMenu = () => {
-      drawer.classList.toggle('open');
-      burger.classList.toggle('active');
-    };
-    burger.addEventListener('click', toggleMenu);
-    closeDrawer.addEventListener('click', toggleMenu);
-    links.forEach(l => l.addEventListener('click', () => drawer.classList.remove('open')));
-
-    // Before/After Slider Logic
     const ba = document.getElementById('ba');
-    const knob = document.getElementById('baKnob');
     const handle = document.getElementById('baHandle');
-    const after = ba.querySelector('.after');
-    
-    // WICHTIG: Hintergrundbild setzen für "contain" Effekt
-    const beforeImg = ba.querySelector('.before');
-    if(beforeImg){
-      // Setzt das Bild als unscharfen Hintergrund, damit keine schwarzen Ränder entstehen
-      ba.style.setProperty('--ba-bg', `url(${beforeImg.src})`);
+    const knob = document.getElementById('baKnob');
+    const afterImg = ba.querySelector('.after');
+
+    function move(e) {
+      const rect = ba.getBoundingClientRect();
+      let x = (e.pageX || e.touches[0].pageX) - rect.left - window.scrollX;
+      x = Math.max(0, Math.min(x, rect.width));
+      const percent = (x / rect.width) * 100;
+      handle.style.left = percent + '%';
+      knob.style.left = percent + '%';
+      afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
     }
 
-    let isDragging = false;
-
-    const move = (e) => {
-      if(!isDragging) return;
-      const rect = ba.getBoundingClientRect();
-      // Position berechnen (Touch oder Maus)
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      let x = clientX - rect.left;
-      
-      // Grenzen beachten
-      if(x < 0) x = 0;
-      if(x > rect.width) x = rect.width;
-
-      const per = (x / rect.width) * 100;
-
-      handle.style.left = per + "%";
-      knob.style.left = per + "%";
-      after.style.clipPath = `inset(0 0 0 ${per}%)`;
-    };
-
-    knob.addEventListener('mousedown', () => isDragging = true);
-    knob.addEventListener('touchstart', () => isDragging = true);
-    window.addEventListener('mouseup', () => isDragging = false);
-    window.addEventListener('touchend', () => isDragging = false);
-    window.addEventListener('mousemove', move);
-    window.addEventListener('touchmove', move);
-
-    // Click auf Slider track springt direkt dahin
-    ba.addEventListener('click', (e) => {
-      isDragging = true;
-      move(e);
-      isDragging = false;
-    });
-
+    ba.addEventListener('mousemove', move);
+    ba.addEventListener('touchmove', move);
   </script>
 </body>
 </html>
