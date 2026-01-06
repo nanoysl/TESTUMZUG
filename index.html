@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0a0a0a" />
-  <meta name="description" content="Entrümpelung & Haushaltsauflösung in Borken: diskret, sauber, Festpreis nach Besichtigung." />
-  <title>Räumdienst Borken – Entrümpelung & Haushaltsauflösung</title>
+  <meta name="description" content="Premium Entrümpelung & Haushaltsauflösung in Borken. Diskret, sauber, Festpreis." />
+  <title>RÄUMDIENST BORKEN | Premium Service</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,501 +14,301 @@
   <style>
     :root{
       --bg:#050505;
-      --card-bg: rgba(18,18,18,.66);
-      --border: rgba(255,255,255,.10);
+      --card-bg: rgba(20,20,20,.65);
+      --card-border: rgba(255,255,255,.08);
       --text:#ececec;
-      --muted:#9a9a9a;
+      --text-muted:#888;
       --accent:#FF5500;
       --radius:24px;
-      --ease:cubic-bezier(.23,1,.32,1);
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
+    *{ box-sizing:border-box; margin:0; padding:0; cursor:none; }
     html{ scroll-behavior:smooth; }
     body{
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height: 1.55;
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Space Grotesk', sans-serif;
+      min-height:100vh;
+      line-height:1.6;
       overflow-x:hidden;
     }
-    a{ color:inherit; text-decoration:none; }
-    .container{ max-width: 1400px; margin:0 auto; padding: 0 20px; }
 
-    /* ===================== HEADER (LOGO FIX) ===================== */
+    /* ================= HEADER ================= */
     header{
-      position: fixed;
-      top: 16px; left: 0; right: 0;
-      z-index: 1000;
+      position:fixed;
+      top:20px; left:0; right:0;
+      z-index:100;
       display:flex;
       justify-content:center;
-      padding: 0 18px;
+      padding:0 20px;
     }
 
     .glass-nav{
-      width: min(1240px, calc(100% - 18px));
-      background: rgba(18,18,18,.72);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 10px 14px;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 14px;
+      width:min(1120px, calc(100% - 20px));
+      background: rgba(20,20,20,.75);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-
-    .brand{
+      border:1px solid var(--card-border);
+      border-radius:999px;
+      padding:12px 18px;
       display:flex;
       align-items:center;
-      gap: 12px;
-      min-width: 340px; /* <- damit links nicht gequetscht wird */
-    }
-
-    /* LOGO: größer + füllt besser, keine “mini Kante” */
-    .brand-logo{
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      padding: 6px;               /* <- damit transparente Logos sauber sitzen */
-      object-fit: contain;        /* <- nie croppen */
-      display:block;
+      justify-content:space-between;
+      gap:16px;
     }
 
     .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height: 1.05;
-    }
-    .brand-text strong{
-      font-weight: 900;
-      letter-spacing:-.03em;
-      font-size: 1.02rem;
+      font-weight:800;
+      font-size:1.3rem;
+      letter-spacing:-0.03em;
+      padding:8px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
       white-space:nowrap;
-    }
-    .brand-text span{
-      color: var(--muted);
-      font-weight: 650;
-      font-size: .88rem;
-      white-space:nowrap;
-      opacity:.95;
     }
 
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap: 22px;
-    }
+    .nav-links{ display:flex; gap:26px; }
     .nav-links a{
-      color: var(--muted);
-      font-weight: 750;
-      font-size: .92rem;
-      transition: color .2s var(--ease);
+      color:var(--text-muted);
+      font-weight:600;
+      font-size:.9rem;
+      text-decoration:none;
     }
-    .nav-links a:hover{ color: #fff; }
+    .nav-links a:hover{ color:#fff; }
 
-    .nav-right{
+    .btn-nav{
+      background:#fff;
+      color:#000;
+      padding:8px 18px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.9rem;
+      text-decoration:none;
+    }
+
+    /* ================= HERO ================= */
+    .container{ max-width:1400px; margin:0 auto; padding:0 20px; }
+
+    .hero{
+      height:100vh;
       display:flex;
       align-items:center;
-      gap: 10px;
-    }
-    .pill-btn{
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      color: rgba(255,255,255,.92);
-      font-weight: 850;
-      font-size: .92rem;
-      white-space:nowrap;
-      transition: transform .2s var(--ease);
-    }
-    .pill-btn:hover{ transform: scale(1.03); }
-
-    .cta{
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--accent);
-      background: var(--accent);
-      color: #000;
-      font-weight: 950;
-      font-size: .92rem;
-      white-space:nowrap;
-      transition: transform .2s var(--ease);
-    }
-    .cta:hover{ transform: scale(1.03); }
-
-    @media (max-width: 980px){
-      .nav-links{ display:none; }
-      .brand{ min-width: auto; }
-    }
-    @media (max-width: 560px){
-      .pill-btn{ display:none; }
-      .brand-text span{ display:none; }
-    }
-
-    /* ===================== HERO ===================== */
-    .hero{
-      padding-top: 98px;
-      min-height: 100vh;
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 18px;
-      align-items:center;
-      padding-bottom: 28px;
-    }
-    @media (max-width: 1050px){
-      .hero{ grid-template-columns: 1fr; min-height: auto; }
-    }
-
-    .card{
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow:hidden;
-      position: relative;
-    }
-    .card-pad{ padding: 34px; }
-
-    .tagline{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      font-weight: 850;
-      color: rgba(255,255,255,.92);
-      margin-bottom: 14px;
-    }
-    .dot{
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
+      justify-content:center;
+      text-align:center;
+      padding-top:80px;
     }
 
     h1{
-      font-size: clamp(2.4rem, 4.4vw, 4.2rem);
-      line-height: 1.02;
-      letter-spacing:-.04em;
-      font-weight: 950;
-      margin-bottom: 12px;
+      font-size:clamp(3rem,8vw,7rem);
+      font-weight:800;
+      line-height:.9;
+      background: linear-gradient(to bottom, #fff 40%, #666 100%);
+      -webkit-background-clip:text;
+      color:transparent;
+      margin-bottom:20px;
     }
+
     .hero p{
-      color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 720px;
+      color:var(--text-muted);
+      max-width:640px;
+      margin:0 auto 40px;
+      font-size:1.2rem;
     }
 
-    .actions{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 18px 0 18px;
+    .btn-big{
+      display:inline-block;
+      padding:16px 34px;
+      border-radius:999px;
+      border:1px solid var(--card-border);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
     }
 
-    .action{
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      font-weight: 900;
-      font-size: .92rem;
-      transition: transform .2s var(--ease);
-    }
-    .action:hover{ transform: scale(1.03); }
-    .action.primary{
-      border-color: var(--accent);
-      background: var(--accent);
-      color:#000;
+    /* ================= SECTIONS ================= */
+    .section-title{
+      font-size:2.5rem;
+      margin:100px 0 40px;
     }
 
-    .mini-grid{
+    .card{
+      background:var(--card-bg);
+      border:1px solid var(--card-border);
+      border-radius:var(--radius);
+      padding:40px;
+    }
+
+    /* ================= VORHER / NACHHER – FIX ================= */
+
+    /* Grid wie in deinem Screenshot */
+    .examples-grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 12px;
+      grid-template-columns:2fr 1fr;
+      gap:20px;
+      margin-bottom:100px;
     }
-    @media (max-width: 760px){
-      .mini-grid{ grid-template-columns: 1fr; }
-    }
-    .mini{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      padding: 14px;
-    }
-    .mini strong{ display:block; font-weight: 950; margin-bottom: 6px; }
-    .mini span{ color: var(--muted); font-size: .92rem; }
 
-    /* ===================== WICHTIG: BILDER NICHT MEHR CROPPEN ===================== */
-    /*
-      Problem vorher:
-      - object-fit: cover => Bild wird vergrößert, Ränder abgeschnitten (dein "30% sichtbar")
-      Fix jetzt:
-      - Vordergrund: contain => komplettes Bild sichtbar (kein Zoom)
-      - Hintergrund: cover + blur => füllt den Rahmen premium (keine hässlichen Balken)
-    */
+    .examples-right{
+      display:grid;
+      grid-template-rows:1fr 1fr;
+      gap:20px;
+    }
 
-    .media{
-      position: relative;
-      border-radius: var(--radius);
+    /* ---------- COLLAGE FIX ---------- */
+    /* Für Bilder, die bereits oben/unten vorher/nachher enthalten */
+
+    .ba-collage{
+      position:relative;
+      width:100%;
+      height:100%;
+      min-height:420px;
+      border-radius:var(--radius);
       overflow:hidden;
-      border: 1px solid var(--border);
-      aspect-ratio: 16 / 10;
-      background: rgba(0,0,0,.22);
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      background:#000;
     }
-    @media (max-width: 900px){ .media{ aspect-ratio: 4 / 3; } }
 
-    .media-bg{
-      position:absolute;
-      inset:0;
-      background-image: var(--img);
-      background-size: cover;
-      background-position: center;
-      filter: blur(18px) brightness(.62) saturate(1.06);
-      transform: scale(1.08);
-      opacity: .95;
+    .ba-collage .pane{
+      position:relative;
+      overflow:hidden;
     }
-    .media-bg::after{
+
+    .ba-collage .pane::before{
       content:"";
       position:absolute;
       inset:0;
-      background: radial-gradient(circle at 55% 30%, rgba(255,255,255,.12), rgba(0,0,0,.62) 70%);
-      opacity: .85;
+      background-image: var(--img);
+      background-repeat:no-repeat;
+      background-size:100% 200%;
+      background-position:50% 0%;
+      transform:scale(1.02);
     }
 
-    .media-fg{
+    .ba-collage .after::before{
+      background-position:50% 100%;
+    }
+
+    .ba-divider{
       position:absolute;
-      inset:0;
-      display:grid;
-      place-items:center;
-      padding: 16px;
-      z-index: 2;
+      top:0; bottom:0;
+      left:50%;
+      width:1px;
+      background:rgba(255,255,255,.25);
+      z-index:3;
     }
 
-    /* DAS ist die entscheidende Zeile */
-    .media-fg img{
-      width: 100%;
-      height: 100%;
-      object-fit: contain;      /* <- zeigt das GANZE Bild */
-      object-position: center;
-      display:block;
-    }
-
-    .badge{
+    .ba-badge{
       position:absolute;
-      bottom: 12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: .78rem;
-      font-weight: 950;
-      background: rgba(0,0,0,.72);
-      border: 1px solid rgba(255,255,255,.14);
-      color: rgba(255,255,255,.92);
-      z-index: 3;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      max-width: calc(100% - 24px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .badge.left{ left: 12px; }
-    .badge.right{ right: 12px; }
-
-    /* ===================== SECTION: Beispiele Layout wie in deinem Screenshot ===================== */
-    .section{
-      margin-top: 26px;
-      padding-bottom: 40px;
-    }
-    .section-title{
-      font-size: 2.1rem;
-      font-weight: 950;
-      letter-spacing:-.03em;
-      margin: 10px 0 8px;
-    }
-    .section-sub{
-      color: var(--muted);
-      margin-bottom: 16px;
-      max-width: 900px;
+      top:14px;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.75rem;
+      font-weight:800;
+      text-transform:uppercase;
+      background:rgba(0,0,0,.7);
+      border:1px solid rgba(255,255,255,.15);
+      z-index:4;
     }
 
-    .examples{
-      display:grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 18px;
-    }
-    .examples-right{
-      display:grid;
-      grid-template-rows: 1fr 1fr;
-      gap: 18px;
-    }
-    @media (max-width: 1050px){
-      .examples{ grid-template-columns: 1fr; }
-      .examples-right{ grid-template-rows: auto; }
-    }
+    .ba-badge.before{ left:14px; }
+    .ba-badge.after{ right:14px; }
 
-    /* ===================== FOOTER CTA ===================== */
-    .cta-section{
-      text-align:center;
-      padding: 80px 0 110px;
-      background: linear-gradient(180deg, transparent, rgba(255,85,0,.06));
-      margin-top: 40px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-    .btn-big{
-      display:inline-block;
-      margin-top: 16px;
-      padding: 16px 30px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: #fff;
-      font-weight: 950;
-      transition: .25s var(--ease);
-    }
-    .btn-big:hover{
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #000;
+    /* ================= MOBILE ================= */
+    @media (max-width:900px){
+      *{ cursor:auto; }
+      .nav-links{ display:none; }
+
+      .examples-grid{
+        grid-template-columns:1fr;
+      }
+      .examples-right{
+        grid-template-rows:auto;
+      }
+      .ba-collage{
+        grid-template-columns:1fr;
+        min-height:320px;
+      }
+      .ba-divider{ display:none; }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <nav class="glass-nav">
-      <div class="brand">
-        <!-- WICHTIG: setze hier deinen echten Logo-Dateinamen -->
-        <img class="brand-logo" src="logo.png" alt="Räumdienst Borken Logo">
-        <div class="brand-text">
-          <strong>Räumdienst Borken</strong>
-          <span>Entrümpelung & Haushaltsauflösung</span>
+<header>
+  <nav class="glass-nav">
+    <span class="brand-text">RÄUMDIENST.</span>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#beispiele">Vorher / Nachher</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <a href="tel:+4917646620710" class="btn-nav">0176 46620710</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <div>
+      <h1>PLATZ FÜR<br>DAS NEUE.</h1>
+      <p>Professionelle Entrümpelung & Haushaltsauflösung. Diskret, sauber, besenrein.</p>
+      <a href="#kontakt" class="btn-big">Kostenlose Besichtigung</a>
+    </div>
+  </section>
+
+  <h2 class="section-title" id="beispiele">Vorher / Nachher – Beispiele</h2>
+
+  <div class="examples-grid">
+
+    <!-- GROSSES BEISPIEL (oben/unten Bild -> links/rechts Fix) -->
+    <div class="ba-collage card"
+      style="--img: url('IMG_7437.jpg'); padding:0;">
+      <div class="pane before">
+        <span class="ba-badge before">Vorher</span>
+      </div>
+      <div class="pane after">
+        <span class="ba-badge after">Nachher</span>
+      </div>
+      <div class="ba-divider"></div>
+    </div>
+
+    <!-- RECHTE SPALTE -->
+    <div class="examples-right">
+
+      <div class="ba-collage card"
+        style="--img: url('IMG_7438.jpg'); padding:0;">
+        <div class="pane before">
+          <span class="ba-badge before">Vorher</span>
         </div>
-      </div>
-
-      <div class="nav-links">
-        <a href="#leistungen">Leistungen</a>
-        <a href="#beispiele">Vorher/Nachher</a>
-        <a href="#faq">FAQ</a>
-        <a href="#kontakt">Kontakt</a>
-      </div>
-
-      <div class="nav-right">
-        <a class="pill-btn" href="tel:+4917646620710">0176 46620710</a>
-        <a class="cta" href="#kontakt">Kostenlose Besichtigung</a>
-      </div>
-    </nav>
-  </header>
-
-  <main class="container">
-
-    <!-- HERO -->
-    <section class="hero" id="leistungen">
-      <div class="card card-pad">
-        <div class="tagline"><span class="dot"></span> Diskret. Sauber. Planbar.</div>
-
-        <h1>Entrümpelung &<br>Haushaltsauflösung in <span style="color:var(--accent)">Borken</span></h1>
-
-        <p>
-          Sie möchten wieder Platz, Ordnung und Ruhe? Wir übernehmen Entrümpelungen und Haushaltsauflösungen zuverlässig –
-          inklusive Sortierung, Räumung und besenreiner Übergabe. Vorab kostenlos besichtigen, danach fairer Festpreis.
-        </p>
-
-        <div class="actions">
-          <a class="action primary" href="#kontakt">Festpreis anfragen</a>
-          <a class="action" href="tel:+4917646620710">Sofort anrufen</a>
-          <a class="action" href="#beispiele">Vorher/Nachher sehen</a>
+        <div class="pane after">
+          <span class="ba-badge after">Nachher</span>
         </div>
+        <div class="ba-divider"></div>
+      </div>
 
-        <div class="mini-grid">
-          <div class="mini"><strong>Kostenlose Besichtigung</strong><span>Aufwand einschätzen, Details klären, ohne Risiko.</span></div>
-          <div class="mini"><strong>Fairer Festpreis</strong><span>Sie wissen vorher, womit Sie rechnen können.</span></div>
-          <div class="mini"><strong>Kurzfristige Termine</strong><span>Nach Absprache oft auch kurzfristig möglich.</span></div>
+      <div class="ba-collage card"
+        style="--img: url('IMG_7439.jpg'); padding:0;">
+        <div class="pane before">
+          <span class="ba-badge before">Vorher</span>
         </div>
-      </div>
-
-      <!-- HERO Bild: komplett sichtbar, nicht gezoomt -->
-      <div class="media" style="--img:url('IMG_7437.jpg');">
-        <div class="media-bg"></div>
-        <div class="media-fg">
-          <img src="IMG_7437.jpg" alt="Vorher / Nachher Beispiel">
+        <div class="pane after">
+          <span class="ba-badge after">Nachher</span>
         </div>
-        <span class="badge left">Vorher / Nachher</span>
-        <span class="badge right">Ergebnis zählt</span>
+        <div class="ba-divider"></div>
       </div>
-    </section>
 
-    <!-- Beispiele -->
-    <section class="section" id="beispiele">
-      <h2 class="section-title">Vorher / Nachher – Beispiele</h2>
-      <p class="section-sub">
-        Kein Marketing-Zoom: Die Bilder werden vollständig angezeigt. Der Hintergrund füllt nur weich den Rahmen, ohne zu croppen.
-      </p>
+    </div>
+  </div>
 
-      <div class="examples">
-        <!-- Beispiel 1 (dein großes diagonales Bild) -->
-        <div class="media" style="--img:url('IMG_7439.jpg');">
-          <div class="media-bg"></div>
-          <div class="media-fg">
-            <img src="IMG_7439.jpg" alt="Beispiel 1">
-          </div>
-          <span class="badge left">Beispiel 1 – klarer Unterschied</span>
-          <span class="badge right">Besenrein</span>
-        </div>
+  <section id="kontakt" class="card">
+    <h3>Kontakt</h3>
+    <p>Räumdienst Borken – Inhabergeführt & diskret.</p>
+  </section>
 
-        <div class="examples-right">
-          <!-- Beispiel 2 (Garage / Split-Bild) -->
-          <div class="media" style="--img:url('IMG_7438.jpg');">
-            <div class="media-bg"></div>
-            <div class="media-fg">
-              <img src="IMG_7438.jpg" alt="Beispiel 2">
-            </div>
-            <span class="badge left">Beispiel 2</span>
-            <span class="badge right">Garage</span>
-          </div>
+</main>
 
-          <!-- Beispiel 3 (das bei dir gut wirkt) -->
-          <div class="media" style="--img:url('IMG_7437.jpg');">
-            <div class="media-bg"></div>
-            <div class="media-fg">
-              <img src="IMG_7437.jpg" alt="Beispiel 3">
-            </div>
-            <span class="badge left">Beispiel 3</span>
-            <span class="badge right">Wohnraum</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ (Placeholder) -->
-    <section class="section" id="faq">
-      <h2 class="section-title">FAQ</h2>
-      <p class="section-sub">Die häufigsten Fragen – kurz beantwortet.</p>
-      <div class="card card-pad" style="padding:22px;">
-        <p style="color:var(--muted); margin:0;">FAQ Platzhalter</p>
-      </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section class="cta-section" id="kontakt">
-      <p style="text-transform:uppercase; letter-spacing:2px; color:var(--muted); font-weight:950;">Bereit für Ordnung?</p>
-      <a href="tel:+4917646620710" class="btn-big">Jetzt anrufen</a>
-
-      <div style="margin-top:26px; color:var(--muted); font-size:.95rem;">
-        Räumdienst Borken • Inhabergeführt • Diskret<br><br>
-        <span style="opacity:.55;">Impressum / Datenschutz Platzhalter</span>
-      </div>
-    </section>
-
-  </main>
 </body>
 </html>
