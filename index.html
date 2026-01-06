@@ -17,7 +17,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Minimal icon -->
   <link rel="icon" href="IMG_7436.jpg" />
 
   <style>
@@ -38,11 +37,8 @@
       --shadow: 0 20px 70px rgba(0,0,0,.55);
       --shadow2: 0 12px 30px rgba(0,0,0,.35);
       --radius: 22px;
-      --radius2: 16px;
 
-      /* mehr Platz insgesamt + rechter Container darf größer werden */
       --max: 1240px;
-
       --ease: cubic-bezier(.2,.8,.2,1);
     }
 
@@ -63,7 +59,6 @@
     button, input, textarea{font-family:inherit}
     ::selection{background: rgba(240,138,26,.35)}
 
-    /* Subtle animated “mesh” */
     .mesh{
       position:fixed; inset:-20%;
       z-index:-2;
@@ -83,7 +78,6 @@
       to{transform: translate3d(1.5%, 1.0%, 0) scale(1.06)}
     }
 
-    /* Noise overlay */
     .noise{
       position:fixed; inset:0;
       z-index:-1;
@@ -93,10 +87,7 @@
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
     }
 
-    /* Layout helpers */
     .container{max-width:var(--max); margin:0 auto; padding:0 20px}
-    .row{display:flex; gap:18px}
-    .grid{display:grid; gap:18px}
     .pill{
       display:inline-flex; align-items:center; gap:10px;
       padding:10px 14px;
@@ -133,17 +124,12 @@
     .brand img{
       width:46px; height:46px;
       object-fit: cover;
-      object-position:center;
       border-radius: 14px;
       background: rgba(255,255,255,.03);
       border: 1px solid rgba(255,255,255,.10);
-      padding:0;
       overflow:hidden;
     }
-
-    .brand .name{
-      display:flex; flex-direction:column; line-height:1.05;
-    }
+    .brand .name{display:flex; flex-direction:column; line-height:1.05}
     .brand .name strong{font-size:14px; letter-spacing:.2px}
     .brand .name span{font-size:12px; color: var(--muted2)}
     nav ul{
@@ -242,7 +228,6 @@
       object-fit: cover;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
-      padding:0;
       background: rgba(255,255,255,.04);
       overflow:hidden;
     }
@@ -257,16 +242,12 @@
     .drawer .actions{display:grid; gap:10px; margin-top:12px}
 
     /* Hero */
-    .hero{
-      padding:56px 0 28px;
-      position:relative;
-    }
-
+    .hero{padding:56px 0 28px; position:relative;}
     .hero .wrap{
       display:grid;
       grid-template-columns: 0.95fr 1.05fr;
       gap:18px;
-      align-items:stretch;
+      align-items:start;
     }
 
     .headline{
@@ -321,28 +302,25 @@
     }
     .trust .t strong{display:block; color: rgba(255,255,255,.92); font-size:13px; margin-bottom:4px}
 
-    /* Before/After card */
-    .baCard{
+    /* RECHTE SEITE: statische Vorher/Nachher-Karten */
+    .proofCard{
       border: 1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      position:relative;
-      min-height: 0; /* FIX: keine künstliche Höhe -> Luft verschwindet */
     }
-    .baTop{
+    .proofTop{
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 14px 10px;
       border-bottom:1px solid rgba(255,255,255,.08);
     }
-    .baTop .title{
-      display:flex; flex-direction:column;
-      gap:2px;
+    .proofTop .title{
+      display:flex; flex-direction:column; gap:2px;
     }
-    .baTop .title strong{font-size:13px}
-    .baTop .title span{font-size:12px; color: var(--muted2)}
-    .baTop .miniPill{
+    .proofTop .title strong{font-size:13px}
+    .proofTop .title span{font-size:12px; color: var(--muted2)}
+    .miniPill{
       font-size:12px;
       padding:8px 10px;
       border-radius:999px;
@@ -351,104 +329,58 @@
       color: rgba(255,255,255,.78);
       font-weight:800;
       display:flex; align-items:center; gap:8px;
+      white-space:nowrap;
     }
-    .baTop .miniPill i{
+    .miniPill i{
       width:8px; height:8px; border-radius:99px;
       background: linear-gradient(135deg, var(--blue2), var(--orange));
       box-shadow: 0 0 0 6px rgba(30,74,174,.12);
       display:inline-block;
     }
 
-    /* GANZES BILD SICHTBAR (contain) + blurred background
-       FIX: Höhe wird dynamisch per clamp gesteuert -> kein "zu viel Platz" */
-    .baViewport{
-      position:relative;
-      height: clamp(360px, 48vh, 560px);
-      min-height: 360px;
-      background: rgba(0,0,0,.22);
-      isolation:isolate;
-      overflow:hidden;
-      --ba-bg: none; /* wird per JS gesetzt */
-    }
-    .baViewport::before{
-      content:"";
-      position:absolute; inset:-12%;
-      background-image: var(--ba-bg);
-      background-size: cover;
-      background-position: center;
-      filter: blur(26px) saturate(1.1) contrast(1.05);
-      opacity:.32;
-      transform: scale(1.05);
-      z-index:0;
-      pointer-events:none;
-    }
-    .baViewport::after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(800px 280px at 20% 10%, rgba(255,255,255,.08), transparent 60%);
-      z-index:0;
-      pointer-events:none;
-    }
-    .baViewport img{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit: contain;
-      object-position: center;
-      transform:none;
-      filter:none;
-      z-index:1;
-      padding:10px; /* FIX: weniger Luft ums Bild */
-    }
-    .baViewport .after{
-      clip-path: inset(0 0 0 50%);
+    .proofGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      padding:14px;
     }
 
-    .baHandle{
-      position:absolute; top:0; bottom:0; left:50%;
-      width:2px;
-      background: rgba(255,255,255,.65);
-      transform: translateX(-1px);
-      box-shadow: 0 0 0 10px rgba(0,0,0,.12);
-      cursor: col-resize;
-      z-index: 3;
+    .proofItem{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      border-radius: 18px;
+      overflow:hidden;
+      position:relative;
     }
-    .baKnob{
-      position:absolute; top:50%; left:50%;
-      transform: translate(-50%, -50%);
-      width:54px; height:54px;
-      border-radius: 999px;
-      background: rgba(10,12,18,.75);
-      border:1px solid rgba(255,255,255,.25);
-      backdrop-filter: blur(10px);
-      display:flex; align-items:center; justify-content:center;
-      gap:8px;
-      box-shadow: 0 18px 35px rgba(0,0,0,.35);
-      cursor: col-resize;
-      z-index: 4;
+
+    .proofMedia{
+      aspect-ratio: 16/10;
+      width:100%;
+      background: rgba(0,0,0,.2);
     }
-    .arrow{
-      width:10px; height:10px; border:2px solid rgba(255,255,255,.85);
-      border-top:none; border-right:none;
-      transform: rotate(45deg);
-      opacity:.9;
+    .proofMedia img{
+      width:100%;
+      height:100%;
+      object-fit: contain; /* wichtig: kompletter Text im Bild sichtbar */
+      object-position:center;
+      display:block;
+      padding:8px;
     }
-    .arrow.r{transform: rotate(225deg)}
-    .baLabels{
-      position:absolute; inset:auto 12px 12px 12px;
-      display:flex; justify-content:space-between; gap:10px;
-      pointer-events:none;
-      z-index: 2;
-    }
-    .tag{
+
+    .proofTag{
+      position:absolute;
+      left:10px; bottom:10px;
       padding:8px 10px;
       border-radius: 12px;
       border:1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.28);
+      background: rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
-      font-weight:900; font-size:12px;
+      font-weight:900;
+      font-size:12px;
       letter-spacing:.2px;
-      color: rgba(255,255,255,.92);
       text-transform: uppercase;
+      color: rgba(255,255,255,.92);
+      pointer-events:none;
     }
 
     /* Sections */
@@ -464,6 +396,7 @@
       letter-spacing:-.5px;
     }
     .sectionHead p{margin:0; color: var(--muted); max-width: 62ch; line-height:1.55}
+
     .cards{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -498,7 +431,6 @@
     .card h3{margin:0 0 8px; font-size:15px; letter-spacing:-.2px}
     .card p{margin:0; color: var(--muted); font-size:13px; line-height:1.55}
 
-    /* Process */
     .steps{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -534,7 +466,6 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color: var(--muted); font-size:13px; line-height:1.5}
 
-    /* Gallery */
     .gallery{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
@@ -577,7 +508,6 @@
       gap:14px;
     }
 
-    /* FAQ */
     .faq{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -612,7 +542,6 @@
     details[open] .chev{transform: rotate(225deg)}
     details p{margin:10px 0 0; color: var(--muted); font-size:13px; line-height:1.55}
 
-    /* Contact */
     .contact{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -638,9 +567,7 @@
       opacity:.8;
     }
     .contactCard > *{position:relative}
-    .kv{
-      display:grid; gap:10px; margin-top:10px;
-    }
+    .kv{display:grid; gap:10px; margin-top:10px;}
     .kv .line{
       display:flex; gap:10px; align-items:flex-start;
       color: var(--muted);
@@ -652,13 +579,8 @@
       padding:12px;
     }
     .kv strong{color: rgba(255,255,255,.90)}
-    .form{
-      display:grid; gap:10px;
-      margin-top:10px;
-    }
-    .field{
-      display:grid; gap:6px;
-    }
+    .form{display:grid; gap:10px; margin-top:10px;}
+    .field{display:grid; gap:6px;}
     label{font-size:12px; color: var(--muted2); font-weight:800}
     input, textarea{
       width:100%;
@@ -682,7 +604,6 @@
       margin-top:10px;
     }
 
-    /* Footer */
     footer{
       padding:24px 0 34px;
       border-top: 1px solid rgba(255,255,255,.08);
@@ -697,7 +618,7 @@
     .foot a{color: rgba(255,255,255,.78); font-weight:800}
     .foot a:hover{text-decoration:underline}
 
-    /* Reveal animations */
+    /* Reveal */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease)}
     .reveal.in{opacity:1; transform: translateY(0)}
     .delay1{transition-delay:.05s}
@@ -718,24 +639,20 @@
     @media (max-width: 980px){
       .hero{ padding: 44px 0 22px; }
       .hero .wrap{grid-template-columns: 1fr}
-
-      /* FIX: weniger Luft, aber genug Bildfläche */
-      .baViewport{
-        height: clamp(320px, 44vh, 460px);
-        min-height: 320px;
-      }
-      .baViewport img{ padding: 10px; }
-
       .trust{grid-template-columns: 1fr; gap:10px}
+
       .cards .card{grid-column: span 6}
       .steps .step{grid-column: span 6}
       .gallery{grid-template-columns: 1fr}
       .shotSmallGrid{grid-template-rows: auto; grid-template-columns: 1fr 1fr}
       .faq{grid-template-columns: 1fr}
       .contact{grid-template-columns: 1fr}
+
       nav ul{display:none}
       .hamburger{display:flex}
       .nav-cta .btn.ghost{display:none}
+
+      .proofGrid{grid-template-columns: 1fr; } /* Tablet/Mobile: Vorher über Nachher */
     }
 
     @media (max-width: 560px){
@@ -745,18 +662,12 @@
       .floatCta{display:flex}
       .brand{min-width:auto}
       .brand .name{display:none}
-
-      /* Mobile: deutlich enger -> kein riesiger leerer Block */
       .hero{ padding: 28px 0 16px; }
-      .baViewport{
-        height: clamp(260px, 36vh, 360px);
-        min-height: 260px;
-      }
-      .baViewport img{ padding: 8px; }
+      .proofMedia{ aspect-ratio: 16/11; }
+      .proofMedia img{ padding: 6px; }
     }
   </style>
 
-  <!-- LocalBusiness Schema (anpassen: Telefonnummer/Adresse/Öffnungszeiten wenn vorhanden) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -872,29 +783,29 @@
             </div>
           </div>
 
-          <div class="baCard reveal in delay1" aria-label="Vorher Nachher Vergleich">
-            <div class="baTop">
+          <!-- RECHTS: Slider entfernt -->
+          <div class="proofCard reveal in delay1" aria-label="Vorher Nachher Beispiele">
+            <div class="proofTop">
               <div class="title">
                 <strong>Vorher / Nachher</strong>
-                <span>Schieben Sie den Regler, um den Unterschied zu sehen</span>
+                <span>Echte Beispiele – ohne Slider</span>
               </div>
               <div class="miniPill"><i></i> Ergebnis zählt</div>
             </div>
 
-            <div class="baViewport" id="ba">
-              <img class="before" src="IMG_7437.jpg" alt="Vorher: Raum mit Gegenständen">
-              <img class="after"  src="IMG_7438.jpg" alt="Nachher: Raum geräumt und sauber">
-
-              <div class="baHandle" id="baHandle" aria-hidden="true"></div>
-              <div class="baKnob" id="baKnob" aria-label="Vergleichsregler" role="slider"
-                   aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
-                <span class="arrow"></span>
-                <span class="arrow r"></span>
+            <div class="proofGrid">
+              <div class="proofItem" aria-label="Vorher">
+                <div class="proofMedia">
+                  <img src="IMG_7437.jpg" alt="Vorher: Raum mit Gegenständen">
+                </div>
+                <span class="proofTag">Vorher</span>
               </div>
 
-              <div class="baLabels">
-                <span class="tag">Vorher</span>
-                <span class="tag">Nachher</span>
+              <div class="proofItem" aria-label="Nachher">
+                <div class="proofMedia">
+                  <img src="IMG_7438.jpg" alt="Nachher: Raum geräumt und sauber">
+                </div>
+                <span class="proofTag">Nachher</span>
               </div>
             </div>
           </div>
@@ -1146,7 +1057,7 @@
       if(e.target === drawer) closeDrawerFn();
     });
 
-    // Reveal (simple)
+    // Reveal
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(en => {
@@ -1154,80 +1065,6 @@
       });
     }, {threshold: 0.15});
     revealEls.forEach(el => io.observe(el));
-
-    // Before/After slider
-    const ba = document.getElementById('ba');
-    if(ba){
-      const beforeImg = ba.querySelector('img.before');
-      const afterImg = ba.querySelector('img.after');
-      const handle = document.getElementById('baHandle');
-      const knob = document.getElementById('baKnob');
-
-      let dragging = false;
-      let pct = 50;
-
-      function setPct(p){
-        pct = Math.min(100, Math.max(0, p));
-        if(afterImg) afterImg.style.clipPath = `inset(0 0 0 ${pct}%)`;
-        if(handle) handle.style.left = pct + '%';
-        if(knob) {
-          knob.style.left = pct + '%';
-          knob.setAttribute('aria-valuenow', Math.round(pct));
-        }
-      }
-
-      // blurred background uses current "before" image
-      function setBg(){
-        const src = beforeImg?.getAttribute('src');
-        if(src) ba.style.setProperty('--ba-bg', `url("${src}")`);
-      }
-      setBg();
-
-      function posToPct(clientX){
-        const r = ba.getBoundingClientRect();
-        return ((clientX - r.left) / r.width) * 100;
-      }
-
-      function startDrag(e){
-        dragging = true;
-        const x = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
-        setPct(posToPct(x));
-        e.preventDefault?.();
-      }
-      function moveDrag(e){
-        if(!dragging) return;
-        const x = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
-        setPct(posToPct(x));
-      }
-      function endDrag(){ dragging = false; }
-
-      // mouse/touch
-      knob?.addEventListener('mousedown', startDrag);
-      handle?.addEventListener('mousedown', startDrag);
-      ba.addEventListener('mousedown', (e)=> startDrag(e));
-
-      window.addEventListener('mousemove', moveDrag);
-      window.addEventListener('mouseup', endDrag);
-
-      knob?.addEventListener('touchstart', startDrag, {passive:false});
-      handle?.addEventListener('touchstart', startDrag, {passive:false});
-      ba.addEventListener('touchstart', startDrag, {passive:false});
-
-      window.addEventListener('touchmove', moveDrag, {passive:false});
-      window.addEventListener('touchend', endDrag);
-
-      // keyboard accessibility
-      knob?.addEventListener('keydown', (e) => {
-        const step = e.shiftKey ? 5 : 2;
-        if(e.key === 'ArrowLeft') { setPct(pct - step); e.preventDefault(); }
-        if(e.key === 'ArrowRight'){ setPct(pct + step); e.preventDefault(); }
-        if(e.key === 'Home'){ setPct(0); e.preventDefault(); }
-        if(e.key === 'End'){ setPct(100); e.preventDefault(); }
-      });
-
-      // init
-      setPct(50);
-    }
   </script>
 </body>
 </html>
