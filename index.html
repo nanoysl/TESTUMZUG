@@ -12,11 +12,7 @@
   <meta property="og:description" content="Kostenlose Besichtigung. Fairer Festpreis. Diskret & zügig. Raum Borken & Umgebung." />
   <meta property="og:type" content="website" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <!-- ❌ Google Fonts entfernt (DSGVO-sicher ohne Consent) -->
   <link rel="icon" href="IMG_7436.jpg" />
 
   <style>
@@ -47,7 +43,8 @@
     html,body{height:100%}
     body{
       margin:0;
-      font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      /* ✅ System-Fonts statt Manrope (keine externen Requests) */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       background: radial-gradient(1100px 650px at 15% 10%, rgba(30,74,174,.45), transparent 60%),
                   radial-gradient(900px 550px at 85% 20%, rgba(240,138,26,.35), transparent 55%),
                   radial-gradient(900px 650px at 60% 90%, rgba(225,59,59,.22), transparent 55%),
