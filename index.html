@@ -642,7 +642,10 @@
       flex-wrap:wrap;
     }
     .foot small{color: var(--muted2); line-height:1.55}
-    .foot a{color: rgba(255,255,255,.78); font-weight:800}
+    .foot a, .foot button{
+      color: rgba(255,255,255,.78);
+      font-weight:800;
+    }
     .foot a:hover{text-decoration:underline}
 
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease)}
@@ -662,19 +665,13 @@
 
     /* =========================
        MOBILE-ONLY: moderner & “luftiger”
-       Desktop bleibt 1:1 – nur <980 & <560 angepasst
        ========================= */
     @media (max-width: 980px){
       .container{padding: 0 16px}
       section{padding:24px 0}
       .nav{padding:10px 0}
-
       .hero{padding:30px 0 8px}
-      .headline{
-        padding:18px;
-        box-shadow: 0 12px 38px rgba(0,0,0,.36);
-        background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02));
-      }
+      .headline{padding:18px; box-shadow: 0 12px 38px rgba(0,0,0,.36); background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02));}
       .pill{box-shadow:none}
       .lead{font-size:14px; margin-bottom:14px}
 
@@ -682,7 +679,6 @@
       .btn{box-shadow: 0 8px 18px rgba(0,0,0,.20)}
       .btn.primary{box-shadow: 0 12px 26px rgba(240,138,26,.16), 0 10px 18px rgba(0,0,0,.22)}
 
-      /* Trust = swipe statt 3 Boxen übereinander */
       .trust{
         display:flex;
         gap:10px;
@@ -701,19 +697,13 @@
         border-color: rgba(255,255,255,.09);
         background: rgba(255,255,255,.028);
       }
-      .trust::-webkit-scrollbar{height:10px}
-      .trust::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius: 999px}
-      .trust::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius: 999px}
 
       .sectionHead{flex-direction:column; align-items:flex-start; gap:8px}
-
-      /* etwas weniger “Card-Look” */
       .card, .step, .contactCard, details{
         box-shadow: 0 10px 22px rgba(0,0,0,.20);
         border-color: rgba(255,255,255,.09);
         background: rgba(255,255,255,.032);
       }
-
       .cards .card{grid-column: span 6}
       .steps .step{grid-column: span 6}
 
@@ -735,26 +725,12 @@
       .brand{min-width:auto}
       .brand .name{display:none}
 
-      /* Hero: klarer, weniger “Box” */
       .hero{padding:22px 0 6px}
-      .headline{
-        padding:16px;
-        border-radius: 20px;
-        border-color: rgba(255,255,255,.085);
-      }
+      .headline{padding:16px; border-radius: 20px; border-color: rgba(255,255,255,.085);}
       .headline::before{opacity:.75}
-      .pill{
-        padding:8px 12px;
-        font-size:12px;
-        border-color: rgba(255,255,255,.09);
-        background: rgba(255,255,255,.035);
-      }
+      .pill{padding:8px 12px; font-size:12px; border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.035);}
       h1{font-size: clamp(26px, 8vw, 38px)}
-      .lead{
-        font-size:14px;
-        line-height:1.55;
-        margin-bottom:12px;
-      }
+      .lead{font-size:14px; line-height:1.55; margin-bottom:12px;}
 
       .heroActions{
         display:grid;
@@ -763,7 +739,6 @@
       }
       .heroActions .btn{width:100%}
 
-      /* Leistungen & Ablauf: horizontales Snap-Rack */
       .cards, .steps{
         display:flex;
         gap:12px;
@@ -773,10 +748,6 @@
         -webkit-overflow-scrolling: touch;
         mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
       }
-      .cards::-webkit-scrollbar, .steps::-webkit-scrollbar{height:10px}
-      .cards::-webkit-scrollbar-thumb, .steps::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius:999px}
-      .cards::-webkit-scrollbar-track, .steps::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius:999px}
-
       .cards .card, .steps .step{
         flex: 0 0 auto;
         width: 86vw;
@@ -803,7 +774,7 @@
     }
 
     /* ==========================================================
-       SWIPE-HINWEIS (nur Mobile) – wird per JS bei Viewport-Eintritt getriggert
+       SWIPE-HINWEIS (nur Mobile) – per JS bei Viewport-Eintritt
        ========================================================== */
     @media (max-width: 560px){
       .swipeHint{ position:relative; }
@@ -836,6 +807,73 @@
         75%{opacity:1; transform:translateX(-50%) translateY(0)}
         100%{opacity:0; transform:translateX(-50%) translateY(6px)}
       }
+    }
+
+    /* ==========================================================
+       IMPRESSUM MODAL (Popup)
+       ========================================================== */
+    .modal{
+      position:fixed; inset:0;
+      z-index:140;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      display:none;
+      align-items:center; justify-content:center;
+      padding: 18px;
+    }
+    .modal.open{display:flex}
+    .modalPanel{
+      width:min(840px, 96vw);
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,12,18,.88);
+      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+      overflow:hidden;
+      position:relative;
+    }
+    .modalTop{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .modalTop .title{
+      font-weight:900;
+      font-size:13px;
+      color: rgba(255,255,255,.85);
+    }
+    .modalClose{
+      width:44px; height:44px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.85);
+      cursor:pointer;
+      font-weight:900;
+    }
+    .modalBody{
+      padding:16px;
+    }
+    .modalBody h3{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:-.2px;
+    }
+    .modalBody .kv{margin-top:0}
+    .modalBody .kv .line{
+      background: rgba(255,255,255,.03);
+    }
+
+    /* footer button like link */
+    .linkBtn{
+      all:unset;
+      cursor:pointer;
+      display:inline;
+    }
+    .linkBtn:hover{text-decoration:underline}
+    .linkBtn:focus-visible{
+      outline: 2px solid rgba(240,138,26,.55);
+      outline-offset: 4px;
+      border-radius: 8px;
     }
   </style>
 
@@ -875,14 +913,14 @@
         <a href="#referenzen">Referenzen</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
-        <a href="#impressum">Impressum</a>
+        <a href="#" data-open-impressum>Impressum</a>
       </nav>
       <div class="actions">
         <a class="btn primary" href="tel:+4917646620710">Jetzt anrufen</a>
         <a class="btn" href="#kontakt">Kostenlose Besichtigung</a>
       </div>
       <p class="fine">
-        Hinweis: Bitte passen Sie Datenschutz/weitere Pflichtangaben an, sobald die finalen Unternehmensdaten vorliegen.
+        Hinweis: Datenschutz bitte ergänzen (rechtlich notwendig), falls noch nicht vorhanden.
       </p>
     </div>
   </div>
@@ -906,7 +944,6 @@
             <li><a href="#referenzen">Referenzen</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
-            <li><a href="#impressum">Impressum</a></li>
           </ul>
         </nav>
 
@@ -940,7 +977,6 @@
               <a class="btn ghost" href="#referenzen">Referenzen ansehen</a>
             </div>
 
-            <!-- swipeHint -->
             <div class="trust swipeHint">
               <div class="t reveal in delay1">
                 <strong>Kostenlose Besichtigung</strong>
@@ -1034,7 +1070,7 @@
       </div>
     </section>
 
-    <!-- Referenzen (Carousel) -->
+    <!-- Referenzen -->
     <section id="referenzen">
       <div class="container">
         <div class="sectionHead">
@@ -1188,30 +1224,6 @@
       </div>
     </section>
 
-    <!-- Impressum -->
-    <section id="impressum">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Impressum</h2>
-            <p>Pflichtangaben gemäß deutschem Recht.</p>
-          </div>
-        </div>
-
-        <div class="contactCard reveal in">
-          <h3>Räumdienst Borken</h3>
-          <div class="kv">
-            <div class="line"><strong>Inhaber:</strong> <span>Maksut Saciri</span></div>
-            <div class="line"><strong>Anschrift:</strong> <span>Graf Friedrich Straße 34, 46325 Borken, Deutschland</span></div>
-            <div class="line"><strong>Kontakt:</strong> <span>Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a> · E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a></span></div>
-            <div class="line"><strong>Unternehmensform:</strong> <span>Einzelunternehmen</span></div>
-            <div class="line"><strong>Umsatzsteuer:</strong> <span>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span></div>
-            <div class="line"><strong>Verantwortlich i.S.d. § 55 Abs. 2 RStV:</strong> <span>Maksut Saciri (Adresse wie oben)</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <div class="floatCta" aria-hidden="true">
       <a class="btn" href="tel:+4917646620710">Anrufen</a>
       <a class="btn primary" href="#kontakt">Besichtigung</a>
@@ -1223,7 +1235,10 @@
       <div class="foot">
         <small>
           © <span id="y"></span> Räumdienst Borken — Entrümpelung & Haushaltsauflösung<br>
-          <span style="opacity:.75"><a href="#impressum">Impressum</a> · Datenschutz bitte ergänzen (rechtlich notwendig).</span>
+          <span style="opacity:.75">
+            <button class="linkBtn" type="button" data-open-impressum>Impressum</button>
+            · Datenschutz bitte ergänzen (rechtlich notwendig).
+          </span>
         </small>
         <small><a href="#top">Nach oben</a></small>
       </div>
@@ -1238,6 +1253,33 @@
         <button class="lbClose" id="lbClose" type="button" aria-label="Schließen">✕</button>
       </div>
       <img class="lbImg" id="lbImg" alt="Großansicht">
+    </div>
+  </div>
+
+  <!-- Impressum Modal -->
+  <div class="modal" id="impressumModal" aria-hidden="true">
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Impressum">
+      <div class="modalTop">
+        <div class="title">Impressum</div>
+        <button class="modalClose" id="impressumClose" type="button" aria-label="Schließen">✕</button>
+      </div>
+      <div class="modalBody">
+        <h3>Räumdienst Borken</h3>
+        <div class="kv">
+          <div class="line"><strong>Inhaber:</strong> <span>Maksut Saciri</span></div>
+          <div class="line"><strong>Anschrift:</strong> <span>Graf Friedrich Straße 34, 46325 Borken, Deutschland</span></div>
+          <div class="line">
+            <strong>Kontakt:</strong>
+            <span>
+              Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a>
+              · E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a>
+            </span>
+          </div>
+          <div class="line"><strong>Unternehmensform:</strong> <span>Einzelunternehmen</span></div>
+          <div class="line"><strong>Umsatzsteuer:</strong> <span>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span></div>
+          <div class="line"><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong> <span>Maksut Saciri (Adresse wie oben)</span></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1270,11 +1312,6 @@
       if(e.target === drawer) closeDrawerFn();
     });
 
-    // Close drawer on nav click (mobile)
-    drawer?.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', () => closeDrawerFn());
-    });
-
     // Reveal
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
@@ -1302,7 +1339,6 @@
       track.scrollTo({ left: w * i, behavior: 'smooth' });
     }
 
-    // Dots
     function buildDots(){
       if(!dotsWrap) return;
       dotsWrap.innerHTML = '';
@@ -1348,7 +1384,7 @@
 
     buildDots();
 
-    // Lightbox (Click = Bild groß)
+    // Lightbox
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
     const lbTitle = document.getElementById('lbTitle');
@@ -1360,14 +1396,14 @@
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
-      pauseAutoplay(false); // wenn offen: Autoplay aus
+      pauseAutoplay(false);
     }
     function closeLb(){
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden','true');
       lbImg.src = '';
       document.body.style.overflow = '';
-      resumeAutoplay(); // nach close wieder an
+      resumeAutoplay();
     }
 
     slides.forEach(s => {
@@ -1381,7 +1417,7 @@
     lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
     window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
 
-    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
+    // Autoplay
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let autoplayTimer = null;
@@ -1400,6 +1436,7 @@
       autoplayTimer = window.setInterval(() => {
         if(!carouselInView) return;
         if(lightbox.classList.contains('open')) return;
+        if(document.getElementById('impressumModal')?.classList.contains('open')) return;
         if(Date.now() < userPausedUntil) return;
         scrollToIndex(nextIndexLoop());
       }, 3600);
@@ -1415,25 +1452,23 @@
     function pauseAutoplay(withResumeDelay){
       stopAutoplay();
       if(withResumeDelay){
-        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
+        userPausedUntil = Date.now() + 6000;
       } else {
-        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
+        userPausedUntil = Date.now() + 999999999;
       }
     }
 
     function resumeAutoplay(){
       if(!autoplayEnabled) return;
-      userPausedUntil = Date.now() + 900; // kurzer Buffer
+      userPausedUntil = Date.now() + 900;
       startAutoplay();
     }
 
-    // Interaktionen = Pause
     const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
     pauseEvents.forEach(ev => {
       track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
     });
 
-    // Nur wenn Carousel sichtbar
     const carouselEl = document.getElementById('refCarousel');
     const inViewIO = new IntersectionObserver((entries) => {
       entries.forEach(en => {
@@ -1443,22 +1478,20 @@
     }, {threshold: 0.25});
     if(carouselEl) inViewIO.observe(carouselEl);
 
-    // Start
     startAutoplay();
 
-    // ===== Swipe-Hint: bei jedem Re-Entry in den Viewport neu abspielen (nur Mobile) =====
+    // Swipe-Hint
     const prefersReducedSwipe = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function restartSwipeHint(el){
       el.classList.remove('swipeHint--play');
-      void el.offsetWidth; // reflow erzwingen
+      void el.offsetWidth;
       el.classList.add('swipeHint--play');
       window.setTimeout(() => el.classList.remove('swipeHint--play'), 3900);
     }
 
     if(!prefersReducedSwipe){
       const swipeHints = Array.from(document.querySelectorAll('.swipeHint'));
-
       const swipeIO = new IntersectionObserver((entries) => {
         entries.forEach(en => {
           const el = en.target;
@@ -1479,6 +1512,46 @@
         swipeIO.observe(el);
       });
     }
+
+    // =========================
+    // Impressum Modal
+    // =========================
+    const impressumModal = document.getElementById('impressumModal');
+    const impressumClose = document.getElementById('impressumClose');
+    const openImpressumBtns = document.querySelectorAll('[data-open-impressum]');
+
+    function openImpressum(){
+      // close drawer wenn offen
+      if(drawer?.classList.contains('open')) closeDrawerFn();
+
+      impressumModal.classList.add('open');
+      impressumModal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      pauseAutoplay(false);
+    }
+
+    function closeImpressum(){
+      impressumModal.classList.remove('open');
+      impressumModal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      resumeAutoplay();
+    }
+
+    openImpressumBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openImpressum();
+      });
+    });
+
+    impressumClose?.addEventListener('click', closeImpressum);
+    impressumModal?.addEventListener('click', (e) => { if(e.target === impressumModal) closeImpressum(); });
+
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){
+        if(impressumModal.classList.contains('open')) closeImpressum();
+      }
+    });
   </script>
 </body>
 </html>
