@@ -124,25 +124,21 @@
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 0;
     }
-
-    /* ===== LOGO FIX: keine Innenränder, rund, füllt sauber ===== */
     .brand{
       display:flex; align-items:center; gap:12px;
       min-width: 220px;
     }
-    .brand .logo{
-      width:52px; height:52px;
-      border-radius: 14px;
+
+    /* Logo: sauber, rund, ohne "Ränder" im Bild */
+    .brand img{
+      width:46px; height:46px;
+      object-fit: cover;            /* statt contain -> füllt die Fläche */
+      object-position:center;
+      border-radius: 14px;          /* runder */
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.10);
+      padding:0;                    /* entfernt weiße/luftige Ränder */
       overflow:hidden;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      box-shadow: 0 10px 22px rgba(0,0,0,.25);
-      flex: 0 0 auto;
-    }
-    .brand .logo img{
-      width:100%; height:100%;
-      object-fit: cover; /* Logo füllt den Rahmen */
-      display:block;     /* verhindert “Baseline”-Spalte */
     }
 
     .brand .name{
@@ -150,7 +146,6 @@
     }
     .brand .name strong{font-size:14px; letter-spacing:.2px}
     .brand .name span{font-size:12px; color: var(--muted2)}
-
     nav ul{
       display:flex; gap:18px; list-style:none; margin:0; padding:0;
       align-items:center;
@@ -242,16 +237,14 @@
       margin-bottom:10px;
     }
     .drawer .brandMini{display:flex; align-items:center; gap:10px}
-    .drawer .brandMini .logo{
-      width:48px; height:48px;
-      border-radius: 14px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.14);
+    .drawer .brandMini img{
+      width:44px; height:44px;
+      object-fit: cover;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      padding:0;
       background: rgba(255,255,255,.04);
-      flex: 0 0 auto;
-    }
-    .drawer .brandMini .logo img{
-      width:100%; height:100%; object-fit: cover; display:block;
+      overflow:hidden;
     }
     .drawer nav a{
       display:block;
@@ -363,24 +356,50 @@
       box-shadow: 0 0 0 6px rgba(30,74,174,.12);
       display:inline-block;
     }
+
+    /* ========= FIX: GANZES BILD SICHTBAR (contain) + blurred background ========= */
     .baViewport{
       position:relative;
-      height: 100%;
-      min-height: 360px;
+      height:100%;
+      min-height:360px;
       background: rgba(0,0,0,.22);
+      isolation:isolate;
+      overflow:hidden;
+      --ba-bg: none; /* wird per JS gesetzt */
     }
-    /* ===== Slider-Fix: kein künstliches Zoomen mehr ===== */
+    .baViewport::before{
+      content:"";
+      position:absolute; inset:-12%;
+      background-image: var(--ba-bg);
+      background-size: cover;
+      background-position: center;
+      filter: blur(26px) saturate(1.1) contrast(1.05);
+      opacity:.32;
+      transform: scale(1.05);
+      z-index:0;
+      pointer-events:none;
+    }
+    .baViewport::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(800px 280px at 20% 10%, rgba(255,255,255,.08), transparent 60%);
+      z-index:0;
+      pointer-events:none;
+    }
     .baViewport img{
       position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit: cover;
+      object-fit: contain;       /* <= wichtig: zeigt das komplette Foto inkl. "nachher" */
       object-position: center;
-      filter: contrast(1.02) saturate(1.02);
-      transform: none; /* war scale(1.02) -> hat dein Crop verschlimmert */
+      transform:none;
+      filter:none;
+      z-index:1;
+      padding:14px;              /* lässt dem Bild Luft, damit Text nicht am Rand klebt */
     }
     .baViewport .after{
       clip-path: inset(0 0 0 50%);
     }
+
     .baHandle{
       position:absolute; top:0; bottom:0; left:50%;
       width:2px;
@@ -388,6 +407,7 @@
       transform: translateX(-1px);
       box-shadow: 0 0 0 10px rgba(0,0,0,.12);
       cursor: col-resize;
+      z-index: 3;
     }
     .baKnob{
       position:absolute; top:50%; left:50%;
@@ -401,6 +421,7 @@
       gap:8px;
       box-shadow: 0 18px 35px rgba(0,0,0,.35);
       cursor: col-resize;
+      z-index: 4;
     }
     .arrow{
       width:10px; height:10px; border:2px solid rgba(255,255,255,.85);
@@ -413,6 +434,7 @@
       position:absolute; inset:auto 12px 12px 12px;
       display:flex; justify-content:space-between; gap:10px;
       pointer-events:none;
+      z-index: 2;
     }
     .tag{
       padding:8px 10px;
@@ -439,7 +461,6 @@
       letter-spacing:-.5px;
     }
     .sectionHead p{margin:0; color: var(--muted); max-width: 62ch; line-height:1.55}
-
     .cards{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -510,7 +531,7 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color: var(--muted); font-size:13px; line-height:1.5}
 
-    /* ===== GALLERY FIX: contain + blurred background, kein Crop, zentriert ===== */
+    /* Gallery */
     .gallery{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
@@ -525,59 +546,32 @@
       box-shadow: var(--shadow);
       position:relative;
       min-height: 340px;
-      isolation: isolate;
-    }
-    .shot::before{
-      content:"";
-      position:absolute; inset:-12%;
-      background-image: var(--shot-bg);
-      background-size: cover;
-      background-position: center;
-      filter: blur(26px) saturate(1.1) contrast(1.05);
-      opacity: .32;
-      transform: scale(1.05);
-      z-index: 0;
-    }
-    .shot::after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(800px 280px at 20% 10%, rgba(255,255,255,.08), transparent 60%);
-      z-index: 0;
-      pointer-events:none;
     }
     .shot img{
-      position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit: contain;   /* DAS ist der Schlüssel für deine Collage-Bilder */
-      object-position: center;
-      transform: none;
-      filter: none;
-      z-index: 1;
-      padding: 14px;         /* kontrollierter Abstand statt Crop */
+      object-fit: cover;
+      transform: scale(1.02);
+      filter: contrast(1.02) saturate(1.02);
     }
     .shot .cap{
       position:absolute; left:12px; right:12px; bottom:12px;
       display:flex; gap:10px; align-items:center; justify-content:space-between;
       pointer-events:none;
-      z-index: 2;
     }
     .cap .label{
       padding:10px 12px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.30);
+      background: rgba(0,0,0,.25);
       backdrop-filter: blur(10px);
       font-weight:900;
       font-size:12px;
-      color: rgba(255,255,255,.92);
+      color: rgba(255,255,255,.90);
     }
     .shotSmallGrid{
       display:grid;
       grid-template-rows: 1fr 1fr;
       gap:14px;
-    }
-    .shotSmallGrid .shot{
-      min-height: 210px; /* vorher 162 -> zu klein/zerquetscht */
     }
 
     /* Pricing / Info panel */
@@ -791,7 +785,7 @@
     <div class="panel" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
       <div class="top">
         <div class="brandMini">
-          <div class="logo"><img src="IMG_7436.jpg" alt="Räumdienst Borken Logo"></div>
+          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
           <div>
             <div style="font-weight:900">Räumdienst Borken</div>
             <div style="color:rgba(255,255,255,.58); font-size:12px; font-weight:700">Entrümpelung & Haushaltsauflösung</div>
@@ -821,7 +815,7 @@
     <div class="container">
       <div class="nav">
         <a class="brand" href="#top" aria-label="Startseite">
-          <div class="logo"><img src="IMG_7436.jpg" alt="Räumdienst Borken Logo"></div>
+          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
           <div class="name">
             <strong>Räumdienst Borken</strong>
             <span>Entrümpelung & Haushaltsauflösung</span>
@@ -910,6 +904,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -1058,14 +1053,14 @@
           </div>
 
           <div class="shotSmallGrid">
-            <div class="shot reveal delay1">
+            <div class="shot reveal delay1" style="min-height: 162px;">
               <img src="IMG_7440.jpg" alt="Vorher Nachher Beispiel 2">
               <div class="cap">
                 <span class="label">Beispiel 2</span>
                 <span class="label" style="opacity:.85;">Garage</span>
               </div>
             </div>
-            <div class="shot reveal delay2">
+            <div class="shot reveal delay2" style="min-height: 162px;">
               <img src="IMG_7438.jpg" alt="Vorher Nachher Beispiel 3">
               <div class="cap">
                 <span class="label">Beispiel 3</span>
@@ -1211,9 +1206,7 @@
     <div class="container">
       <div class="foot">
         <div style="display:flex; gap:12px; align-items:flex-start;">
-          <div style="width:46px;height:46px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);box-shadow:0 10px 22px rgba(0,0,0,.22);flex:0 0 auto;">
-            <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo" style="width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
+          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo" style="width:44px;height:44px;object-fit:cover;border-radius:14px;border:1px solid rgba(255,255,255,.10);padding:0;background:rgba(255,255,255,.04);overflow:hidden">
           <div>
             <div style="font-weight:900">Räumdienst Borken</div>
             <small>
@@ -1276,18 +1269,15 @@
     }, {threshold: 0.12});
     qsa('.reveal').forEach(el => io.observe(el));
 
-    // ===== GALLERY: set blurred background from each img src
-    qsa('.shot').forEach(shot=>{
-      const img = shot.querySelector('img');
-      if(!img) return;
-      shot.style.setProperty('--shot-bg', `url("${img.getAttribute('src')}")`);
-    });
-
     // ===== Before/After slider
     const ba = qs('#ba');
     const afterImg = qs('#ba .after');
     const knob = qs('#baKnob');
     const handle = qs('#baHandle');
+
+    // Set blurred background from the BEFORE image
+    const baBgSrc = qs('#ba .before')?.getAttribute('src');
+    if (ba && baBgSrc) ba.style.setProperty('--ba-bg', `url("${baBgSrc}")`);
 
     let percent = 50;
     const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
