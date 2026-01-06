@@ -642,10 +642,7 @@
       flex-wrap:wrap;
     }
     .foot small{color: var(--muted2); line-height:1.55}
-    .foot a, .foot button{
-      color: rgba(255,255,255,.78);
-      font-weight:800;
-    }
+    .foot a{color: rgba(255,255,255,.78); font-weight:800}
     .foot a:hover{text-decoration:underline}
 
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease)}
@@ -665,13 +662,19 @@
 
     /* =========================
        MOBILE-ONLY: moderner & “luftiger”
+       Desktop bleibt 1:1 – nur <980 & <560 angepasst
        ========================= */
     @media (max-width: 980px){
       .container{padding: 0 16px}
       section{padding:24px 0}
       .nav{padding:10px 0}
+
       .hero{padding:30px 0 8px}
-      .headline{padding:18px; box-shadow: 0 12px 38px rgba(0,0,0,.36); background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02));}
+      .headline{
+        padding:18px;
+        box-shadow: 0 12px 38px rgba(0,0,0,.36);
+        background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02));
+      }
       .pill{box-shadow:none}
       .lead{font-size:14px; margin-bottom:14px}
 
@@ -679,6 +682,7 @@
       .btn{box-shadow: 0 8px 18px rgba(0,0,0,.20)}
       .btn.primary{box-shadow: 0 12px 26px rgba(240,138,26,.16), 0 10px 18px rgba(0,0,0,.22)}
 
+      /* Trust = swipe statt 3 Boxen übereinander */
       .trust{
         display:flex;
         gap:10px;
@@ -697,13 +701,19 @@
         border-color: rgba(255,255,255,.09);
         background: rgba(255,255,255,.028);
       }
+      .trust::-webkit-scrollbar{height:10px}
+      .trust::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius: 999px}
+      .trust::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius: 999px}
 
       .sectionHead{flex-direction:column; align-items:flex-start; gap:8px}
+
+      /* etwas weniger “Card-Look” */
       .card, .step, .contactCard, details{
         box-shadow: 0 10px 22px rgba(0,0,0,.20);
         border-color: rgba(255,255,255,.09);
         background: rgba(255,255,255,.032);
       }
+
       .cards .card{grid-column: span 6}
       .steps .step{grid-column: span 6}
 
@@ -725,12 +735,26 @@
       .brand{min-width:auto}
       .brand .name{display:none}
 
+      /* Hero: klarer, weniger “Box” */
       .hero{padding:22px 0 6px}
-      .headline{padding:16px; border-radius: 20px; border-color: rgba(255,255,255,.085);}
+      .headline{
+        padding:16px;
+        border-radius: 20px;
+        border-color: rgba(255,255,255,.085);
+      }
       .headline::before{opacity:.75}
-      .pill{padding:8px 12px; font-size:12px; border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.035);}
+      .pill{
+        padding:8px 12px;
+        font-size:12px;
+        border-color: rgba(255,255,255,.09);
+        background: rgba(255,255,255,.035);
+      }
       h1{font-size: clamp(26px, 8vw, 38px)}
-      .lead{font-size:14px; line-height:1.55; margin-bottom:12px;}
+      .lead{
+        font-size:14px;
+        line-height:1.55;
+        margin-bottom:12px;
+      }
 
       .heroActions{
         display:grid;
@@ -739,6 +763,7 @@
       }
       .heroActions .btn{width:100%}
 
+      /* Leistungen & Ablauf: horizontales Snap-Rack */
       .cards, .steps{
         display:flex;
         gap:12px;
@@ -748,6 +773,10 @@
         -webkit-overflow-scrolling: touch;
         mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
       }
+      .cards::-webkit-scrollbar, .steps::-webkit-scrollbar{height:10px}
+      .cards::-webkit-scrollbar-thumb, .steps::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius:999px}
+      .cards::-webkit-scrollbar-track, .steps::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius:999px}
+
       .cards .card, .steps .step{
         flex: 0 0 auto;
         width: 86vw;
@@ -774,7 +803,7 @@
     }
 
     /* ==========================================================
-       SWIPE-HINWEIS (nur Mobile) – per JS bei Viewport-Eintritt
+       SWIPE-HINWEIS (nur Mobile) – wird per JS bei Viewport-Eintritt getriggert
        ========================================================== */
     @media (max-width: 560px){
       .swipeHint{ position:relative; }
@@ -810,8 +839,19 @@
     }
 
     /* ==========================================================
-       IMPRESSUM MODAL (Popup)
+       MODALS: Impressum + Datenschutz (nur per Klick im Footer)
        ========================================================== */
+    .legalBtn{
+      all:unset;
+      cursor:pointer;
+      font-weight:900;
+      color: rgba(255,255,255,.78);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    .legalBtn:hover{color: rgba(255,255,255,.92)}
+
     .modal{
       position:fixed; inset:0;
       z-index:140;
@@ -822,24 +862,28 @@
       padding: 18px;
     }
     .modal.open{display:flex}
+
     .modalPanel{
-      width:min(840px, 96vw);
+      width:min(980px, 96vw);
+      max-height: 90vh;
       border-radius: 22px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(10,12,18,.88);
+      background: rgba(10,12,18,.90);
       box-shadow: 0 30px 90px rgba(0,0,0,.65);
       overflow:hidden;
       position:relative;
+      display:flex;
+      flex-direction:column;
     }
     .modalTop{
       display:flex; justify-content:space-between; align-items:center;
       padding:12px 12px;
       border-bottom:1px solid rgba(255,255,255,.08);
     }
-    .modalTop .title{
+    .modalTitle{
       font-weight:900;
-      font-size:13px;
-      color: rgba(255,255,255,.85);
+      font-size:14px;
+      color: rgba(255,255,255,.90);
     }
     .modalClose{
       width:44px; height:44px;
@@ -852,28 +896,33 @@
     }
     .modalBody{
       padding:16px;
+      overflow:auto;
+      color: rgba(255,255,255,.86);
+      font-size: 13.5px;
+      line-height: 1.65;
     }
     .modalBody h3{
-      margin:0 0 10px;
-      font-size:16px;
+      margin: 0 0 10px;
+      font-size: 15px;
       letter-spacing:-.2px;
     }
-    .modalBody .kv{margin-top:0}
-    .modalBody .kv .line{
+    .modalBody h4{
+      margin: 16px 0 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,.92);
+      letter-spacing:.1px;
+      text-transform:none;
+    }
+    .modalBody p{margin: 0 0 10px; color: rgba(255,255,255,.78)}
+    .modalBody a{color: rgba(240,138,26,.90); font-weight:900; text-decoration:underline}
+    .modalBody ul{margin: 6px 0 12px 18px; color: rgba(255,255,255,.78)}
+    .modalBody li{margin: 6px 0}
+    .legalBox{
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
-    }
-
-    /* footer button like link */
-    .linkBtn{
-      all:unset;
-      cursor:pointer;
-      display:inline;
-    }
-    .linkBtn:hover{text-decoration:underline}
-    .linkBtn:focus-visible{
-      outline: 2px solid rgba(240,138,26,.55);
-      outline-offset: 4px;
-      border-radius: 8px;
+      border-radius: 16px;
+      padding: 12px;
+      margin: 10px 0 12px;
     }
   </style>
 
@@ -913,14 +962,13 @@
         <a href="#referenzen">Referenzen</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
-        <a href="#" data-open-impressum>Impressum</a>
       </nav>
       <div class="actions">
         <a class="btn primary" href="tel:+4917646620710">Jetzt anrufen</a>
         <a class="btn" href="#kontakt">Kostenlose Besichtigung</a>
       </div>
       <p class="fine">
-        Hinweis: Datenschutz bitte ergänzen (rechtlich notwendig), falls noch nicht vorhanden.
+        Hinweis: Bitte passen Sie Impressum/Datenschutz/Adresse an, sobald die finalen Unternehmensdaten vorliegen.
       </p>
     </div>
   </div>
@@ -977,6 +1025,7 @@
               <a class="btn ghost" href="#referenzen">Referenzen ansehen</a>
             </div>
 
+            <!-- swipeHint -->
             <div class="trust swipeHint">
               <div class="t reveal in delay1">
                 <strong>Kostenlose Besichtigung</strong>
@@ -1070,7 +1119,7 @@
       </div>
     </section>
 
-    <!-- Referenzen -->
+    <!-- Referenzen (Carousel) -->
     <section id="referenzen">
       <div class="container">
         <div class="sectionHead">
@@ -1198,12 +1247,12 @@
               <div class="line"><strong>Region:</strong> <span>Borken & Umgebung</span></div>
               <div class="line"><strong>Leistung:</strong> <span>Entrümpelung, Haushaltsauflösung, Nebenräume</span></div>
             </div>
-            <p class="fine">Hinweis: Datenschutz bitte ergänzen (rechtlich notwendig), falls noch nicht vorhanden.</p>
+            <p class="fine">Hinweis: Impressum/Datenschutz/Adresse bitte mit finalen Unternehmensdaten ergänzen.</p>
           </div>
 
           <div class="contactCard reveal in delay1">
             <h3>Festpreis anfragen</h3>
-            <form class="form" action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
+            <form class="form" action="mailto:deinemail@domain.de" method="post" enctype="text/plain">
               <div class="field">
                 <label for="name">Name</label>
                 <input id="name" name="Name" placeholder="Vor- und Nachname" required>
@@ -1236,8 +1285,9 @@
         <small>
           © <span id="y"></span> Räumdienst Borken — Entrümpelung & Haushaltsauflösung<br>
           <span style="opacity:.75">
-            <button class="linkBtn" type="button" data-open-impressum>Impressum</button>
-            · Datenschutz bitte ergänzen (rechtlich notwendig).
+            <button class="legalBtn" type="button" data-open-modal="impressumModal">Impressum</button>
+            &nbsp;·&nbsp;
+            <button class="legalBtn" type="button" data-open-modal="datenschutzModal">Datenschutz</button>
           </span>
         </small>
         <small><a href="#top">Nach oben</a></small>
@@ -1260,25 +1310,120 @@
   <div class="modal" id="impressumModal" aria-hidden="true">
     <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Impressum">
       <div class="modalTop">
-        <div class="title">Impressum</div>
-        <button class="modalClose" id="impressumClose" type="button" aria-label="Schließen">✕</button>
+        <div class="modalTitle">Impressum</div>
+        <button class="modalClose" type="button" data-close-modal aria-label="Schließen">✕</button>
       </div>
       <div class="modalBody">
         <h3>Räumdienst Borken</h3>
-        <div class="kv">
-          <div class="line"><strong>Inhaber:</strong> <span>Maksut Saciri</span></div>
-          <div class="line"><strong>Anschrift:</strong> <span>Graf Friedrich Straße 34, 46325 Borken, Deutschland</span></div>
-          <div class="line">
-            <strong>Kontakt:</strong>
-            <span>
-              Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a>
-              · E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a>
-            </span>
-          </div>
-          <div class="line"><strong>Unternehmensform:</strong> <span>Einzelunternehmen</span></div>
-          <div class="line"><strong>Umsatzsteuer:</strong> <span>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span></div>
-          <div class="line"><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong> <span>Maksut Saciri (Adresse wie oben)</span></div>
+        <div class="legalBox">
+          <p><strong>Inhaber:</strong> Maksut Saciri<br>
+          <strong>Adresse:</strong> Graf Friedrich Straße 34, 46325 Borken, Deutschland</p>
+
+          <p><strong>Kontakt:</strong><br>
+            Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a><br>
+            E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a>
+          </p>
+
+          <p><strong>Unternehmensform:</strong> Einzelunternehmen</p>
+          <p><strong>Umsatzsteuer:</strong> Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
         </div>
+
+        <h4>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h4>
+        <p>Maksut Saciri (Adresse wie oben)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Datenschutz Modal -->
+  <div class="modal" id="datenschutzModal" aria-hidden="true">
+    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Datenschutz">
+      <div class="modalTop">
+        <div class="modalTitle">Datenschutzerklärung</div>
+        <button class="modalClose" type="button" data-close-modal aria-label="Schließen">✕</button>
+      </div>
+      <div class="modalBody">
+        <h3>Datenschutzerklärung</h3>
+
+        <h4>1. Verantwortlicher</h4>
+        <div class="legalBox">
+          <p>
+            Räumdienst Borken<br>
+            Inhaber: Maksut Saciri<br>
+            Graf Friedrich Straße 34<br>
+            46325 Borken, Deutschland
+          </p>
+          <p>
+            Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a><br>
+            E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a>
+          </p>
+        </div>
+
+        <h4>2. Allgemeine Hinweise</h4>
+        <p>
+          Wir verarbeiten personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO) sowie den einschlägigen nationalen Datenschutzvorschriften
+          (insbesondere BDSG). Diese Erklärung informiert über Art, Umfang und Zweck der Verarbeitung personenbezogener Daten beim Besuch dieser Website
+          und bei Kontaktaufnahme.
+        </p>
+
+        <h4>3. Zugriffsdaten / Server-Logfiles</h4>
+        <p>
+          Beim Aufruf dieser Website können durch den Hosting-/Server-Anbieter Informationen in sogenannten Server-Logfiles erhoben werden (z. B. IP-Adresse,
+          Datum und Uhrzeit des Zugriffs, aufgerufene Seite/Datei, Referrer-URL, Browser/OS). Die Verarbeitung erfolgt zur Gewährleistung der technischen
+          Sicherheit (z. B. Abwehr von Angriffen) und zur Stabilität der Website.
+        </p>
+        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).</p>
+
+        <h4>4. Kontaktaufnahme</h4>
+        <p>
+          Wenn Sie uns per Telefon, WhatsApp oder E-Mail kontaktieren oder das Formular nutzen (derzeit per <strong>mailto</strong>), verarbeiten wir die von Ihnen
+          übermittelten Daten (z. B. Name, Telefonnummer, E-Mail, Inhalte der Anfrage) zur Bearbeitung Ihrer Anfrage und zur Kommunikation mit Ihnen.
+        </p>
+        <p><strong>Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche/vertragliche Maßnahmen) und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Kommunikation).</p>
+
+        <h4>5. Empfänger / Weitergabe von Daten</h4>
+        <p>
+          Eine Weitergabe Ihrer Daten an Dritte erfolgt nur, wenn dies zur Durchführung vorvertraglicher Maßnahmen oder zur Vertragserfüllung erforderlich ist,
+          eine gesetzliche Verpflichtung besteht oder Sie eingewilligt haben.
+        </p>
+
+        <h4>6. Speicherdauer</h4>
+        <p>
+          Wir speichern personenbezogene Daten nur so lange, wie dies für die genannten Zwecke erforderlich ist. Darüber hinaus speichern wir Daten,
+          soweit gesetzliche Aufbewahrungspflichten bestehen (z. B. handels- oder steuerrechtliche Pflichten).
+        </p>
+
+        <h4>7. Ihre Rechte</h4>
+        <p>Sie haben nach der DSGVO insbesondere folgende Rechte:</p>
+        <ul>
+          <li>Auskunft (Art. 15 DSGVO)</li>
+          <li>Berichtigung (Art. 16 DSGVO)</li>
+          <li>Löschung (Art. 17 DSGVO)</li>
+          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+          <li>Widerspruch gegen bestimmte Verarbeitungen (Art. 21 DSGVO)</li>
+          <li>Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
+        </ul>
+
+        <h4>8. Beschwerderecht</h4>
+        <p>
+          Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen
+          Daten gegen die DSGVO verstößt.
+        </p>
+
+        <h4>9. Cookies / Tracking</h4>
+        <p>
+          Diese Website setzt nach aktuellem Stand keine Analyse- oder Tracking-Tools ein. Soweit zukünftig Tools (z. B. Analytics/Pixel) eingebunden werden,
+          erfolgt dies – sofern erforderlich – erst nach vorheriger Einwilligung über ein Consent-Banner.
+        </p>
+        <p><strong>Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. c DSGVO (rechtliche Pflichten), Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse) sowie – bei einwilligungspflichtigen Tools – Art. 6 Abs. 1 lit. a DSGVO.</p>
+
+        <h4>10. Datensicherheit</h4>
+        <p>
+          Wir treffen angemessene technische und organisatorische Maßnahmen, um Ihre Daten gegen Verlust, Missbrauch und unbefugten Zugriff zu schützen.
+        </p>
+
+        <h4>11. Stand</h4>
+        <p>Stand: Januar 2026</p>
       </div>
     </div>
   </div>
@@ -1339,6 +1484,7 @@
       track.scrollTo({ left: w * i, behavior: 'smooth' });
     }
 
+    // Dots
     function buildDots(){
       if(!dotsWrap) return;
       dotsWrap.innerHTML = '';
@@ -1384,7 +1530,7 @@
 
     buildDots();
 
-    // Lightbox
+    // Lightbox (Click = Bild groß)
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
     const lbTitle = document.getElementById('lbTitle');
@@ -1396,14 +1542,14 @@
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
-      pauseAutoplay(false);
+      pauseAutoplay(false); // wenn offen: Autoplay aus
     }
     function closeLb(){
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden','true');
       lbImg.src = '';
       document.body.style.overflow = '';
-      resumeAutoplay();
+      resumeAutoplay(); // nach close wieder an
     }
 
     slides.forEach(s => {
@@ -1417,7 +1563,7 @@
     lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
     window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
 
-    // Autoplay
+    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let autoplayTimer = null;
@@ -1436,7 +1582,6 @@
       autoplayTimer = window.setInterval(() => {
         if(!carouselInView) return;
         if(lightbox.classList.contains('open')) return;
-        if(document.getElementById('impressumModal')?.classList.contains('open')) return;
         if(Date.now() < userPausedUntil) return;
         scrollToIndex(nextIndexLoop());
       }, 3600);
@@ -1452,23 +1597,25 @@
     function pauseAutoplay(withResumeDelay){
       stopAutoplay();
       if(withResumeDelay){
-        userPausedUntil = Date.now() + 6000;
+        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
       } else {
-        userPausedUntil = Date.now() + 999999999;
+        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
       }
     }
 
     function resumeAutoplay(){
       if(!autoplayEnabled) return;
-      userPausedUntil = Date.now() + 900;
+      userPausedUntil = Date.now() + 900; // kurzer Buffer
       startAutoplay();
     }
 
+    // Interaktionen = Pause
     const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
     pauseEvents.forEach(ev => {
       track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
     });
 
+    // Nur wenn Carousel sichtbar
     const carouselEl = document.getElementById('refCarousel');
     const inViewIO = new IntersectionObserver((entries) => {
       entries.forEach(en => {
@@ -1478,20 +1625,22 @@
     }, {threshold: 0.25});
     if(carouselEl) inViewIO.observe(carouselEl);
 
+    // Start
     startAutoplay();
 
-    // Swipe-Hint
+    // ===== Swipe-Hint: bei jedem Re-Entry in den Viewport neu abspielen (nur Mobile) =====
     const prefersReducedSwipe = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function restartSwipeHint(el){
       el.classList.remove('swipeHint--play');
-      void el.offsetWidth;
+      void el.offsetWidth; // reflow erzwingen
       el.classList.add('swipeHint--play');
       window.setTimeout(() => el.classList.remove('swipeHint--play'), 3900);
     }
 
     if(!prefersReducedSwipe){
       const swipeHints = Array.from(document.querySelectorAll('.swipeHint'));
+
       const swipeIO = new IntersectionObserver((entries) => {
         entries.forEach(en => {
           const el = en.target;
@@ -1513,43 +1662,43 @@
       });
     }
 
-    // =========================
-    // Impressum Modal
-    // =========================
-    const impressumModal = document.getElementById('impressumModal');
-    const impressumClose = document.getElementById('impressumClose');
-    const openImpressumBtns = document.querySelectorAll('[data-open-impressum]');
+    // ===== Legal Modals (Impressum / Datenschutz) =====
+    const modalEls = Array.from(document.querySelectorAll('.modal'));
+    const openModalBtns = Array.from(document.querySelectorAll('[data-open-modal]'));
+    const closeModalBtns = Array.from(document.querySelectorAll('[data-close-modal]'));
 
-    function openImpressum(){
-      // close drawer wenn offen
-      if(drawer?.classList.contains('open')) closeDrawerFn();
-
-      impressumModal.classList.add('open');
-      impressumModal.setAttribute('aria-hidden','false');
+    function openModalById(id){
+      const m = document.getElementById(id);
+      if(!m) return;
+      m.classList.add('open');
+      m.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
-      pauseAutoplay(false);
     }
 
-    function closeImpressum(){
-      impressumModal.classList.remove('open');
-      impressumModal.setAttribute('aria-hidden','true');
+    function closeModal(m){
+      if(!m) return;
+      m.classList.remove('open');
+      m.setAttribute('aria-hidden','true');
       document.body.style.overflow = '';
-      resumeAutoplay();
     }
 
-    openImpressumBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openImpressum();
+    openModalBtns.forEach(btn => {
+      btn.addEventListener('click', () => openModalById(btn.getAttribute('data-open-modal')));
+    });
+
+    closeModalBtns.forEach(btn => {
+      btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
+    });
+
+    modalEls.forEach(m => {
+      m.addEventListener('click', (e) => {
+        if(e.target === m) closeModal(m);
       });
     });
 
-    impressumClose?.addEventListener('click', closeImpressum);
-    impressumModal?.addEventListener('click', (e) => { if(e.target === impressumModal) closeImpressum(); });
-
     window.addEventListener('keydown', (e) => {
       if(e.key === 'Escape'){
-        if(impressumModal.classList.contains('open')) closeImpressum();
+        modalEls.forEach(m => { if(m.classList.contains('open')) closeModal(m); });
       }
     });
   </script>
