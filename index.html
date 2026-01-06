@@ -385,7 +385,7 @@
     .step h3{margin:0 0 8px; font-size:14px}
     .step p{margin:0; color: var(--muted); font-size:13px; line-height:1.5}
 
-    /* ===== Referenzen: manuelles Carousel (kein Auto) ===== */
+    /* ===== Referenzen: manuelles Carousel (plus Auto-Play via JS) ===== */
     .carouselCard{
       border:1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
@@ -443,6 +443,7 @@
       position:relative;
       box-shadow: 0 12px 30px rgba(0,0,0,.30);
     }
+
     .slideMedia{aspect-ratio: 16/9; background: rgba(0,0,0,.18);}
     .slideMedia img{
       width:100%; height:100%;
@@ -660,26 +661,28 @@
     .floatCta a{flex:1}
 
     /* =========================
-       MOBILE-ONLY: “weniger voll”
-       Desktop bleibt 1:1 – wir fassen nur <980 und <560 an
+       MOBILE-ONLY: moderner & “luftiger”
+       Desktop bleibt 1:1 – nur <980 & <560 angepasst
        ========================= */
     @media (max-width: 980px){
-      /* Weniger “Boxen-Gefühl” durch kompaktere Abstände */
       .container{padding: 0 16px}
-      section{padding:26px 0}
+      section{padding:24px 0}
       .nav{padding:10px 0}
 
-      /* Hero weniger “massiv” */
-      .hero{padding:34px 0 10px}
-      .headline{padding:18px; box-shadow: 0 14px 46px rgba(0,0,0,.40)}
+      .hero{padding:30px 0 8px}
+      .headline{
+        padding:18px;
+        box-shadow: 0 12px 38px rgba(0,0,0,.36);
+        background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02));
+      }
+      .pill{box-shadow:none}
       .lead{font-size:14px; margin-bottom:14px}
 
-      /* CTA: weniger Luft, klarer */
       .heroActions{gap:8px}
-      .btn{box-shadow: 0 8px 18px rgba(0,0,0,.22)}
-      .btn.primary{box-shadow: 0 14px 30px rgba(240,138,26,.18), 0 10px 18px rgba(0,0,0,.26)}
+      .btn{box-shadow: 0 8px 18px rgba(0,0,0,.20)}
+      .btn.primary{box-shadow: 0 12px 26px rgba(240,138,26,.16), 0 10px 18px rgba(0,0,0,.22)}
 
-      /* Trust: statt 3 fetter Kacheln -> horizontales “Swipe-Rack” */
+      /* Trust = swipe statt 3 Boxen übereinander */
       .trust{
         display:flex;
         gap:10px;
@@ -687,30 +690,30 @@
         padding-bottom: 6px;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
+        mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
       }
       .trust .t{
         flex: 0 0 auto;
-        min-width: min(320px, 82vw);
+        min-width: min(340px, 86vw);
         scroll-snap-align: start;
         padding:12px;
-        border-radius: 16px;
-        background: rgba(255,255,255,.035);
+        border-radius: 18px;
+        border-color: rgba(255,255,255,.09);
+        background: rgba(255,255,255,.028);
       }
       .trust::-webkit-scrollbar{height:10px}
       .trust::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius: 999px}
       .trust::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius: 999px}
 
-      /* Section Head: weniger “zweispaltig”, mehr Luft nach unten */
       .sectionHead{flex-direction:column; align-items:flex-start; gap:8px}
-      .sectionHead p{max-width: 72ch}
 
-      /* Karten & Steps: weniger Schatten, weniger visuelle “Container-Last” */
+      /* etwas weniger “Card-Look” */
       .card, .step, .contactCard, details{
-        box-shadow: 0 10px 24px rgba(0,0,0,.22);
-        background: rgba(255,255,255,.042);
+        box-shadow: 0 10px 22px rgba(0,0,0,.20);
+        border-color: rgba(255,255,255,.09);
+        background: rgba(255,255,255,.032);
       }
 
-      /* Grid Verhalten bleibt wie vorher (damit Desktop-Feeling erhalten bleibt) */
       .cards .card{grid-column: span 6}
       .steps .step{grid-column: span 6}
 
@@ -720,26 +723,38 @@
       nav ul{display:none}
       .hamburger{display:flex}
       .nav-cta .btn.ghost{display:none}
-
       .carouselTop .note{display:none}
     }
 
     @media (max-width: 560px){
-      /* Noch kompakter, ohne hässlich “gequetscht” */
       .container{padding: 0 14px}
-      section{padding:22px 0}
+      section{padding:20px 0}
+      .nav{padding:9px 0}
 
-      /* Header / Brand: weniger Höhe */
       .brand img{width:42px; height:42px; border-radius: 14px}
       .brand{min-width:auto}
       .brand .name{display:none}
-      .nav{padding:9px 0}
 
-      /* Hero: Buttons untereinander -> ruhiger */
-      .hero{padding:24px 0 8px}
-      .pill{padding:8px 12px; font-size:12px}
+      /* Hero: klarer, weniger “Box” */
+      .hero{padding:22px 0 6px}
+      .headline{
+        padding:16px;
+        border-radius: 20px;
+        border-color: rgba(255,255,255,.085);
+      }
+      .headline::before{opacity:.75}
+      .pill{
+        padding:8px 12px;
+        font-size:12px;
+        border-color: rgba(255,255,255,.09);
+        background: rgba(255,255,255,.035);
+      }
       h1{font-size: clamp(26px, 8vw, 38px)}
-      .lead{font-size:14px; line-height:1.55}
+      .lead{
+        font-size:14px;
+        line-height:1.55;
+        margin-bottom:12px;
+      }
 
       .heroActions{
         display:grid;
@@ -748,27 +763,45 @@
       }
       .heroActions .btn{width:100%}
 
-      /* Trust: etwas schmaler, wirkt wie “Stories”, nicht wie 3 Kisten */
-      .trust .t{min-width: 86vw; padding:12px}
+      /* Leistungen & Ablauf: “modern” = horizontales Snap-Rack statt viele Kacheln untereinander */
+      .cards, .steps{
+        display:flex;
+        gap:12px;
+        overflow:auto;
+        padding-bottom: 6px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+      }
+      .cards::-webkit-scrollbar, .steps::-webkit-scrollbar{height:10px}
+      .cards::-webkit-scrollbar-thumb, .steps::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius:999px}
+      .cards::-webkit-scrollbar-track, .steps::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius:999px}
 
-      /* Leistungen/Steps auf Phone: volle Breite, aber weniger Gap */
-      .cards{gap:12px}
-      .steps{gap:12px}
-      .cards .card{grid-column: span 12; padding:14px}
-      .steps .step{grid-column: span 12; padding:14px}
+      .cards .card, .steps .step{
+        flex: 0 0 auto;
+        width: 86vw;
+        scroll-snap-align: start;
+        padding:14px;
+        border-radius: 20px;
+        background: rgba(255,255,255,.028);
+      }
+      /* weniger Text-Block-Gefühl */
+      .card p, .step p{
+        display:-webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow:hidden;
+      }
 
-      /* Referenzen: etwas enger */
+      /* Referenzen etwas cleaner */
       .trackWrap{padding: 14px}
       .track{gap:12px}
       .slide{width: 88vw}
 
-      /* Kontakt: kompaktere Lines */
-      .contactCard{padding:14px}
+      /* Kontakt kompakter */
+      .contactCard{padding:14px; border-radius: 20px}
       .kv .line{padding:11px; border-radius: 14px}
-      input, textarea{border-radius: 14px}
-      textarea{min-height: 110px}
 
-      /* Floating CTA */
       .floatCta{display:flex}
     }
   </style>
@@ -970,7 +1003,7 @@
         <div class="sectionHead">
           <div>
             <h2>Referenzen</h2>
-            <p>Wischen oder ziehen Sie die Beispiele. Kein Autoplay – Sie steuern selbst.</p>
+            <p>Wischen oder ziehen Sie die Beispiele. Das Carousel läuft automatisch – bei Interaktion stoppt es kurz.</p>
           </div>
         </div>
 
@@ -981,7 +1014,7 @@
               <span>Klick aufs Bild = groß ansehen</span>
             </div>
             <div class="controls">
-              <span class="note">Drag/Swipe • Pfeile • Dots</span>
+              <span class="note">Auto • Drag/Swipe • Pfeile • Dots</span>
               <button class="iconBtn" type="button" id="prevBtn" aria-label="Vorheriges Bild">
                 <svg viewBox="0 0 24 24"><path d="M15.5 4.5 7 12l8.5 7.5 1.5-1.7L10.5 12 17 6.2z"/></svg>
               </button>
@@ -1212,7 +1245,7 @@
         b.className = 'dotBtn';
         b.type = 'button';
         b.setAttribute('aria-label', 'Zu Slide ' + (i+1));
-        b.addEventListener('click', () => scrollToIndex(i));
+        b.addEventListener('click', () => { pauseAutoplay(true); scrollToIndex(i); });
         dotsWrap.appendChild(b);
       });
       setActiveDot(0);
@@ -1231,10 +1264,12 @@
     }
 
     prevBtn?.addEventListener('click', () => {
+      pauseAutoplay(true);
       const i = Math.max(0, currentIndex() - 1);
       scrollToIndex(i);
     });
     nextBtn?.addEventListener('click', () => {
+      pauseAutoplay(true);
       const i = Math.min(slides.length - 1, currentIndex() + 1);
       scrollToIndex(i);
     });
@@ -1247,7 +1282,7 @@
 
     buildDots();
 
-    // Lightbox
+    // Lightbox (Click = Bild groß)
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
     const lbTitle = document.getElementById('lbTitle');
@@ -1259,12 +1294,14 @@
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
+      pauseAutoplay(false); // wenn offen: Autoplay aus
     }
     function closeLb(){
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden','true');
       lbImg.src = '';
       document.body.style.overflow = '';
+      resumeAutoplay(); // nach close wieder an
     }
 
     slides.forEach(s => {
@@ -1277,6 +1314,71 @@
     lbClose?.addEventListener('click', closeLb);
     lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
     window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
+
+    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let autoplayTimer = null;
+    let autoplayEnabled = !prefersReduced;
+    let userPausedUntil = 0;
+    let carouselInView = false;
+
+    function nextIndexLoop(){
+      const i = currentIndex();
+      return (i + 1) % Math.max(1, slides.length);
+    }
+
+    function startAutoplay(){
+      if(!autoplayEnabled || !track || slides.length < 2) return;
+      if(autoplayTimer) return;
+      autoplayTimer = window.setInterval(() => {
+        if(!carouselInView) return;
+        if(lightbox.classList.contains('open')) return;
+        if(Date.now() < userPausedUntil) return;
+        scrollToIndex(nextIndexLoop());
+      }, 3600);
+    }
+
+    function stopAutoplay(){
+      if(autoplayTimer){
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function pauseAutoplay(withResumeDelay){
+      stopAutoplay();
+      if(withResumeDelay){
+        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
+      } else {
+        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
+      }
+    }
+
+    function resumeAutoplay(){
+      if(!autoplayEnabled) return;
+      userPausedUntil = Date.now() + 900; // kurzer Buffer
+      startAutoplay();
+    }
+
+    // Interaktionen = Pause
+    const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
+    pauseEvents.forEach(ev => {
+      track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
+    });
+
+    // Nur wenn Carousel sichtbar
+    const carouselEl = document.getElementById('refCarousel');
+    const inViewIO = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        carouselInView = !!en.isIntersecting;
+        if(carouselInView) startAutoplay();
+      });
+    }, {threshold: 0.25});
+    if(carouselEl) inViewIO.observe(carouselEl);
+
+    // Start
+    startAutoplay();
   </script>
 </body>
 </html>
