@@ -875,13 +875,14 @@
         <a href="#referenzen">Referenzen</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
+        <a href="#impressum">Impressum</a>
       </nav>
       <div class="actions">
         <a class="btn primary" href="tel:+4917646620710">Jetzt anrufen</a>
         <a class="btn" href="#kontakt">Kostenlose Besichtigung</a>
       </div>
       <p class="fine">
-        Hinweis: Bitte passen Sie Impressum/Datenschutz/Adresse an, sobald die finalen Unternehmensdaten vorliegen.
+        Hinweis: Bitte passen Sie Datenschutz/weitere Pflichtangaben an, sobald die finalen Unternehmensdaten vorliegen.
       </p>
     </div>
   </div>
@@ -905,6 +906,7 @@
             <li><a href="#referenzen">Referenzen</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="#impressum">Impressum</a></li>
           </ul>
         </nav>
 
@@ -1160,12 +1162,12 @@
               <div class="line"><strong>Region:</strong> <span>Borken & Umgebung</span></div>
               <div class="line"><strong>Leistung:</strong> <span>Entrümpelung, Haushaltsauflösung, Nebenräume</span></div>
             </div>
-            <p class="fine">Hinweis: Impressum/Datenschutz/Adresse bitte mit finalen Unternehmensdaten ergänzen.</p>
+            <p class="fine">Hinweis: Datenschutz bitte ergänzen (rechtlich notwendig), falls noch nicht vorhanden.</p>
           </div>
 
           <div class="contactCard reveal in delay1">
             <h3>Festpreis anfragen</h3>
-            <form class="form" action="mailto:deinemail@domain.de" method="post" enctype="text/plain">
+            <form class="form" action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
               <div class="field">
                 <label for="name">Name</label>
                 <input id="name" name="Name" placeholder="Vor- und Nachname" required>
@@ -1186,6 +1188,30 @@
       </div>
     </section>
 
+    <!-- Impressum -->
+    <section id="impressum">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Impressum</h2>
+            <p>Pflichtangaben gemäß deutschem Recht.</p>
+          </div>
+        </div>
+
+        <div class="contactCard reveal in">
+          <h3>Räumdienst Borken</h3>
+          <div class="kv">
+            <div class="line"><strong>Inhaber:</strong> <span>Maksut Saciri</span></div>
+            <div class="line"><strong>Anschrift:</strong> <span>Graf Friedrich Straße 34, 46325 Borken, Deutschland</span></div>
+            <div class="line"><strong>Kontakt:</strong> <span>Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a> · E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a></span></div>
+            <div class="line"><strong>Unternehmensform:</strong> <span>Einzelunternehmen</span></div>
+            <div class="line"><strong>Umsatzsteuer:</strong> <span>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</span></div>
+            <div class="line"><strong>Verantwortlich i.S.d. § 55 Abs. 2 RStV:</strong> <span>Maksut Saciri (Adresse wie oben)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="floatCta" aria-hidden="true">
       <a class="btn" href="tel:+4917646620710">Anrufen</a>
       <a class="btn primary" href="#kontakt">Besichtigung</a>
@@ -1197,7 +1223,7 @@
       <div class="foot">
         <small>
           © <span id="y"></span> Räumdienst Borken — Entrümpelung & Haushaltsauflösung<br>
-          <span style="opacity:.75">Impressum & Datenschutz bitte ergänzen (rechtlich notwendig).</span>
+          <span style="opacity:.75"><a href="#impressum">Impressum</a> · Datenschutz bitte ergänzen (rechtlich notwendig).</span>
         </small>
         <small><a href="#top">Nach oben</a></small>
       </div>
@@ -1242,6 +1268,11 @@
     closeDrawer?.addEventListener('click', closeDrawerFn);
     drawer?.addEventListener('click', (e) => {
       if(e.target === drawer) closeDrawerFn();
+    });
+
+    // Close drawer on nav click (mobile)
+    drawer?.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => closeDrawerFn());
     });
 
     // Reveal
