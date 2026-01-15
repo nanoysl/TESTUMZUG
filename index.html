@@ -199,14 +199,62 @@
         }
 
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .gallery-item { border-radius: 20px; overflow: hidden; height: 320px; position: relative; box-shadow: var(--shadow-sm); }
+        .gallery-item { 
+            border-radius: 20px; overflow: hidden; height: 320px; position: relative; box-shadow: var(--shadow-sm); 
+            cursor: pointer; /* Zeigt an, dass man klicken kann */
+        }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
         .gallery-item:hover img { transform: scale(1.1); }
         .badge-overlay { 
             position: absolute; bottom: 20px; left: 20px; background: rgba(255,255,255,0.95); 
             padding: 8px 16px; border-radius: 8px; font-weight: 700; color: var(--primary-blue); 
             font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            pointer-events: none;
         }
+
+        /* --- LIGHTBOX (NEU) --- */
+        .lightbox {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0, 0, 0, 0.9); /* Dunkler Hintergrund */
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            transition: 0.3s;
+        }
+        .close-lightbox:hover { color: var(--accent-red); }
+
 
         /* --- CONTACT --- */
         .contact-section { background: linear-gradient(180deg, var(--bg-body) 0%, #e0e7ff 100%); }
@@ -424,7 +472,7 @@
                         </div>
                     </div>
                     <div class="contact-form">
-                        <form action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
+                        <form action="mailto:Rauemdienst.Borken@gmail.com?subject=Anfrage über Webseite" method="post" enctype="text/plain">
                             <input type="text" name="name" placeholder="Ihr Name" required>
                             <input type="tel" name="phone" placeholder="Telefonnummer" required>
                             <textarea name="message" rows="4" placeholder="Ihr Anliegen"></textarea>
@@ -447,13 +495,16 @@
         </div>
     </footer>
 
+    <div id="lightbox" class="lightbox">
+        <span id="close-lightbox" class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
     <script>
         // --- PROBLEM LÖSUNG: STARTET SEITE IMMER OBEN ---
-        // Verhindert, dass der Browser sich die alte Scrollposition merkt
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
-        // Zwingt den Browser nach oben
         window.scrollTo(0, 0);
         // ------------------------------------------------
 
@@ -486,6 +537,31 @@
         window.addEventListener('touchend', () => isDown = false);
         window.addEventListener('touchmove', (e) => { if (isDown) moveSlider(e.touches[0].clientX); });
         container.addEventListener('click', (e) => moveSlider(e.clientX));
+
+        // --- LIGHTBOX SCRIPT ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('close-lightbox');
+        const galleryImages = document.querySelectorAll('.gallery-item img');
+
+        galleryImages.forEach(img => {
+            img.addEventListener('click', function() {
+                lightbox.classList.add('active');
+                lightboxImg.src = this.src;
+            });
+        });
+
+        // Schließen beim Klick auf X
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        // Schließen beim Klick auf den Hintergrund
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
