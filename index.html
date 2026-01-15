@@ -6,7 +6,7 @@
     <title>Räumdienst Borken | Professionelle Haushaltsauflösung</title>
     <meta name="description" content="Ihr Partner für Entrümpelung, Haushaltsauflösung und Wohnungsauflösung in Borken. Besenrein, diskret und zum Festpreis.">
     
-    <link rel="icon" href="IMG_7436.jpg" type="image/jpeg">
+    <link rel="icon" href="logo.png" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,21 +20,27 @@
             --bg-white: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
+            
             --container-width: 1200px;
+            
+            /* Premium Shadows */
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --shadow-blue: 0 20px 40px -10px rgba(0, 48, 143, 0.25);
+            
             --radius-lg: 24px;
         }
 
+        /* --- GLOBAL RESET --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevents side-scrolling on mobile */
             -webkit-font-smoothing: antialiased;
         }
 
@@ -42,10 +48,13 @@
         h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -0.02em; }
         h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
         p { margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.125rem; }
-        img { max-width: 100%; display: block; }
+        
+        /* IMAGE RESPONSIVENESS FIX */
+        img { max-width: 100%; height: auto; display: block; }
+
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         
-        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; width: 100%; }
 
         /* --- ANIMATIONS --- */
         .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -59,9 +68,20 @@
             padding: 16px 32px; font-weight: 700; font-size: 1rem;
             border-radius: 50px; cursor: pointer; position: relative; overflow: hidden;
             border: none; transition: all 0.3s ease; text-align: center;
+            white-space: nowrap; /* Prevents text breaking on small phones */
         }
-        .btn-primary { background: var(--accent-red); color: white; box-shadow: 0 4px 15px rgba(225, 37, 27, 0.3); }
+        .btn-primary { 
+            background: var(--accent-red); color: white; 
+            box-shadow: 0 4px 15px rgba(225, 37, 27, 0.3); 
+        }
+        .btn-primary::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(225, 37, 27, 0.4); }
+        .btn-primary:hover::after { left: 100%; }
+
         .btn-secondary { background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); }
         .btn-secondary:hover { background: var(--primary-blue); color: white; }
 
@@ -72,36 +92,57 @@
             border-bottom: 1px solid rgba(0,0,0,0.05); padding: 12px 0;
         }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-        .logo { height: 50px; width: auto; }
+        
+        /* Logo sizing fixed for mobile */
+        .logo { height: 50px; width: auto; max-width: 200px; object-fit: contain; }
         
         .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-link { font-weight: 600; color: var(--text-main); }
+        .nav-link { font-weight: 600; color: var(--text-main); position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--accent-red); transition: 0.3s;
+        }
         .nav-link:hover { color: var(--accent-red); }
+        .nav-link:hover::after { width: 100%; }
 
         .mobile-toggle { display: none; font-size: 1.8rem; color: var(--primary-blue); cursor: pointer; }
 
         /* --- HERO --- */
         .hero {
-            padding-top: 160px; padding-bottom: 80px;
+            padding-top: 140px; padding-bottom: 80px;
             background: radial-gradient(circle at 80% 20%, #eff6ff 0%, #ffffff 60%);
             overflow: hidden;
         }
-        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+        /* Abstract Background Shape */
+        .hero::before {
+            content: ''; position: absolute; top: -100px; right: -100px;
+            width: 600px; height: 600px; background: linear-gradient(135deg, rgba(0,48,143,0.05), rgba(225,37,27,0.05));
+            border-radius: 50%; filter: blur(80px); z-index: 0;
+        }
+        
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        
         .hero-img-card {
             border-radius: var(--radius-lg); box-shadow: var(--shadow-blue);
             transform: rotate(2deg); border: 8px solid white; transition: 0.5s;
+            position: relative;
         }
         .hero-img-card:hover { transform: rotate(0) scale(1.02); }
         
-        .trust-metrics { display: flex; gap: 40px; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); }
-        .metric b { display: block; font-size: 1.5rem; color: var(--primary-blue); }
+        .trust-metrics { display: flex; gap: 30px; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); flex-wrap: wrap; }
+        .metric b { display: block; font-size: 1.5rem; color: var(--primary-blue); line-height: 1; }
+        .metric span { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); }
 
         /* --- SECTIONS --- */
         .section-py { padding: 80px 0; }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .about-img { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
         .check-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 12px; font-weight: 600; }
-        .check-icon svg { width: 16px; fill: #16a34a; }
+        .check-icon { 
+            width: 24px; height: 24px; background: #dcfce7; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; 
+        }
+        .check-icon svg { width: 14px; fill: #16a34a; }
 
         /* --- SLIDER --- */
         .interactive-bg { background: var(--bg-body); text-align: center; }
@@ -120,66 +161,88 @@
             position: absolute; top: 50%; left: 50%; width: 56px; height: 56px; background: var(--accent-red);
             border-radius: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;
             color: white; border: 3px solid white; z-index: 20; pointer-events: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         /* --- CARDS & GALLERY --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: white; padding: 40px; border-radius: var(--radius-lg); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-        .card-icon { font-size: 2rem; margin-bottom: 20px; color: var(--primary-blue); }
+        .card { background: white; padding: 40px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: 0.3s; border: 1px solid rgba(0,0,0,0.02); }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: rgba(0,48,143,0.1); }
+        .card-icon { 
+            width: 60px; height: 60px; background: #eff6ff; border-radius: 16px; 
+            display: flex; align-items: center; justify-content: center; font-size: 2rem; 
+            margin-bottom: 24px; color: var(--primary-blue); 
+        }
 
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .gallery-item { border-radius: 20px; overflow: hidden; height: 320px; position: relative; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        .badge-overlay { position: absolute; bottom: 20px; left: 20px; background: rgba(255,255,255,0.9); padding: 6px 14px; border-radius: 8px; font-weight: 700; color: var(--primary-blue); font-size: 0.85rem; }
+        .gallery-item { border-radius: 20px; overflow: hidden; height: 320px; position: relative; box-shadow: var(--shadow-sm); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .badge-overlay { 
+            position: absolute; bottom: 20px; left: 20px; background: rgba(255,255,255,0.95); 
+            padding: 8px 16px; border-radius: 8px; font-weight: 700; color: var(--primary-blue); 
+            font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
         /* --- CONTACT --- */
         .contact-section { background: linear-gradient(180deg, var(--bg-body) 0%, #e0e7ff 100%); }
         .contact-box { background: white; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow-lg); display: grid; grid-template-columns: 1fr 1.2fr; }
-        .contact-info { background: var(--primary-blue); padding: 60px; color: white; }
+        .contact-info { background: var(--primary-blue); padding: 60px; color: white; position: relative; }
+        .contact-info::after { content: ''; position: absolute; bottom: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; }
         .contact-info h2, .contact-info p, .contact-info a { color: white; }
         .contact-form { padding: 60px; }
-        input, textarea { width: 100%; padding: 16px; background: #f1f5f9; border: 2px solid transparent; border-radius: 12px; margin-bottom: 20px; font-family: inherit; }
+        input, textarea { width: 100%; padding: 16px; background: #f1f5f9; border: 2px solid transparent; border-radius: 12px; margin-bottom: 20px; font-family: inherit; transition: 0.3s; }
+        input:focus, textarea:focus { background: white; border-color: var(--primary-blue); outline: none; box-shadow: 0 0 0 4px rgba(0,48,143,0.1); }
         
         /* --- FOOTER (Improved Visibility) --- */
-        footer { background: #0f172a; color: white; padding: 60px 0 30px; text-align: center; }
-        .footer-logo { height: 60px; margin: 0 auto 30px; display: block; }
+        footer { background: #0f172a; color: white; padding: 80px 0 40px; text-align: center; }
+        .footer-logo { height: 60px; margin: 0 auto 40px; display: block; }
         
         .footer-legal { 
-            display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; flex-wrap: wrap;
         }
         .footer-legal a {
-            color: white; 
-            font-weight: 700; 
-            font-size: 1.1rem;
-            text-decoration: none;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
-            padding-bottom: 4px;
-            transition: 0.3s;
+            color: white; font-weight: 700; font-size: 1.1rem;
+            text-decoration: none; border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 4px; transition: 0.3s;
         }
         .footer-legal a:hover { border-bottom-color: var(--accent-red); color: var(--accent-red); }
         .copyright { opacity: 0.6; font-size: 0.9rem; }
 
-        /* --- RESPONSIVE CSS --- */
+        /* --- RESPONSIVE CSS (FIXED) --- */
         @media (max-width: 968px) {
-            h1 { font-size: 3rem; }
-            .hero-grid, .about-grid, .contact-box { grid-template-columns: 1fr; }
-            .hero { padding-top: 120px; text-align: center; }
-            .hero-grid { gap: 40px; }
-            .hero-img-card { max-width: 100%; margin: 0 auto; transform: rotate(0); }
-            .trust-metrics { justify-content: center; }
+            h1 { font-size: 2.8rem; }
+            .hero { padding-top: 100px; text-align: center; }
             
-            /* Mobile Nav */
+            /* Stack columns vertically */
+            .hero-grid, .about-grid, .contact-box { grid-template-columns: 1fr; gap: 40px; }
+            
+            /* Fix Hero Image overflowing */
+            .hero-img-card { max-width: 100%; margin: 20px auto 0; transform: rotate(0); }
+            
+            .trust-metrics { justify-content: center; gap: 20px; }
+            
+            /* Mobile Nav - Fixed positioning to stay on screen */
+            .mobile-toggle { display: block; }
             .nav-links {
-                display: none; position: absolute; top: 100%; left: 0; width: 100%;
-                background: white; padding: 30px; flex-direction: column;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 1px solid #eee;
+                display: none; 
+                position: fixed; /* Fixed so it doesn't scroll away */
+                top: 74px; /* Height of header */
+                left: 0; right: 0;
+                background: white; 
+                padding: 30px 24px; 
+                flex-direction: column;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+                border-top: 1px solid #eee;
+                max-height: 80vh; overflow-y: auto;
             }
             .nav-links.active { display: flex; }
-            .mobile-toggle { display: block; }
             
+            /* Adjust padding for mobile */
             .contact-info, .contact-form { padding: 40px 24px; }
             .section-py { padding: 60px 0; }
+            
+            .card, .gallery-item { min-width: 100%; }
         }
     </style>
 </head>
@@ -190,7 +253,9 @@
             <a href="index.html">
                 <img src="logo.png" alt="Räumdienst Borken Logo" class="logo">
             </a>
+            
             <div class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</div>
+            
             <nav class="nav-links">
                 <a href="#about" class="nav-link">Über Uns</a>
                 <a href="#services" class="nav-link">Leistungen</a>
@@ -204,19 +269,22 @@
         <section class="hero">
             <div class="container hero-grid">
                 <div class="hero-content fade-up">
-                    <span style="background:#e0eaff; color:var(--primary-blue); padding:8px 16px; border-radius:50px; font-weight:700; font-size:0.85rem;">In Borken & Umgebung</span>
+                    <span style="background:#e0eaff; color:var(--primary-blue); padding:8px 16px; border-radius:50px; font-weight:700; font-size:0.85rem; display:inline-block; margin-bottom:20px;">In Borken & Umgebung</span>
                     <h1>Wir schaffen Platz für <span style="color: var(--accent-red);">Neues Leben.</span></h1>
                     <p>Ihre Experten für Haushaltsauflösung und Entrümpelung. Wir arbeiten schnell, diskret und hinterlassen alles besenrein.</p>
+                    
                     <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; justify-content: center;">
                         <a href="#contact" class="btn btn-primary">Kostenlose Besichtigung</a>
                         <a href="#services" class="btn btn-secondary">Unsere Leistungen</a>
                     </div>
+                    
                     <div class="trust-metrics">
                         <div class="metric"><b>100%</b><span>Festpreis</span></div>
                         <div class="metric"><b>24h</b><span>Angebot</span></div>
                         <div class="metric"><b>0€</b><span>Anfahrt</span></div>
                     </div>
                 </div>
+                
                 <div class="fade-up delay-2">
                     <div class="hero-img-card">
                         <img src="IMG_7437.jpg" alt="Wohnzimmer vorher nachher">
