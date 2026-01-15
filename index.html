@@ -1,436 +1,493 @@
-<!doctype html>
-<html lang="de" class="dark">
+<!DOCTYPE html>
+<html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <meta name="description" content="Räumdienst Borken: Professionelle Entrümpelung & Haushaltsauflösung. Sperrmüll, Garagen & Härtefälle. Diskret, schnell, Festpreis." />
-  
-  <meta property="og:title" content="Räumdienst Borken | Entrümpelung & Auflösung" />
-  <meta property="og:description" content="Wir schaffen Platz. Kostenlose Besichtigung & Festpreis in Borken & Umgebung." />
-  <meta property="og:image" content="IMG_7441.png" />
-  <meta property="og:type" content="website" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Räumdienst Borken | Professionelle Haushaltsauflösung</title>
+    <meta name="description" content="Ihr Partner für Entrümpelung, Haushaltsauflösung und Wohnungsauflösung in Borken. Besenrein, diskret und zum Festpreis.">
 
-  <title>Räumdienst Borken | Entrümpelung & Haushaltsauflösung</title>
-  
-  <link rel="icon" href="IMG_7441.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      /* Grundeinstellungen Dark Mode */
-      --bg: #0a0a0a;
-      --card-bg: rgba(20, 25, 35, 0.7); /* Leicht bläulich-dunkel */
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text-main: #ffffff;
-      --text-muted: #94a3b8;
-      
-      /* BRAND COLORS (Aus deinem Logo) */
-      --brand-blue: #004ebc;   /* Das kräftige Blau */
-      --brand-red: #e1251b;    /* Das Signal-Rot */
-      
-      /* Animationen */
-      --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; height: 100%; }
-    
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.6;
-      overflow-x: hidden;
-      font-size: 16px;
-      overscroll-behavior-y: none; /* Verhindert das "Federn" auf iOS */
-    }
-
-    /* --- Hintergrund-Effekte --- */
-    .bg-noise {
-      position: fixed; inset: 0; z-index: -1; opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    
-    /* Farbige Blobs im Hintergrund */
-    .blob {
-      position: fixed; border-radius: 50%; filter: blur(90px); z-index: -2; opacity: 0.25;
-      animation: breathe 10s ease-in-out infinite alternate;
-    }
-    .blob-1 { width: 350px; height: 350px; background: var(--brand-blue); top: -100px; left: -100px; }
-    .blob-2 { width: 300px; height: 300px; background: var(--brand-red); bottom: -50px; right: -50px; animation-delay: -5s; }
-
-    @keyframes breathe { 0% { transform: scale(1); } 100% { transform: scale(1.1) translate(20px, 20px); } }
-
-    /* --- Typografie --- */
-    h1, h2, h3 { margin: 0; font-weight: 800; letter-spacing: -0.02em; }
-    
-    h1 { 
-      font-size: clamp(2.2rem, 8vw, 4.5rem); 
-      line-height: 1.1; 
-      margin-bottom: 20px;
-      background: linear-gradient(180deg, #fff, #cbd5e1); 
-      -webkit-background-clip: text; color: transparent;
-    }
-    
-    /* Highlight Wort "Borken" etc. */
-    .text-highlight {
-      color: var(--brand-red);
-    }
-
-    h2 { 
-      font-size: 2rem; margin-bottom: 1.5rem; 
-      padding-left: 16px; border-left: 4px solid var(--brand-red); 
-    }
-    
-    p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; max-width: 600px; }
-    
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* --- Buttons --- */
-    .btn-wrapper {
-      display: flex; flex-direction: column; gap: 12px; 
-      width: 100%; max-width: 340px; margin-top: 10px;
-    }
-
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 16px 32px; border-radius: 16px;
-      font-weight: 700; font-size: 16px; text-decoration: none;
-      transition: all 0.2s var(--ease-elastic);
-      cursor: pointer; position: relative; overflow: hidden;
-      border: none;
-    }
-    .btn:active { transform: scale(0.96); }
-
-    .btn-primary {
-      background: var(--brand-blue); color: white;
-      box-shadow: 0 10px 30px rgba(0, 78, 188, 0.4);
-    }
-    /* Shine Effekt auf dem Button */
-    .btn-primary::after {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      animation: shine 3s infinite;
-    }
-    @keyframes shine { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
-
-    .btn-glass {
-      background: rgba(255,255,255,0.08); color: #fff;
-      backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* --- Hero Section --- */
-    header {
-      padding: 20px 0; position: absolute; width: 100%; top: 0; z-index: 10;
-      display: flex; justify-content: center;
-    }
-    .top-pill {
-      background: rgba(0,0,0,0.6); backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      padding: 8px 20px; border-radius: 99px;
-      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-      color: var(--brand-red);
-    }
-
-    .hero {
-      min-height: 95vh; display: flex; flex-direction: column; 
-      justify-content: center; align-items: center; text-align: center;
-      padding-top: 60px; position: relative;
-    }
-
-    .brand-logo-img {
-      width: 280px; max-width: 80%; height: auto; 
-      margin-bottom: 20px;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-    }
-
-    /* --- Cards / Services --- */
-    .snap-scroller {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px; padding-bottom: 20px;
-    }
-
-    .card {
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: 24px; padding: 28px;
-      display: flex; flex-direction: column; justify-content: flex-start;
-      position: relative; overflow: hidden; height: 100%;
-      transition: transform 0.3s ease;
-    }
-    .card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
-    
-    .card-icon { font-size: 40px; margin-bottom: 20px; }
-    .card h3 { margin-bottom: 12px; font-size: 1.3rem; }
-    .card p { font-size: 1rem; margin-bottom: 0; line-height: 1.5; }
-
-    /* --- Slider (Referenzen) --- */
-    .slider {
-      display: flex; overflow-x: auto; gap: 16px;
-      scroll-snap-type: x mandatory;
-      padding: 0 0 20px 0; 
-      scrollbar-width: none;
-    }
-    .slider::-webkit-scrollbar { display: none; }
-    .slide {
-      min-width: 85%; /* Mobile: man sieht den nächsten Slide leicht */
-      aspect-ratio: 4/3;
-      scroll-snap-align: center;
-      border-radius: 20px; overflow: hidden; position: relative;
-      border: 1px solid var(--card-border);
-    }
-    @media (min-width: 768px) { .slide { min-width: 400px; } }
-    
-    .slide img { width: 100%; height: 100%; object-fit: cover; }
-    .slide-badge {
-      position: absolute; bottom: 12px; left: 12px;
-      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-      padding: 6px 12px; border-radius: 8px;
-      font-size: 12px; font-weight: 600; color: white;
-    }
-
-    /* --- Stats Row --- */
-    .stat-row {
-      display: flex; gap: 30px; justify-content: center; margin-top: 40px;
-      border-top: 1px solid var(--card-border); padding-top: 30px; width: 100%;
-    }
-    .stat { text-align: center; }
-    .stat b { display: block; font-size: 22px; color: #fff; margin-bottom: 4px; }
-    .stat span { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-
-    /* --- Mobile & Responsive Tweaks --- */
-    @media (max-width: 768px) {
-      .snap-scroller {
-        display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-        padding: 0 20px 40px 20px; margin: 0 -24px;
-        scrollbar-width: none;
-      }
-      .card { min-width: 85vw; scroll-snap-align: center; }
-      h1 { font-size: 3rem; } /* Etwas kleiner für lange Wörter */
-      .stat-row { gap: 15px; }
-    }
-
-    section { padding: 60px 0; }
-    
-    /* --- Formular --- */
-    input, textarea {
-        width: 100%; background: var(--card-bg); border: 1px solid var(--card-border);
-        padding: 16px; border-radius: 12px; color: white; font-family: inherit;
-        font-size: 16px; margin-bottom: 12px; outline: none; transition: border 0.3s;
-    }
-    input:focus, textarea:focus { border-color: var(--brand-blue); }
-
-    /* --- Mobile Dock (Unten) --- */
-    .bottom-dock {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-      z-index: 100;
-      background: rgba(20, 20, 20, 0.9); backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 6px; border-radius: 20px;
-      display: flex; align-items: center; gap: 8px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    }
-    .dock-item {
-      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); border-radius: 14px;
-    }
-    .dock-item.active { color: white; background: rgba(255,255,255,0.1); }
-    .dock-item svg { width: 22px; height: 22px; fill: currentColor; }
-    
-    .dock-cta {
-      background: var(--brand-blue); color: white;
-      padding: 0 20px; height: 44px; border-radius: 14px;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      display: flex; align-items: center;
-      box-shadow: 0 4px 15px rgba(0, 78, 188, 0.4);
-    }
-    
-    @media (min-width: 769px) { .bottom-dock { display: none; } }
-  </style>
-</head>
-
-<body>
-  <div class="bg-noise"></div>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-
-  <header>
-    <div class="top-pill">Räumdienst Borken</div>
-  </header>
-
-  <main>
-    <section class="hero container">
-      <img src="IMG_7441.png" alt="Räumdienst Borken Logo" class="brand-logo-img">
-
-      <h1>
-        Entrümpelung &<br>
-        Haushaltsauflösung
-      </h1>
-      
-      <p>
-        Wir schaffen wieder Platz, Ordnung und Ruhe. 
-        Zuverlässige Räumung in <span style="color:#fff">Borken & Umgebung</span>.
-        Diskret und zum fairen Festpreis.
-      </p>
-
-      <div class="btn-wrapper">
-        <a href="#kontakt" class="btn btn-primary">Kostenlose Besichtigung</a>
-        <a href="#leistungen" class="btn btn-glass">Unsere Leistungen</a>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat"><b>100%</b><span>Diskret</span></div>
-        <div class="stat"><b>24h</b><span>Termine</span></div>
-        <div class="stat"><b>0€</b><span>Anfahrt</span></div>
-      </div>
-    </section>
-
-    <section id="leistungen" class="container">
-      <h2>Was wir tun</h2>
-      <div class="snap-scroller">
-        
-        <div class="card">
-          <div class="card-icon" style="color: var(--brand-blue);">🏠</div>
-          <h3>Wohnung & Haus</h3>
-          <p>Komplette Haushaltsauflösung von Immobilien. Wir arbeiten sorgfältig und übergeben besenrein.</p>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon" style="color: var(--brand-red);">🏗️</div>
-          <h3>Entrümpelung</h3>
-          <p>Keller, Dachboden oder Garage voll? Wir räumen alles leer und entsorgen fachgerecht beim Wertstoffhof.</p>
-        </div>
-        
-        <div class="card">
-          <div class="card-icon">🚛</div>
-          <h3>Sperrmüll & Härtefälle</h3>
-          <p>Wir kümmern uns um Sperrmüll/Trödel. Auch bei stark vollgestellten Wohnungen helfen wir diskret und ohne Vorurteile.</p>
-        </div>
-        
-      </div>
-    </section>
-
-    <section id="referenzen" class="container">
-      <h2>Vorher / Nachher</h2>
-      <div class="slider">
-        <div class="slide">
-          <img src="IMG_7439.jpg" loading="lazy" alt="Nachher Bild Wohnzimmer">
-          <div class="slide-badge">Nachher</div>
-        </div>
-        <div class="slide">
-          <img src="IMG_7437.jpg" loading="lazy" alt="Vorher Bild Keller">
-          <div class="slide-badge">Vorher (Keller)</div>
-        </div>
-        <div class="slide">
-          <img src="IMG_7440.jpg" loading="lazy" alt="Besenrein übergeben">
-          <div class="slide-badge">Besenrein</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="ablauf" class="container">
-      <h2>Der Ablauf</h2>
-      <div style="background: var(--card-bg); border-radius: 24px; padding: 24px; border: 1px solid var(--card-border);">
-        
-        <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-          <div style="background: rgba(255,255,255,0.1); min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Kostenlose Besichtigung</h3>
-            <p style="margin: 0; font-size: 0.95rem;">Rufen Sie uns an (0176 46620710). Wir schauen uns alles unverbindlich an.</p>
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-          <div style="background: rgba(255,255,255,0.1); min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">2</div>
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Fairer Festpreis</h3>
-            <p style="margin: 0; font-size: 0.95rem;">Sie erhalten ein Angebot. Keine versteckten Kosten. Sie wissen genau, womit Sie rechnen können.</p>
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 16px;">
-          <div style="background: var(--brand-blue); color: #fff; min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div>
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Räumung & Übergabe</h3>
-            <p style="margin: 0; font-size: 0.95rem;">Wir arbeiten zügig und ordentlich. Alles wird sauber hinterlassen.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="kontakt" class="container" style="padding-bottom: 140px;">
-      <h2>Anfrage senden</h2>
-      <p style="margin-top:-10px; margin-bottom: 20px;">Schreiben Sie uns gerne eine Nachricht – wir melden uns zeitnah zurück.</p>
-      
-      <form action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
-        <input type="text" name="name" placeholder="Ihr Name" required>
-        <input type="tel" name="tel" placeholder="Telefonnummer für Rückruf" required>
-        <textarea name="msg" rows="5" placeholder="Was soll geräumt werden? (z.B. 3-Zimmer Wohnung, Keller, etc.)" required></textarea>
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">Nachricht absenden</button>
-      </form>
-      
-      <div style="text-align: center; margin-top: 30px; opacity: 0.7;">
-        Oder direkt anrufen / WhatsApp:<br>
-        <a href="tel:+4917646620710" style="color:white; font-weight:bold; text-decoration:none; font-size: 1.1rem;">0176 46620710</a>
-      </div>
-    </section>
-
-  </main>
-
-  <nav class="bottom-dock">
-    <a href="#top" class="dock-item">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    </a>
-    <a href="https://wa.me/4917646620710" class="dock-item">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
-    <a href="tel:+4917646620710" class="dock-cta">
-      Anrufen
-    </a>
-  </nav>
-
-  <div id="impressum-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:200; padding:20px; align-items:center; justify-content:center;">
-    <div style="background:#111; padding:30px; border-radius:24px; border:1px solid #333; max-width:500px; width:100%;">
-      <h3 style="margin-bottom:16px; color:white;">Impressum</h3>
-      <p style="font-size:0.95rem; line-height:1.6; color:#ccc;">
-        <strong>Angaben gemäß § 5 TMG</strong><br><br>
-        Räumdienst Borken<br>
-        Maksut Saciri<br>
-        Graf Friedrich Str. 34<br>
-        46325 Borken<br><br>
-        <strong>Kontakt:</strong><br>
-        Telefon: 0176 46620710<br>
-        E-Mail: Rauemdienst.Borken@gmail.com
-      </p>
-      <button onclick="document.getElementById('impressum-modal').style.display='none'" class="btn btn-glass" style="width:100%; margin-top:10px;">Schließen</button>
-    </div>
-  </div>
-
-  <footer style="text-align:center; padding: 40px 0 120px 0; color: #555; font-size: 13px;">
-    <button onclick="document.getElementById('impressum-modal').style.display='flex'" style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Impressum & Datenschutz</button>
-    <p style="margin-top:10px;">&copy; 2024 Räumdienst Borken</p>
-  </footer>
-
-  <script>
-    // Animation beim Scrollen
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = 1;
-          entry.target.style.transform = 'translateY(0)';
+    <style>
+        :root {
+            /* Brand Colors derived from IMG_7436.jpg */
+            --primary-blue: #0B468C; 
+            --accent-red: #D92B2B;
+            --accent-orange: #F28C0F;
+            
+            /* Neutrals */
+            --bg-white: #ffffff;
+            --bg-off-white: #f4f7fa;
+            --text-main: #1a202c;
+            --text-muted: #64748b;
+            
+            /* UI Elements */
+            --shadow-card: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 50px -10px rgba(11, 70, 140, 0.15);
+            --radius-lg: 24px;
+            --radius-btn: 12px;
+            
+            --container-width: 1200px;
         }
-      });
-    });
 
-    document.querySelectorAll('.card, .hero > *, #ablauf > div > div').forEach(el => {
-      el.style.opacity = 0;
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-      observer.observe(el);
-    });
-  </script>
+        /* --- GLOBAL RESET & TYPOGRAPHY --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-off-white);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 { line-height: 1.2; font-weight: 800; color: var(--primary-blue); }
+        h1 { font-size: clamp(2.5rem, 5vw, 4.2rem); letter-spacing: -0.02em; }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+        p { margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.1rem; }
+        
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- ANIMATION UTILITIES --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 32px; font-weight: 700; font-size: 1.05rem;
+            border-radius: var(--radius-btn);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer; position: relative; overflow: hidden;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--accent-red); color: white;
+            box-shadow: 0 4px 15px rgba(217, 43, 43, 0.3);
+        }
+        .btn-primary::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(217, 43, 43, 0.4); }
+        .btn-primary:hover::after { left: 100%; }
+
+        .btn-secondary {
+            background: white; color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        .btn-secondary:hover { background: var(--primary-blue); color: white; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 15px 0; transition: 0.3s;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo { height: 60px; width: auto; object-fit: contain; }
+
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-link { font-weight: 600; font-size: 1rem; color: var(--text-main); position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--accent-red); transition: 0.3s;
+        }
+        .nav-link:hover { color: var(--accent-red); }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Mobile Menu */
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-blue); }
+        
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative; padding-top: 180px; padding-bottom: 100px;
+            background: radial-gradient(circle at top right, #eef5ff 0%, #fff 40%);
+            overflow: hidden;
+        }
+        /* Abstract Background Shape */
+        .hero::before {
+            content: ''; position: absolute; top: -10%; right: -10%;
+            width: 600px; height: 600px; background: linear-gradient(135deg, rgba(11, 70, 140, 0.05), rgba(217, 43, 43, 0.05));
+            border-radius: 50%; filter: blur(80px); z-index: 0;
+        }
+
+        .hero-grid {
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block; padding: 8px 16px; background: #e0eaff; color: var(--primary-blue);
+            border-radius: 50px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase;
+            margin-bottom: 24px; letter-spacing: 0.5px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+        }
+        /* Polished Image Card */
+        .hero-img {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            transform: rotate(2deg);
+            border: 8px solid white;
+            transition: 0.5s;
+        }
+        .hero-image-wrapper:hover .hero-img { transform: rotate(0) scale(1.02); }
+
+        .trust-metrics {
+            display: flex; gap: 40px; margin-top: 40px; padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        .metric b { display: block; font-size: 1.8rem; color: var(--primary-blue); line-height: 1; margin-bottom: 5px; }
+        .metric span { font-size: 0.9rem; font-weight: 500; }
+
+        /* --- SLIDER SECTION (The "Wow" Factor) --- */
+        .interactive-section {
+            background: var(--bg-white); padding: 100px 0;
+            text-align: center;
+        }
+        
+        .slider-wrapper {
+            position: relative; width: 100%; max-width: 900px; margin: 50px auto 0;
+            border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            aspect-ratio: 16/9; /* Standard aspect ratio */
+            user-select: none;
+            cursor: col-resize;
+        }
+        
+        /* Technical Note: We use IMG_7440.jpg (Garage). 
+           Since the source image is a side-by-side collage, we use CSS background positioning 
+           to show the "Clean" side as the base and the "Dirty" side as the overlay mask.
+        */
+        .slider-after {
+            position: absolute; inset: 0;
+            background-image: url('IMG_7440.jpg'); 
+            background-size: 200% 100%; /* Stretch so half the image fills the container */
+            background-position: 100% 0; /* Show Right side (After) */
+        }
+        
+        .slider-before {
+            position: absolute; top: 0; left: 0; height: 100%; width: 50%;
+            background-image: url('IMG_7440.jpg');
+            background-size: 200% 100%;
+            background-position: 0 0; /* Show Left side (Before) */
+            border-right: 3px solid var(--bg-white);
+            overflow: hidden;
+        }
+
+        .slider-handle {
+            position: absolute; top: 50%; left: 50%;
+            width: 44px; height: 44px; background: var(--accent-red);
+            border-radius: 50%; transform: translate(-50%, -50%);
+            display: flex; align-items: center; justify-content: center;
+            color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 3px solid white; z-index: 10; pointer-events: none;
+        }
+
+        /* --- SERVICES GRID --- */
+        .services { padding: 100px 0; }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;
+        }
+        .card {
+            background: var(--bg-white); padding: 40px; border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card); border: 1px solid rgba(0,0,0,0.03);
+            transition: 0.3s; display: flex; flex-direction: column; height: 100%;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: rgba(11, 70, 140, 0.1); }
+        
+        .card-icon {
+            width: 60px; height: 60px; background: #eff6ff; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; margin-bottom: 25px; color: var(--primary-blue);
+        }
+        .card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-main); }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section { padding: 80px 0; background: var(--bg-white); }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px;
+        }
+        .gallery-item {
+            border-radius: 16px; overflow: hidden; position: relative; height: 300px;
+            box-shadow: var(--shadow-card);
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover; transition: 0.5s;
+        }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .badge {
+            position: absolute; bottom: 15px; left: 15px; background: rgba(0,0,0,0.7);
+            color: white; padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        /* --- CONTACT --- */
+        .contact { padding: 100px 0; background: linear-gradient(180deg, var(--bg-off-white) 0%, #eef2f6 100%); }
+        .contact-box {
+            background: var(--bg-white); border-radius: 30px; overflow: hidden;
+            box-shadow: var(--shadow-card); display: grid; grid-template-columns: 1fr 1fr;
+        }
+        
+        .contact-info {
+            background: var(--primary-blue); padding: 60px; color: white;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .contact-info h2, .contact-info p { color: white; }
+        .contact-info a { color: white; opacity: 0.9; font-size: 1.2rem; font-weight: 700; display: block; margin-top: 10px; }
+        
+        .contact-form { padding: 60px; }
+        input, textarea {
+            width: 100%; padding: 15px; background: var(--bg-off-white);
+            border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 15px;
+            font-family: inherit; font-size: 1rem; transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-color: var(--primary-blue); outline: none; background: white; }
+
+        /* --- FOOTER --- */
+        footer { background: #0f172a; color: white; padding: 60px 0 20px; text-align: center; }
+        footer p { color: #94a3b8; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero-grid, .contact-box { grid-template-columns: 1fr; }
+            .hero { padding-top: 120px; text-align: center; }
+            .hero-image-wrapper { margin-top: 40px; }
+            .trust-metrics { justify-content: center; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; padding: 20px; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .contact-info, .contact-form { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#">
+                <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo" class="logo">
+            </a>
+            <div class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</div>
+            <nav class="nav-links">
+                <a href="#services" class="nav-link">Leistungen</a>
+                <a href="#projects" class="nav-link">Referenzen</a>
+                <a href="#about" class="nav-link">Über Uns</a>
+                <a href="tel:+4917646620710" class="btn btn-primary">Jetzt anrufen</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content fade-in-up">
+                    <span class="hero-badge">In Borken & Umgebung</span>
+                    <h1>Wir schaffen Platz für <br><span style="color: var(--accent-red);">Neues Leben.</span></h1>
+                    <p>Ihre Experten für Haushaltsauflösung und Entrümpelung. Wir arbeiten schnell, diskret und hinterlassen alles besenrein. Starten Sie jetzt stressfrei.</p>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px; justify-content: flex-start;">
+                        <a href="#contact" class="btn btn-primary">Kostenlose Besichtigung</a>
+                        <a href="#services" class="btn btn-secondary">Unsere Leistungen</a>
+                    </div>
+
+                    <div class="trust-metrics">
+                        <div class="metric"><b>100%</b><span>Festpreis</span></div>
+                        <div class="metric"><b>24h</b><span>Angebot</span></div>
+                        <div class="metric"><b>0€</b><span>Anfahrt</span></div>
+                    </div>
+                </div>
+
+                <div class="hero-image-wrapper fade-in-up delay-200">
+                    <img src="IMG_7437.jpg" alt="Wohnzimmer vorher nachher" class="hero-img" style="object-fit: cover; height: 400px; width: 100%; object-position: bottom;">
+                    <div style="position: absolute; bottom: -20px; right: -20px; background: white; padding: 15px 25px; border-radius: 16px; box-shadow: var(--shadow-card); font-weight: 700; color: var(--primary-blue); display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%;"></div>
+                        Besenrein garantiert
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <div style="text-align: center; max-width: 600px; margin: 0 auto 50px;">
+                    <h2 class="fade-in-up">Unser Rundum-Service</h2>
+                    <p class="fade-in-up delay-100">Von der Garage bis zur Villa. Wir kümmern uns um die schweren Dinge, damit Sie den Kopf frei haben.</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="card fade-in-up delay-100">
+                        <div class="card-icon">🏠</div>
+                        <h3>Haushaltsauflösung</h3>
+                        <p>Komplette Auflösung von Haus oder Wohnung. Wir sortieren, verpacken und entsorgen fachgerecht. Wertsachenrechnung möglich.</p>
+                    </div>
+                    <div class="card fade-in-up delay-200">
+                        <div class="card-icon">♻️</div>
+                        <h3>Entrümpelung</h3>
+                        <p>Egal ob Keller, Dachboden oder Garage. Wir befreien Sie von Sperrmüll und Unrat. Umweltgerechte Entsorgung inklusive Nachweis.</p>
+                    </div>
+                    <div class="card fade-in-up delay-300">
+                        <div class="card-icon">🤝</div>
+                        <h3>Härtefälle & Messie</h3>
+                        <p>Wir helfen diskret, respektvoll und ohne Vorurteile. Wir stellen den bewohnbaren Zustand wieder her – schnell und effizient.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-section">
+            <div class="container">
+                <h2 class="fade-in-up">Erleben Sie den Unterschied</h2>
+                <p class="fade-in-up delay-100">Ziehen Sie den Regler, um die Garage zu "reinigen".</p>
+                
+                <div class="slider-wrapper fade-in-up delay-200" id="compareSlider">
+                    <div class="slider-after"></div>
+                    <div class="slider-before" id="sliderOverlay"></div>
+                    <div class="slider-handle" id="sliderHandle">↔</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="gallery-section">
+            <div class="container">
+                <h2 style="margin-bottom: 40px;">Aktuelle Projekte</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-up">
+                        <img src="IMG_7439.jpg" alt="Keller Entrümpelung" loading="lazy">
+                        <div class="badge">Keller</div>
+                    </div>
+                    <div class="gallery-item fade-in-up delay-100">
+                        <img src="IMG_7438.jpg" alt="Dachboden Entrümpelung" loading="lazy">
+                        <div class="badge">Dachboden</div>
+                    </div>
+                    <div class="gallery-item fade-in-up delay-200">
+                        <img src="IMG_7437.jpg" alt="Wohnzimmer Auflösung" loading="lazy">
+                        <div class="badge">Wohnzimmer</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-box fade-in-up">
+                    <div class="contact-info">
+                        <h2>Starten Sie jetzt.</h2>
+                        <p>Wir erstellen Ihnen ein unverbindliches Festpreis-Angebot. Keine versteckten Kosten.</p>
+                        <br>
+                        <div>
+                            <p style="margin-bottom: 5px; opacity: 0.8; font-size: 0.9rem;">Rufen Sie uns direkt an:</p>
+                            <a href="tel:+4917646620710">0176 46620710</a>
+                        </div>
+                        <div style="margin-top: 30px;">
+                            <p style="margin-bottom: 5px; opacity: 0.8; font-size: 0.9rem;">Oder schreiben Sie uns:</p>
+                            <a href="mailto:Rauemdienst.Borken@gmail.com" style="font-size: 1rem;">Rauemdienst.Borken@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
+                            <label style="font-weight: 700; display: block; margin-bottom: 8px;">Ihr Name</label>
+                            <input type="text" name="name" placeholder="Max Mustermann" required>
+                            
+                            <label style="font-weight: 700; display: block; margin-bottom: 8px;">Telefonnummer</label>
+                            <input type="tel" name="phone" placeholder="Für Rückfragen" required>
+                            
+                            <label style="font-weight: 700; display: block; margin-bottom: 8px;">Ihr Anliegen</label>
+                            <textarea name="message" rows="4" placeholder="Was soll geräumt werden? (z.B. 3-Zimmer Wohnung, Garage, etc.)"></textarea>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Kostenloses Angebot anfordern</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <img src="IMG_7436.jpg" alt="Logo Footer" style="height: 50px; margin: 0 auto 20px; opacity: 0.9; filter: brightness(10) grayscale(1);">
+            <p>&copy; 2024 Räumdienst Borken. Alle Rechte vorbehalten.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Impressum | Datenschutz</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. SCROLL ANIMATIONS (Intersection Observer)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // 2. INTERACTIVE SLIDER LOGIC
+        // Transforms the single side-by-side image IMG_7440.jpg into a slider
+        const slider = document.getElementById('compareSlider');
+        const overlay = document.getElementById('sliderOverlay');
+        const handle = document.getElementById('sliderHandle');
+        let isDown = false;
+
+        function updateSlider(x) {
+            const rect = slider.getBoundingClientRect();
+            let percentage = ((x - rect.left) / rect.width) * 100;
+            
+            // Clamp percentage between 0 and 100
+            if (percentage < 0) percentage = 0;
+            if (percentage > 100) percentage = 100;
+            
+            overlay.style.width = percentage + "%";
+            handle.style.left = percentage + "%";
+        }
+
+        // Mouse Events
+        slider.addEventListener('mousedown', () => isDown = true);
+        window.addEventListener('mouseup', () => isDown = false);
+        window.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            updateSlider(e.clientX);
+        });
+
+        // Touch Events (Mobile)
+        slider.addEventListener('touchstart', () => isDown = true);
+        window.addEventListener('touchend', () => isDown = false);
+        window.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        // Click to jump
+        slider.addEventListener('click', (e) => updateSlider(e.clientX));
+    </script>
 </body>
 </html>
