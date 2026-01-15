@@ -1,1703 +1,606 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0B2A6F" />
-  <meta name="description" content="Entrümpelung & Haushaltsauflösung in Borken: zuverlässig, diskret, sauber. Kostenlose Besichtigung, fairer Festpreis. Kurzfristige Termine möglich." />
-  <title>Räumdienst Borken – Entrümpelung & Haushaltsauflösung</title>
+  <meta name="theme-color" content="#03050a" />
+  <meta name="description" content="Räumdienst Borken: Professionelle Entrümpelung & Haushaltsauflösung. Wir schaffen Platz und Ruhe – diskret, schnell und zum fairen Festpreis." />
+  <title>Räumdienst Borken | Platz für Neues</title>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Räumdienst Borken – Entrümpelung & Haushaltsauflösung" />
-  <meta property="og:description" content="Kostenlose Besichtigung. Fairer Festpreis. Diskret & zügig. Raum Borken & Umgebung." />
+  <meta property="og:title" content="Räumdienst Borken – Entrümpelung mit Niveau" />
+  <meta property="og:description" content="Kostenlose Besichtigung. Fairer Festpreis. Diskret & zügig. Wir kümmern uns um den Rest." />
   <meta property="og:type" content="website" />
-
-  <!-- ❌ Google Fonts entfernt (DSGVO-sicher ohne Consent) -->
   <link rel="icon" href="IMG_7436.jpg" />
 
   <style>
-    :root{
-      --bg:#05070d;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.09);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.90);
-      --muted: rgba(255,255,255,.68);
-      --muted2: rgba(255,255,255,.52);
+    :root {
+      /* Palette - Deep Space & Professional Trust */
+      --bg: #03050a;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.06);
+      
+      --text-main: #f2f2f2;
+      --text-muted: #a1a1aa;
+      --text-accent: #3b82f6;
 
-      --blue:#0B2A6F;
-      --blue2:#1E4AAE;
-      --orange:#F08A1A;
-      --red:#E13B3B;
+      --brand-orange: #f59e0b;
+      --brand-red: #ef4444;
+      --brand-blue: #3b82f6;
 
-      --shadow: 0 20px 70px rgba(0,0,0,.55);
-      --shadow2: 0 12px 30px rgba(0,0,0,.35);
-      --radius: 22px;
-      --radius2: 16px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 8px;
 
-      --max: 1240px;
-      --ease: cubic-bezier(.2,.8,.2,1);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      /* ✅ System-Fonts statt Manrope (keine externen Requests) */
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(1100px 650px at 15% 10%, rgba(30,74,174,.45), transparent 60%),
-                  radial-gradient(900px 550px at 85% 20%, rgba(240,138,26,.35), transparent 55%),
-                  radial-gradient(900px 650px at 60% 90%, rgba(225,59,59,.22), transparent 55%),
-                  linear-gradient(180deg, #04060c 0%, #04060c 50%, #03050a 100%);
-      color: var(--text);
-      overflow-x:hidden;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    a{color:inherit; text-decoration:none}
-    button, input, textarea{font-family:inherit}
-    ::selection{background: rgba(240,138,26,.35)}
-
-    .mesh{
-      position:fixed; inset:-20%;
-      z-index:-2;
-      filter: blur(30px) saturate(120%);
-      opacity:.65;
-      pointer-events:none;
-      transform: translateZ(0);
-      animation: floatMesh 14s var(--ease) infinite alternate;
-      background:
-        radial-gradient(closest-side at 15% 25%, rgba(30,74,174,.45), transparent 60%),
-        radial-gradient(closest-side at 70% 15%, rgba(240,138,26,.35), transparent 62%),
-        radial-gradient(closest-side at 80% 75%, rgba(225,59,59,.20), transparent 60%),
-        radial-gradient(closest-side at 30% 80%, rgba(30,74,174,.25), transparent 60%);
-    }
-    @keyframes floatMesh{
-      from{transform: translate3d(-1.5%, -1.5%, 0) scale(1.02)}
-      to{transform: translate3d(1.5%, 1.0%, 0) scale(1.06)}
+    /* Base Reset & Typography */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .noise{
-      position:fixed; inset:0;
-      z-index:-1;
-      pointer-events:none;
-      opacity:.08;
-      mix-blend-mode: overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    /* --- Background FX --- */
+    .noise-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
+    .glow-blob {
+      position: fixed; width: 600px; height: 600px; border-radius: 50%;
+      filter: blur(80px); opacity: 0.4; z-index: -2;
+      animation: floatBlob 20s ease-in-out infinite alternate;
+    }
+    .blob-1 { top: -10%; left: -10%; background: radial-gradient(circle, var(--brand-blue), transparent 70%); }
+    .blob-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, var(--brand-orange), transparent 70%); animation-delay: -5s; }
+    
+    @keyframes floatBlob { 
+      0% { transform: translate(0,0) scale(1); } 
+      100% { transform: translate(50px, 50px) scale(1.1); } 
     }
 
-    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 14px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.05);
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-      color: var(--muted);
-      font-weight:600;
-      letter-spacing:.2px;
+    /* --- Layout Utilities --- */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
+    .grid { display: grid; gap: 24px; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+
+    /* --- Typography --- */
+    h1, h2, h3 { margin: 0; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+    h1 { font-size: clamp(3rem, 5vw, 4.5rem); background: linear-gradient(to bottom right, #fff, #aaa); -webkit-background-clip: text; color: transparent; }
+    h2 { font-size: clamp(2rem, 3vw, 3rem); margin-bottom: 1rem; }
+    p { margin: 0 0 1.5rem 0; color: var(--text-muted); font-size: 1.1rem; }
+    .text-gradient { background: linear-gradient(135deg, var(--brand-orange), var(--brand-red)); -webkit-background-clip: text; color: transparent; }
+
+    /* --- Components: Buttons --- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 28px; border-radius: 99px;
+      font-weight: 600; font-size: 15px; text-decoration: none;
+      transition: all 0.3s var(--ease-out);
+      cursor: pointer; border: 1px solid transparent;
     }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: linear-gradient(135deg, var(--orange), var(--red));
-      box-shadow: 0 0 0 6px rgba(240,138,26,.12);
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand-orange), var(--brand-red));
+      color: white;
+      box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px -5px rgba(245, 158, 11, 0.4); }
+    
+    .btn-glass {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+    .btn-glass:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+
+    /* --- Header --- */
+    header {
+      position: fixed; top: 20px; left: 0; right: 0; z-index: 100;
+      transition: transform 0.3s ease;
+    }
+    .nav-glass {
+      background: rgba(3, 5, 10, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 99px;
+      padding: 10px 20px;
+      max-width: fit-content;
+      margin: 0 auto;
+      box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+    }
+    .nav-content { gap: 32px; }
+    .nav-links { list-style: none; padding: 0; margin: 0; gap: 24px; display: flex; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text-main); }
+    
+    .nav-logo-small { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; }
+    .nav-logo-small img { width: 32px; height: 32px; border-radius: 8px; object-fit: cover; }
+
+    /* --- Hero Section --- */
+    .hero {
+      padding-top: 180px; padding-bottom: 100px;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 99px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      font-size: 13px; font-weight: 600; color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .hero-label span { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-orange); box-shadow: 0 0 10px var(--brand-orange); }
+
+    /* NEW: Integrated Large Logo Area */
+    .hero-brand-visual {
+      margin: 40px 0;
+      position: relative;
+      width: 140px; height: 140px;
+      border-radius: 40px; /* Squircle */
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 
+        0 0 0 1px rgba(0,0,0,0.5),
+        0 20px 50px -10px rgba(0,0,0,0.5),
+        inset 0 0 60px rgba(255,255,255,0.02);
+      transform: rotate(-5deg);
+      transition: transform 0.5s var(--ease-out);
+    }
+    .hero-brand-visual:hover { transform: rotate(0deg) scale(1.05); }
+    .hero-brand-visual img {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 40px; opacity: 0.9;
+    }
+    /* Glow behind the logo */
+    .hero-brand-visual::after {
+      content:''; position: absolute; inset: -20px; z-index: -1;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent 70%);
+      filter: blur(20px); opacity: 0.6;
     }
 
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(5,7,13,.78), rgba(5,7,13,.45));
-      border-bottom: 1px solid rgba(255,255,255,.08);
+    /* --- Cards (Bento Grid Style) --- */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease-out);
+      group: 'card';
     }
-    .brand{display:flex; align-items:center; gap:12px; min-width: 220px;}
-    .brand img{
-      width:46px; height:46px;
-      object-fit: cover;
-      object-position:center;
-      border-radius: 14px;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.10);
-      overflow:hidden;
+    /* Spotlight Effect via JS */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      z-index: 1;
     }
-    .brand .name{display:flex; flex-direction:column; line-height:1.05}
-    .brand .name strong{font-size:14px; letter-spacing:.2px}
-    .brand .name span{font-size:12px; color: var(--muted2)}
+    .card:hover::before { opacity: 1; }
+    
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .card h3 { font-size: 1.25rem; margin-bottom: 10px; color: var(--text-main); }
+    .card p { font-size: 0.95rem; line-height: 1.5; margin-bottom: 0; }
 
-    nav ul{
-      display:flex; gap:18px; list-style:none; margin:0; padding:0;
-      align-items:center;
+    /* --- Process Section (Horizontal Timeline) --- */
+    .process-track {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+      margin-top: 40px;
     }
-    nav a{
-      color: var(--muted);
-      font-weight:700;
-      font-size:13px;
-      padding:10px 10px;
-      border-radius: 10px;
-      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+    .step-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      position: relative;
     }
-    nav a:hover{background: rgba(255,255,255,.06); color: var(--text); transform: translateY(-1px)}
-    .nav-cta{display:flex; gap:10px; align-items:center}
-
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-weight:800;
-      font-size:13px;
-      cursor:pointer;
-      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
-      box-shadow: 0 10px 24px rgba(0,0,0,.25);
-      user-select:none;
+    .step-num {
+      font-size: 4rem; font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      position: absolute; top: 0; right: 10px; line-height: 1;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22)}
-    .btn.primary{
-      border: 1px solid rgba(240,138,26,.35);
-      background: linear-gradient(135deg, rgba(240,138,26,.95), rgba(225,59,59,.86));
-      box-shadow: 0 18px 35px rgba(240,138,26,.22), 0 12px 22px rgba(0,0,0,.30);
-    }
-    .btn.primary:hover{transform: translateY(-2px)}
-    .btn.ghost{
-      background: rgba(255,255,255,.04);
-      border-color: rgba(255,255,255,.12);
-      color: rgba(255,255,255,.78);
-    }
-
-    .hamburger{
-      display:none;
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      align-items:center; justify-content:center;
-      cursor:pointer;
-    }
-    .hamburger span{
-      width:18px; height:2px; background: rgba(255,255,255,.82);
-      display:block; position:relative;
-    }
-    .hamburger span::before,.hamburger span::after{
-      content:""; position:absolute; left:0;
-      width:18px; height:2px; background: rgba(255,255,255,.82);
-      transition: transform .2s var(--ease), top .2s var(--ease), opacity .2s var(--ease);
-    }
-    .hamburger span::before{top:-6px}
-    .hamburger span::after{top:6px}
-    .hamburger.active span{background:transparent}
-    .hamburger.active span::before{top:0; transform: rotate(45deg)}
-    .hamburger.active span::after{top:0; transform: rotate(-45deg)}
-
-    /* Mobile drawer */
-    .drawer{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
-      z-index:99;
-      display:none;
-    }
-    .drawer.open{display:block}
-    .drawer .panel{
-      position:absolute; right:0; top:0; height:100%;
-      width:min(420px, 92vw);
-      background: rgba(8,10,16,.94);
-      border-left: 1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(16px);
-      padding:18px;
-      transform: translateX(105%);
-      transition: transform .25s var(--ease);
-      box-shadow: -30px 0 70px rgba(0,0,0,.55);
-    }
-    .drawer.open .panel{transform: translateX(0)}
-    .drawer .top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.08);
-      margin-bottom:10px;
-    }
-    .drawer .brandMini{display:flex; align-items:center; gap:10px}
-    .drawer .brandMini img{
-      width:44px; height:44px;
-      object-fit: cover;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      overflow:hidden;
-    }
-    .drawer nav a{
-      display:block;
-      padding:14px 12px;
-      border-radius: 14px;
-      color: rgba(255,255,255,.86);
-      font-weight:800;
-    }
-    .drawer nav a:hover{background: rgba(255,255,255,.06)}
-    .drawer .actions{display:grid; gap:10px; margin-top:12px}
-
-    /* Hero */
-    .hero{padding:56px 0 16px; position:relative;}
-    .hero .wrap{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:18px;
-      align-items:start;
-    }
-    .headline{
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border-radius: var(--radius);
-      padding:26px;
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .headline::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(850px 280px at 20% 0%, rgba(30,74,174,.38), transparent 60%),
-        radial-gradient(600px 220px at 85% 15%, rgba(240,138,26,.30), transparent 60%),
-        radial-gradient(700px 260px at 75% 95%, rgba(225,59,59,.18), transparent 60%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .headline > *{position:relative}
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(30px, 3.4vw, 52px);
-      line-height:1.02;
-      letter-spacing:-0.8px;
-    }
-    .lead{
-      margin:0 0 18px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height:1.6;
-      max-width: 70ch;
-    }
-    .heroActions{display:flex; flex-wrap:wrap; gap:10px; margin-top: 6px}
-    .trust{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap:12px;
-      margin-top:16px;
-    }
-    .trust .t{
-      padding:12px 12px;
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.78);
-      font-weight:700;
-      font-size:12px;
-      line-height:1.25;
-    }
-    .trust .t strong{display:block; color: rgba(255,255,255,.92); font-size:13px; margin-bottom:4px}
-
-    /* Sections */
-    section{padding:34px 0}
-    .sectionHead{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:16px;
-      margin-bottom:16px;
-    }
-    .sectionHead h2{
-      margin:0;
-      font-size: clamp(22px, 2.4vw, 32px);
-      letter-spacing:-.5px;
-    }
-    .sectionHead p{margin:0; color: var(--muted); max-width: 72ch; line-height:1.55}
-
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-    }
-    .card{
-      grid-column: span 4;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      padding:16px;
-      box-shadow: var(--shadow2);
-      position:relative;
-      overflow:hidden;
-      transform: translateY(0);
-      transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
-    }
-    .card:hover{
-      transform: translateY(-3px);
-      background: rgba(255,255,255,.07);
-      border-color: rgba(255,255,255,.18);
-    }
-    .icon{
-      width:46px; height:46px; border-radius: 16px;
-      display:flex; align-items:center; justify-content:center;
-      border:1px solid rgba(255,255,255,.14);
-      background: radial-gradient(40px 40px at 20% 20%, rgba(30,74,174,.35), rgba(255,255,255,.04)),
-                  radial-gradient(40px 40px at 80% 80%, rgba(240,138,26,.22), transparent 65%);
-      margin-bottom:12px;
-    }
-    .icon svg{width:22px; height:22px; fill: rgba(255,255,255,.88)}
-    .card h3{margin:0 0 8px; font-size:15px; letter-spacing:-.2px}
-    .card p{margin:0; color: var(--muted); font-size:13px; line-height:1.55}
-
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-    }
-    .step{
-      grid-column: span 3;
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      padding:16px;
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow2);
-      position:relative;
-      overflow:hidden;
-    }
-    .step::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(400px 150px at 10% 0%, rgba(30,74,174,.25), transparent 60%),
-                  radial-gradient(340px 150px at 90% 0%, rgba(240,138,26,.18), transparent 60%);
-      opacity:.8;
-      pointer-events:none;
-    }
-    .step > *{position:relative}
-    .n{
-      width:34px; height:34px; border-radius: 12px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:900;
-      background: rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.14);
-      margin-bottom:10px;
-    }
-    .step h3{margin:0 0 8px; font-size:14px}
-    .step p{margin:0; color: var(--muted); font-size:13px; line-height:1.5}
-
-    /* ===== Referenzen: manuelles Carousel (plus Auto-Play via JS) ===== */
-    .carouselCard{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .carouselTop{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:14px;
-      padding:16px 16px 12px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .carouselTop .meta strong{display:block; font-size:14px}
-    .carouselTop .meta span{display:block; font-size:12px; color: var(--muted2); margin-top:3px}
-    .carouselTop .controls{display:flex; gap:10px; align-items:center}
-    .iconBtn{
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      color: rgba(255,255,255,.90);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer;
-      transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
-      user-select:none;
-    }
-    .iconBtn:hover{transform: translateY(-1px); background: rgba(0,0,0,.26); border-color: rgba(255,255,255,.22)}
-    .iconBtn:active{transform: translateY(0)}
-    .iconBtn svg{width:18px; height:18px; fill: rgba(255,255,255,.90)}
-
-    .trackWrap{position:relative; padding:16px;}
-    .track{
-      display:flex;
-      gap:14px;
-      overflow:auto;
+    
+    /* --- Carousel --- */
+    .carousel-wrap {
+      overflow-x: auto;
+      display: flex; gap: 20px;
+      padding-bottom: 20px;
       scroll-snap-type: x mandatory;
-      scroll-behavior:smooth;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 10px;
+      scrollbar-width: none;
     }
-    .track::-webkit-scrollbar{height:10px}
-    .track::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius: 999px}
-    .track::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius: 999px}
-
-    .slide{
-      flex: 0 0 auto;
-      width: min(520px, 86vw);
-      scroll-snap-align: start;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.20);
-      border-radius: 18px;
-      overflow:hidden;
-      position:relative;
-      box-shadow: 0 12px 30px rgba(0,0,0,.30);
+    .carousel-wrap::-webkit-scrollbar { display: none; }
+    .ref-slide {
+      min-width: 400px;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      scroll-snap-align: center;
+      position: relative;
+      border: 1px solid var(--card-border);
     }
-
-    .slideMedia{aspect-ratio: 16/9; background: rgba(0,0,0,.18);}
-    .slideMedia img{
-      width:100%; height:100%;
-      object-fit: cover;
-      object-position:center;
-      display:block;
-      cursor: zoom-in;
-      transform: scale(1.01);
-      transition: transform .25s var(--ease);
+    .ref-slide img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s;
     }
-    .slide:hover .slideMedia img{transform: scale(1.04)}
-
-    .slideCap{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 12px;
-      border-top:1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.20);
-    }
-    .badge{
-      padding:8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.82);
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.2px;
-      white-space:nowrap;
-    }
-    .note{
-      color: var(--muted2);
-      font-size:12px;
-      font-weight:800;
-      white-space:nowrap;
+    .ref-slide:hover img { transform: scale(1.05); }
+    .ref-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
     }
 
-    .dots{display:flex; justify-content:center; gap:8px; padding: 0 16px 14px;}
-    .dotBtn{
-      width:8px; height:8px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.10);
-      cursor:pointer;
-      transition: transform .2s var(--ease), background .2s var(--ease);
+    /* --- Contact --- */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+    .contact-info {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
     }
-    .dotBtn.active{background: linear-gradient(135deg, rgba(240,138,26,.95), rgba(225,59,59,.86)); transform: scale(1.2)}
-    .dotBtn:hover{transform: scale(1.2)}
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    input, textarea {
+      width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 14px;
+      color: white; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--brand-orange); }
 
-    /* Lightbox */
-    .lightbox{
-      position:fixed; inset:0;
-      z-index:120;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(10px);
-      display:none;
-      align-items:center; justify-content:center;
-      padding: 18px;
+    /* --- Footer --- */
+    footer { border-top: 1px solid var(--card-border); padding: 40px 0; margin-top: 80px; font-size: 14px; color: var(--text-muted); }
+    .footer-flex { display: flex; justify-content: space-between; align-items: center; }
+    .legal-links button { background: none; border: none; color: var(--text-muted); cursor: pointer; text-decoration: underline; font-size: inherit; }
+
+    /* --- Mobile Responsive --- */
+    @media (max-width: 768px) {
+      .hero { padding-top: 140px; }
+      h1 { font-size: 2.5rem; }
+      .nav-links { display: none; } /* Hide desktop links */
+      .nav-glass { width: 90%; justify-content: space-between; display: flex; }
+      .mobile-menu-btn { display: block; color: white; background: none; border: none; font-size: 24px; cursor: pointer; }
+      
+      .process-track, .contact-grid { grid-template-columns: 1fr; }
+      .ref-slide { min-width: 85vw; }
+      .hero-brand-visual { width: 100px; height: 100px; border-radius: 30px; }
     }
-    .lightbox.open{display:flex}
-    .lbPanel{
-      width:min(1080px, 96vw);
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(10,12,18,.86);
-      box-shadow: 0 30px 90px rgba(0,0,0,.65);
-      overflow:hidden;
-      position:relative;
-    }
-    .lbTop{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:12px 12px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .lbTop .title{
-      font-weight:900;
-      font-size:13px;
-      color: rgba(255,255,255,.85);
-    }
-    .lbClose{
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.85);
-      cursor:pointer;
-      font-weight:900;
-    }
-    .lbImg{
-      width:100%;
-      max-height: 78vh;
-      display:block;
-      object-fit: contain;
-      background: rgba(0,0,0,.28);
+    @media (min-width: 769px) {
+      .mobile-menu-btn { display: none; }
     }
 
-    /* FAQ */
-    .faq{display:grid; grid-template-columns: 1fr 1fr; gap:14px;}
-    details{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      padding:14px 14px;
-      box-shadow: var(--shadow2);
-      overflow:hidden;
+    /* --- Animations --- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s var(--ease-out); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* --- Modal --- */
+    .modal {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+      display: none; align-items: center; justify-content: center; padding: 20px;
     }
-    summary{
-      cursor:pointer;
-      list-style:none;
-      font-weight:900;
-      font-size:14px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
+    .modal.open { display: flex; }
+    .modal-content {
+      background: #111; border: 1px solid var(--card-border);
+      padding: 30px; border-radius: 20px;
+      max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
     }
-    summary::-webkit-details-marker{display:none}
-    .chev{
-      width:10px; height:10px;
-      border:2px solid rgba(255,255,255,.72);
-      border-left:none; border-top:none;
-      transform: rotate(45deg);
-      transition: transform .2s var(--ease);
-      flex: 0 0 auto;
-      margin-left:10px;
-    }
-    details[open] .chev{transform: rotate(225deg)}
-    details p{margin:10px 0 0; color: var(--muted); font-size:13px; line-height:1.55}
-
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .contactCard{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      box-shadow: var(--shadow);
-      padding:16px;
-      overflow:hidden;
-      position:relative;
-    }
-    .contactCard::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 220px at 15% 10%, rgba(30,74,174,.22), transparent 60%),
-        radial-gradient(520px 220px at 85% 20%, rgba(240,138,26,.18), transparent 60%);
-      pointer-events:none;
-      opacity:.8;
-    }
-    .contactCard > *{position:relative}
-    .kv{display:grid; gap:10px; margin-top:10px;}
-    .kv .line{
-      display:flex; gap:10px; align-items:flex-start;
-      color: var(--muted);
-      font-size:13px;
-      line-height:1.45;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
-      padding:12px;
-    }
-    .kv strong{color: rgba(255,255,255,.90)}
-    .form{display:grid; gap:10px; margin-top:10px;}
-    .field{display:grid; gap:6px;}
-    label{font-size:12px; color: var(--muted2); font-weight:800}
-    input, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      color: rgba(255,255,255,.90);
-      outline:none;
-      transition: border-color .2s var(--ease), background .2s var(--ease);
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(240,138,26,.45);
-      background: rgba(0,0,0,.28);
-    }
-    textarea{min-height: 120px; resize: vertical}
-    .fine{color: var(--muted2); font-size:12px; line-height:1.45; margin-top:10px;}
-
-    footer{
-      padding:24px 0 34px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
-    }
-    .foot{
-      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
-      flex-wrap:wrap;
-    }
-    .foot small{color: var(--muted2); line-height:1.55}
-    .foot a{color: rgba(255,255,255,.78); font-weight:800}
-    .foot a:hover{text-decoration:underline}
-
-    .reveal{opacity:0; transform: translateY(14px); transition: opacity .5s var(--ease), transform .5s var(--ease)}
-    .reveal.in{opacity:1; transform: translateY(0)}
-    .delay1{transition-delay:.05s}
-    .delay2{transition-delay:.10s}
-    .delay3{transition-delay:.15s}
-
-    .floatCta{
-      position:fixed;
-      left:14px; right:14px; bottom:14px;
-      z-index:70;
-      display:none;
-      gap:10px;
-    }
-    .floatCta a{flex:1}
-
-    /* =========================
-       MOBILE-ONLY: moderner & “luftiger”
-       Desktop bleibt 1:1 – nur <980 & <560 angepasst
-       ========================= */
-    @media (max-width: 980px){
-      .container{padding: 0 16px}
-      section{padding:24px 0}
-      .nav{padding:10px 0}
-
-      .hero{padding:30px 0 8px}
-      .headline{
-        padding:18px;
-        box-shadow: 0 12px 38px rgba(0,0,0,.36);
-        background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.02));
-      }
-      .pill{box-shadow:none}
-      .lead{font-size:14px; margin-bottom:14px}
-
-      .heroActions{gap:8px}
-      .btn{box-shadow: 0 8px 18px rgba(0,0,0,.20)}
-      .btn.primary{box-shadow: 0 12px 26px rgba(240,138,26,.16), 0 10px 18px rgba(0,0,0,.22)}
-
-      /* Trust = swipe statt 3 Boxen übereinander */
-      .trust{
-        display:flex;
-        gap:10px;
-        overflow:auto;
-        padding-bottom: 6px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-      }
-      .trust .t{
-        flex: 0 0 auto;
-        min-width: min(340px, 86vw);
-        scroll-snap-align: start;
-        padding:12px;
-        border-radius: 18px;
-        border-color: rgba(255,255,255,.09);
-        background: rgba(255,255,255,.028);
-      }
-      .trust::-webkit-scrollbar{height:10px}
-      .trust::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius: 999px}
-      .trust::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius: 999px}
-
-      .sectionHead{flex-direction:column; align-items:flex-start; gap:8px}
-
-      /* etwas weniger “Card-Look” */
-      .card, .step, .contactCard, details{
-        box-shadow: 0 10px 22px rgba(0,0,0,.20);
-        border-color: rgba(255,255,255,.09);
-        background: rgba(255,255,255,.032);
-      }
-
-      .cards .card{grid-column: span 6}
-      .steps .step{grid-column: span 6}
-
-      .faq{grid-template-columns: 1fr}
-      .contact{grid-template-columns: 1fr}
-
-      nav ul{display:none}
-      .hamburger{display:flex}
-      .nav-cta .btn.ghost{display:none}
-      .carouselTop .note{display:none}
-    }
-
-    @media (max-width: 560px){
-      .container{padding: 0 14px}
-      section{padding:20px 0}
-      .nav{padding:9px 0}
-
-      .brand img{width:42px; height:42px; border-radius: 14px}
-      .brand{min-width:auto}
-      .brand .name{display:none}
-
-      /* Hero: klarer, weniger “Box” */
-      .hero{padding:22px 0 6px}
-      .headline{
-        padding:16px;
-        border-radius: 20px;
-        border-color: rgba(255,255,255,.085);
-      }
-      .headline::before{opacity:.75}
-      .pill{
-        padding:8px 12px;
-        font-size:12px;
-        border-color: rgba(255,255,255,.09);
-        background: rgba(255,255,255,.035);
-      }
-      h1{font-size: clamp(26px, 8vw, 38px)}
-      .lead{
-        font-size:14px;
-        line-height:1.55;
-        margin-bottom:12px;
-      }
-
-      .heroActions{
-        display:grid;
-        grid-template-columns: 1fr;
-        gap:10px;
-      }
-      .heroActions .btn{width:100%}
-
-      /* Leistungen & Ablauf: horizontales Snap-Rack */
-      .cards, .steps{
-        display:flex;
-        gap:12px;
-        overflow:auto;
-        padding-bottom: 6px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-      }
-      .cards::-webkit-scrollbar, .steps::-webkit-scrollbar{height:10px}
-      .cards::-webkit-scrollbar-thumb, .steps::-webkit-scrollbar-thumb{background: rgba(255,255,255,.14); border-radius:999px}
-      .cards::-webkit-scrollbar-track, .steps::-webkit-scrollbar-track{background: rgba(255,255,255,.06); border-radius:999px}
-
-      .cards .card, .steps .step{
-        flex: 0 0 auto;
-        width: 86vw;
-        scroll-snap-align: start;
-        padding:14px;
-        border-radius: 20px;
-        background: rgba(255,255,255,.028);
-      }
-      .card p, .step p{
-        display:-webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow:hidden;
-      }
-
-      .trackWrap{padding: 14px}
-      .track{gap:12px}
-      .slide{width: 88vw}
-
-      .contactCard{padding:14px; border-radius: 20px}
-      .kv .line{padding:11px; border-radius: 14px}
-
-      .floatCta{display:flex}
-    }
-
-    /* ==========================================================
-       SWIPE-HINWEIS (nur Mobile) – wird per JS bei Viewport-Eintritt getriggert
-       ========================================================== */
-    @media (max-width: 560px){
-      .swipeHint{ position:relative; }
-
-      .swipeHint::after{
-        content:"Wischen";
-        position:absolute;
-        left:50%;
-        bottom:8px;
-        transform:translateX(-50%) translateY(6px);
-        font-size:11px;
-        font-weight:900;
-        letter-spacing:.25px;
-        color: rgba(255,255,255,.82);
-        background: rgba(0,0,0,.45);
-        border: 1px solid rgba(255,255,255,.14);
-        padding:6px 12px;
-        border-radius:999px;
-        pointer-events:none;
-        opacity:0;
-      }
-
-      .swipeHint.swipeHint--play::after{
-        animation: swipeHintFade 3.8s var(--ease) 1;
-      }
-
-      @keyframes swipeHintFade{
-        0%{opacity:0; transform:translateX(-50%) translateY(6px)}
-        18%{opacity:1; transform:translateX(-50%) translateY(0)}
-        75%{opacity:1; transform:translateX(-50%) translateY(0)}
-        100%{opacity:0; transform:translateX(-50%) translateY(6px)}
-      }
-    }
-
-    /* ==========================================================
-       MODALS: Impressum + Datenschutz (nur per Klick im Footer)
-       ========================================================== */
-    .legalBtn{
-      all:unset;
-      cursor:pointer;
-      font-weight:900;
-      color: rgba(255,255,255,.78);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-    }
-    .legalBtn:hover{color: rgba(255,255,255,.92)}
-
-    .modal{
-      position:fixed; inset:0;
-      z-index:140;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(10px);
-      display:none;
-      align-items:center; justify-content:center;
-      padding: 18px;
-    }
-    .modal.open{display:flex}
-
-    .modalPanel{
-      width:min(980px, 96vw);
-      max-height: 90vh;
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(10,12,18,.90);
-      box-shadow: 0 30px 90px rgba(0,0,0,.65);
-      overflow:hidden;
-      position:relative;
-      display:flex;
-      flex-direction:column;
-    }
-    .modalTop{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:12px 12px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-    .modalTitle{
-      font-weight:900;
-      font-size:14px;
-      color: rgba(255,255,255,.90);
-    }
-    .modalClose{
-      width:44px; height:44px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.85);
-      cursor:pointer;
-      font-weight:900;
-    }
-    .modalBody{
-      padding:16px;
-      overflow:auto;
-      color: rgba(255,255,255,.86);
-      font-size: 13.5px;
-      line-height: 1.65;
-    }
-    .modalBody h3{
-      margin: 0 0 10px;
-      font-size: 15px;
-      letter-spacing:-.2px;
-    }
-    .modalBody h4{
-      margin: 16px 0 8px;
-      font-size: 13px;
-      color: rgba(255,255,255,.92);
-      letter-spacing:.1px;
-      text-transform:none;
-    }
-    .modalBody p{margin: 0 0 10px; color: rgba(255,255,255,.78)}
-    .modalBody a{color: rgba(240,138,26,.90); font-weight:900; text-decoration:underline}
-    .modalBody ul{margin: 6px 0 12px 18px; color: rgba(255,255,255,.78)}
-    .modalBody li{margin: 6px 0}
-    .legalBox{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
-      padding: 12px;
-      margin: 10px 0 12px;
-    }
+    .close-modal { float: right; cursor: pointer; background: none; border: none; color: white; font-size: 20px; }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Räumdienst Borken",
-    "description": "Entrümpelung & Haushaltsauflösung in Borken: zuverlässig, diskret, sauber. Kostenlose Besichtigung, fairer Festpreis.",
-    "areaServed": "Borken und Umgebung",
-    "telephone": "+49 176 46620710",
-    "image": ["IMG_7436.jpg","IMG_7437.jpg","IMG_7438.jpg","IMG_7439.jpg","IMG_7440.jpg"]
-  }
-  </script>
 </head>
 
 <body>
-  <div class="mesh" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
+  <div class="noise-overlay"></div>
+  <div class="glow-blob blob-1"></div>
+  <div class="glow-blob blob-2"></div>
 
-  <!-- Mobile drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
-      <div class="top">
-        <div class="brandMini">
-          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
-          <div>
-            <div style="font-weight:900">Räumdienst Borken</div>
-            <div style="color:rgba(255,255,255,.58); font-size:12px; font-weight:700">Entrümpelung & Haushaltsauflösung</div>
-          </div>
-        </div>
-        <button class="btn ghost" id="closeDrawer" type="button" aria-label="Menü schließen">Schließen</button>
-      </div>
-      <nav>
-        <a href="#leistungen">Leistungen</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#referenzen">Referenzen</a>
-        <a href="#faq">FAQ</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <div class="actions">
-        <a class="btn primary" href="tel:+4917646620710">Jetzt anrufen</a>
-        <a class="btn" href="#kontakt">Kostenlose Besichtigung</a>
-      </div>
-      <p class="fine">
-        Hinweis: Bitte passen Sie Impressum/Datenschutz/Adresse an, sobald die finalen Unternehmensdaten vorliegen.
-      </p>
-    </div>
-  </div>
-
-  <!-- Header -->
   <header>
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="#top" aria-label="Startseite">
-          <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
-          <div class="name">
-            <strong>Räumdienst Borken</strong>
-            <span>Entrümpelung & Haushaltsauflösung</span>
-          </div>
-        </a>
-
-        <nav aria-label="Hauptnavigation">
-          <ul>
-            <li><a href="#leistungen">Leistungen</a></li>
-            <li><a href="#ablauf">Ablauf</a></li>
-            <li><a href="#referenzen">Referenzen</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-          </ul>
-        </nav>
-
-        <div class="nav-cta">
-          <a class="btn ghost" href="tel:+4917646620710" aria-label="Telefon">📞 0176 46620710</a>
-          <a class="btn primary" href="#kontakt">Kostenlose Besichtigung</a>
-          <button class="hamburger" id="burger" aria-label="Menü öffnen" type="button">
-            <span></span>
-          </button>
-        </div>
-      </div>
+    <div class="nav-glass flex items-center">
+      <a href="#top" class="nav-logo-small">
+        <img src="IMG_7436.jpg" alt="Logo Klein">
+        Räumdienst Borken
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#ablauf">Ablauf</a></li>
+        <li><a href="#referenzen">Referenzen</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+      
+      <a href="tel:+4917646620710" class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;">
+        0176 46620710
+      </a>
     </div>
   </header>
 
   <main id="top">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <div class="wrap">
-          <div class="headline reveal in">
-            <span class="pill"><span class="dot"></span> Diskret. Sauber. Planbar.</span>
-            <h1>Entrümpelung & Haushaltsauflösung<br>in <span style="background:linear-gradient(135deg,var(--orange),var(--red)); -webkit-background-clip:text; background-clip:text; color:transparent;">Borken</span></h1>
-            <p class="lead">
-              Sie möchten wieder Platz, Ordnung und Ruhe? Wir übernehmen Entrümpelungen und Haushaltsauflösungen zuverlässig – inklusive
-              Sortierung, Räumung und besenreiner Übergabe. <strong>Vorab kostenlos besichtigen</strong>, danach <strong>fairer Festpreis</strong>.
-            </p>
+    <section class="hero container reveal">
+      <div class="hero-label">
+        <span></span> Jetzt auch kurzfristige Termine
+      </div>
+      
+      <div class="hero-brand-visual">
+        <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo Groß">
+      </div>
 
-            <div class="heroActions">
-              <a class="btn primary" href="#kontakt">Festpreis anfragen</a>
-              <a class="btn" href="tel:+4917646620710">Sofort anrufen</a>
-              <a class="btn ghost" href="#referenzen">Referenzen ansehen</a>
-            </div>
+      <h1>
+        Befreien Sie sich von <br>
+        <span class="text-gradient">Altlasten & Sorgen.</span>
+      </h1>
+      
+      <p style="max-width: 600px; margin: 24px auto;">
+        Wir kümmern uns um Entrümpelungen und Haushaltsauflösungen in Borken & Umgebung. 
+        Diskret, respektvoll und besenrein. Sie müssen keinen Finger rühren.
+      </p>
+      
+      <div class="flex" style="gap: 12px; flex-wrap: wrap; justify-content: center;">
+        <a href="#kontakt" class="btn btn-primary">Kostenlose Besichtigung</a>
+        <a href="#referenzen" class="btn btn-glass">Unsere Arbeit ansehen</a>
+      </div>
+      
+      <div class="flex" style="gap: 24px; margin-top: 40px; opacity: 0.6; font-size: 13px;">
+        <div class="flex items-center" style="gap: 6px;">✓ Festpreis-Garantie</div>
+        <div class="flex items-center" style="gap: 6px;">✓ Wertanrechnung</div>
+        <div class="flex items-center" style="gap: 6px;">✓ Besenreine Übergabe</div>
+      </div>
+    </section>
 
-            <!-- swipeHint -->
-            <div class="trust swipeHint">
-              <div class="t reveal in delay1">
-                <strong>Kostenlose Besichtigung</strong>
-                Aufwand einschätzen, Details klären, ohne Risiko.
-              </div>
-              <div class="t reveal in delay2">
-                <strong>Fairer Festpreis</strong>
-                Sie wissen vorher, womit Sie rechnen können.
-              </div>
-              <div class="t reveal in delay3">
-                <strong>Kurzfristige Termine</strong>
-                Nach Absprache oft auch kurzfristig möglich.
-              </div>
-            </div>
+    <section id="leistungen" class="container" style="padding-top: 60px;">
+      <div class="flex justify-between items-center" style="margin-bottom: 30px;">
+        <h2>Unser Service</h2>
+        <p style="margin:0;">Alles aus einer Hand.</p>
+      </div>
 
+      <div class="bento-grid" id="cards-container">
+        <div class="card reveal">
+          <div class="card-icon">🏠</div>
+          <h3>Haushaltsauflösung</h3>
+          <p>Komplette Auflösung von Wohnungen und Häusern. Wir sortieren, entsorgen fachgerecht und übergeben das Objekt übergabefertig an den Vermieter oder Eigentümer.</p>
+        </div>
+        
+        <div class="card reveal" style="transition-delay: 100ms;">
+          <div class="card-icon">📦</div>
+          <h3>Entrümpelung</h3>
+          <p>Ob Keller, Dachboden, Garage oder vermüllte Immobilie. Wir schaffen Platz und Ordnung, egal wie vollgestellt der Raum ist. Diskretion ist dabei selbstverständlich.</p>
+        </div>
+        
+        <div class="card reveal" style="transition-delay: 200ms;">
+          <div class="card-icon">🤝</div>
+          <h3>Senioren-Umzug</h3>
+          <p>Wir helfen beim Wechsel ins Pflegeheim. Wir sortieren Erinnerungsstücke, kümmern uns um den Umzug der Möbel und räumen den Rest der alten Wohnung.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ablauf" class="container" style="padding-top: 100px;">
+      <h2 style="text-align: center;">So einfach geht's</h2>
+      <div class="process-track">
+        <div class="step-card reveal">
+          <span class="step-num">1</span>
+          <h3>Besichtigung</h3>
+          <p style="font-size: 14px;">Sie rufen uns an. Wir kommen vorbei (kostenlos) und verschaffen uns einen Überblick.</p>
+        </div>
+        <div class="step-card reveal" style="transition-delay: 100ms;">
+          <span class="step-num">2</span>
+          <h3>Angebot</h3>
+          <p style="font-size: 14px;">Sie erhalten einen garantierten Festpreis. Keine versteckten Kosten im Nachhinein.</p>
+        </div>
+        <div class="step-card reveal" style="transition-delay: 200ms;">
+          <span class="step-num">3</span>
+          <h3>Räumung</h3>
+          <p style="font-size: 14px;">Unser Team rückt an und räumt das Objekt leer. Schnell, sauber und diskret.</p>
+        </div>
+        <div class="step-card reveal" style="transition-delay: 300ms;">
+          <span class="step-num">4</span>
+          <h3>Übergabe</h3>
+          <p style="font-size: 14px;">Wir übergeben besenrein. Auf Wunsch machen wir auch die Schlüsselübergabe.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="referenzen" class="container" style="padding-top: 100px;">
+      <h2>Echte Ergebnisse</h2>
+      <p>Bilder sagen mehr als Worte. Ziehen Sie, um mehr zu sehen.</p>
+      
+      <div class="carousel-wrap" id="carousel">
+        <div class="ref-slide">
+          <img src="IMG_7439.jpg" alt="Nachher Wohnzimmer" loading="lazy">
+          <div class="ref-overlay">
+            <strong>Wohnungsauflösung Borken</strong>
+            <div style="font-size: 12px; opacity: 0.8;">Komplett möbliert übernommen, besenrein übergeben.</div>
+          </div>
+        </div>
+        <div class="ref-slide">
+          <img src="IMG_7440.jpg" alt="Besenrein Raum" loading="lazy">
+          <div class="ref-overlay">
+            <strong>Endzustand</strong>
+            <div style="font-size: 12px; opacity: 0.8;">Bereit für die Renovierung.</div>
+          </div>
+        </div>
+        <div class="ref-slide">
+          <img src="IMG_7437.jpg" alt="Vorher Zustand" loading="lazy">
+          <div class="ref-overlay">
+            <strong>Vorher</strong>
+            <div style="font-size: 12px; opacity: 0.8;">So sah es vor unserem Einsatz aus.</div>
+          </div>
+        </div>
+        <div class="ref-slide">
+          <img src="IMG_7438.jpg" alt="Nachher Zustand" loading="lazy">
+          <div class="ref-overlay">
+            <strong>Nachher</strong>
+            <div style="font-size: 12px; opacity: 0.8;">Sauber, leer und ordentlich.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Leistungen -->
-    <section id="leistungen">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Leistungen</h2>
-            <p>Konsequent organisiert, sauber umgesetzt. Für Privatpersonen, Vermieter, Erbengemeinschaften und Gewerbe – im Raum Borken & Umgebung.</p>
-          </div>
-        </div>
-
-        <div class="cards swipeHint">
-          <div class="card reveal in">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V11z"/></svg>
-            </div>
-            <h3>Wohnungen & Häuser</h3>
-            <p>Entrümpelung kompletter Objekte inkl. Nebenräume. Besenreine Übergabe auf Wunsch mit Schlüsselübergabe.</p>
-          </div>
-
-          <div class="card reveal in delay1">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 10h16v10H4V10zm2-6h12l2 4H4l2-4z"/></svg>
-            </div>
-            <h3>Haushaltsauflösungen</h3>
-            <p>Strukturiert bei sensiblen Fällen (Umzug, Auszug, Nachlass). Diskret und ohne unnötigen Stress.</p>
-          </div>
-
-          <div class="card reveal in delay2">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7 7h10v10H7V7zm-4 4h3v6H3v-6zm15 0h3v6h-3v-6z"/></svg>
-            </div>
-            <h3>Keller, Dachboden, Garage</h3>
-            <p>Schnell wieder nutzbare Flächen. Mit System sortiert, geräumt, sauber abgeschlossen.</p>
-          </div>
-        </div>
+    <section class="container" id="faq" style="padding-top: 100px; max-width: 800px;">
+      <h2>Häufige Fragen</h2>
+      <div class="grid" style="gap: 16px;">
+        <details class="step-card" style="cursor: pointer;">
+          <summary style="font-weight: 700;">Ist die Besichtigung wirklich kostenlos?</summary>
+          <p style="margin-top: 10px;">Ja, zu 100%. Wir müssen das Objekt sehen, um den Aufwand einzuschätzen. Das kostet Sie nichts, auch wenn Sie uns nicht beauftragen.</p>
+        </details>
+        <details class="step-card" style="cursor: pointer;">
+          <summary style="font-weight: 700;">Muss ich bei der Räumung anwesend sein?</summary>
+          <p style="margin-top: 10px;">Nein. Viele Kunden übergeben uns den Schlüssel und kommen erst zur Abnahme wieder. Wir arbeiten selbstständig.</p>
+        </details>
+        <details class="step-card" style="cursor: pointer;">
+          <summary style="font-weight: 700;">Was passiert mit verwertbaren Gegenständen?</summary>
+          <p style="margin-top: 10px;">Gut erhaltene Möbel oder Wertsachen rechnen wir gerne auf den Gesamtpreis an. Das senkt Ihre Kosten.</p>
+        </details>
       </div>
     </section>
 
-    <!-- Ablauf -->
-    <section id="ablauf">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Ablauf</h2>
-            <p>Transparent und planbar – damit Sie wissen, was passiert und wann.</p>
-          </div>
-        </div>
-
-        <div class="steps swipeHint">
-          <div class="step reveal in">
-            <div class="n">1</div>
-            <h3>Kostenlose Besichtigung</h3>
-            <p>Wir schauen uns alles vor Ort an, klären Umfang, Zugänge und Timing.</p>
-          </div>
-          <div class="step reveal in delay1">
-            <div class="n">2</div>
-            <h3>Festpreis-Angebot</h3>
-            <p>Sie bekommen einen klaren Preis – ohne Überraschungen und ohne Kleingedrucktes.</p>
-          </div>
-          <div class="step reveal in delay2">
-            <div class="n">3</div>
-            <h3>Entrümpelung</h3>
-            <p>Wir räumen organisiert, zügig und diskret – mit sauberer Arbeitsweise.</p>
-          </div>
-          <div class="step reveal in delay3">
-            <div class="n">4</div>
-            <h3>Besenreine Übergabe</h3>
-            <p>Am Ende übergeben wir ordentlich und besenrein. Optional inkl. Schlüsselübergabe.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Referenzen (Carousel) -->
-    <section id="referenzen">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Referenzen</h2>
-            <p>Wischen oder ziehen Sie die Beispiele. Das Carousel läuft automatisch – bei Interaktion stoppt es kurz.</p>
-          </div>
-        </div>
-
-        <div class="carouselCard reveal in" id="refCarousel">
-          <div class="carouselTop">
-            <div class="meta">
-              <strong>Projekte aus Borken & Umgebung</strong>
-              <span>Klick aufs Bild = groß ansehen</span>
+    <section id="kontakt" class="container" style="padding-top: 100px;">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Kontakt aufnehmen</h3>
+          <p>Der erste Schritt zur Ordnung.</p>
+          
+          <div style="margin-top: 24px;">
+            <div style="margin-bottom: 16px;">
+              <strong style="display:block; color:white;">Telefon / WhatsApp</strong>
+              <a href="tel:+4917646620710" style="color: var(--brand-orange); font-size: 1.2rem;">0176 46620710</a>
             </div>
-            <div class="controls">
-              <span class="note">Auto • Drag/Swipe • Pfeile • Dots</span>
-              <button class="iconBtn" type="button" id="prevBtn" aria-label="Vorheriges Bild">
-                <svg viewBox="0 0 24 24"><path d="M15.5 4.5 7 12l8.5 7.5 1.5-1.7L10.5 12 17 6.2z"/></svg>
-              </button>
-              <button class="iconBtn" type="button" id="nextBtn" aria-label="Nächstes Bild">
-                <svg viewBox="0 0 24 24"><path d="M8.5 19.5 17 12 8.5 4.5 7 6.2 13.5 12 7 17.8z"/></svg>
-              </button>
+            <div>
+              <strong style="display:block; color:white;">Einsatzgebiet</strong>
+              <span style="color: var(--text-muted);">Borken, Bocholt, Rhede & Umgebung</span>
             </div>
           </div>
-
-          <div class="trackWrap swipeHint">
-            <div class="track" id="track" aria-label="Referenz Carousel">
-              <article class="slide" data-title="Projekt 01 – Wohnzimmer" data-badge="Wohnung" data-img="IMG_7439.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7439.jpg" alt="Referenz Projekt 01">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Wohnung</span>
-                  <span class="note">Projekt 01</span>
-                </div>
-              </article>
-
-              <article class="slide" data-title="Projekt 02 – Raum" data-badge="Besenrein" data-img="IMG_7440.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7440.jpg" alt="Referenz Projekt 02">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Besenrein</span>
-                  <span class="note">Projekt 02</span>
-                </div>
-              </article>
-
-              <article class="slide" data-title="Projekt 03 – Vorher" data-badge="Vorher" data-img="IMG_7437.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7437.jpg" alt="Referenz Projekt 03">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Vorher</span>
-                  <span class="note">Projekt 03</span>
-                </div>
-              </article>
-
-              <article class="slide" data-title="Projekt 04 – Nachher" data-badge="Nachher" data-img="IMG_7438.jpg">
-                <div class="slideMedia">
-                  <img src="IMG_7438.jpg" alt="Referenz Projekt 04">
-                </div>
-                <div class="slideCap">
-                  <span class="badge">Nachher</span>
-                  <span class="note">Projekt 04</span>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="dots" id="dots" aria-label="Carousel Navigation"></div>
         </div>
+
+        <form class="contact-info" action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label>Ihr Name</label>
+            <input type="text" name="name" required placeholder="Max Mustermann">
+          </div>
+          <div class="form-group">
+            <label>Telefonnummer (für Rückruf)</label>
+            <input type="tel" name="telefon" required placeholder="0176...">
+          </div>
+          <div class="form-group">
+            <label>Worum geht es?</label>
+            <textarea name="nachricht" rows="4" placeholder="Kurze Info zum Objekt (z.B. 3-Zimmer Wohnung, 2. Etage)..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Anfrage senden</button>
+          <p style="font-size: 11px; margin-top: 12px; opacity: 0.6;">Durch das Absenden öffnen Sie Ihr Mail-Programm.</p>
+        </form>
       </div>
     </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>FAQ</h2>
-            <p>Die häufigsten Fragen – kurz beantwortet.</p>
-          </div>
-        </div>
-
-        <div class="faq">
-          <details class="reveal in">
-            <summary>Wie schnell sind Termine möglich? <span class="chev"></span></summary>
-            <p>Je nach Auslastung oft kurzfristig. Am besten direkt anrufen oder über das Formular anfragen.</p>
-          </details>
-
-          <details class="reveal in delay1">
-            <summary>Gibt es einen Festpreis? <span class="chev"></span></summary>
-            <p>Ja. Nach der kostenlosen Besichtigung erhalten Sie ein transparentes Festpreis-Angebot.</p>
-          </details>
-
-          <details class="reveal in delay2">
-            <summary>Ist die Besichtigung wirklich kostenlos? <span class="chev"></span></summary>
-            <p>Ja. Sie dient dazu, den Aufwand realistisch einzuschätzen und Ihnen ein seriöses Angebot zu machen.</p>
-          </details>
-
-          <details class="reveal in delay3">
-            <summary>Wie läuft die Übergabe ab? <span class="chev"></span></summary>
-            <p>Wir übergeben besenrein. Auf Wunsch auch mit Schlüsselübergabe bzw. Abstimmung mit Vermieter/Verwaltung.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="kontakt">
-      <div class="container">
-        <div class="sectionHead">
-          <div>
-            <h2>Kontakt</h2>
-            <p>Kurze Anfrage reicht. Sie bekommen schnell eine Rückmeldung zur kostenlosen Besichtigung.</p>
-          </div>
-        </div>
-
-        <div class="contact">
-          <div class="contactCard reveal in">
-            <h3>Direktkontakt</h3>
-            <div class="kv">
-              <div class="line"><strong>Telefon:</strong> <span><a href="tel:+4917646620710">0176 46620710</a></span></div>
-              <div class="line"><strong>Region:</strong> <span>Borken & Umgebung</span></div>
-              <div class="line"><strong>Leistung:</strong> <span>Entrümpelung, Haushaltsauflösung, Nebenräume</span></div>
-            </div>
-            <p class="fine">Hinweis: Impressum/Datenschutz/Adresse bitte mit finalen Unternehmensdaten ergänzen.</p>
-          </div>
-
-          <div class="contactCard reveal in delay1">
-            <h3>Festpreis anfragen</h3>
-            <form class="form" action="mailto:deinemail@domain.de" method="post" enctype="text/plain">
-              <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="Name" placeholder="Vor- und Nachname" required>
-              </div>
-              <div class="field">
-                <label for="phone">Telefon</label>
-                <input id="phone" name="Telefon" placeholder="0176 ..." required>
-              </div>
-              <div class="field">
-                <label for="msg">Kurzbeschreibung</label>
-                <textarea id="msg" name="Nachricht" placeholder="Objekt (Wohnung/Haus), grobe Größe, Etage, Terminwunsch..." required></textarea>
-              </div>
-              <button class="btn primary" type="submit">Anfrage senden</button>
-              <p class="fine">Formular nutzt aktuell <strong>mailto</strong>. Für professionell: später per Backend/Form-Service (z. B. Netlify Forms) ersetzen.</p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="floatCta" aria-hidden="true">
-      <a class="btn" href="tel:+4917646620710">Anrufen</a>
-      <a class="btn primary" href="#kontakt">Besichtigung</a>
-    </div>
   </main>
 
   <footer>
-    <div class="container">
-      <div class="foot">
-        <small>
-          © <span id="y"></span> Räumdienst Borken — Entrümpelung & Haushaltsauflösung<br>
-          <span style="opacity:.75">
-            <button class="legalBtn" type="button" data-open-modal="impressumModal">Impressum</button>
-            &nbsp;·&nbsp;
-            <button class="legalBtn" type="button" data-open-modal="datenschutzModal">Datenschutz</button>
-          </span>
-        </small>
-        <small><a href="#top">Nach oben</a></small>
+    <div class="container footer-flex">
+      <div>
+        © <span id="year"></span> Räumdienst Borken<br>
+        <span style="opacity: 0.5; font-size: 12px;">Inh. Maksut Saciri, Graf Friedrich Str. 34, 46325 Borken</span>
+      </div>
+      <div class="legal-links">
+        <button onclick="openModal('impressum')">Impressum</button>
+        <span style="margin:0 10px">•</span>
+        <button onclick="openModal('datenschutz')">Datenschutz</button>
       </div>
     </div>
   </footer>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lbPanel" role="dialog" aria-modal="true" aria-label="Bildvorschau">
-      <div class="lbTop">
-        <div class="title" id="lbTitle">Vorschau</div>
-        <button class="lbClose" id="lbClose" type="button" aria-label="Schließen">✕</button>
-      </div>
-      <img class="lbImg" id="lbImg" alt="Großansicht">
+  <div id="impressum" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('impressum')">✕</button>
+      <h3>Impressum</h3>
+      <p>Angaben gemäß § 5 TMG</p>
+      <p>Räumdienst Borken<br>Inhaber: Maksut Saciri<br>Graf Friedrich Straße 34<br>46325 Borken</p>
+      <p>Kontakt:<br>Telefon: 0176 46620710<br>E-Mail: Rauemdienst.Borken@gmail.com</p>
+      <p>Steuernummer: [Ihre Steuernummer]<br>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
     </div>
   </div>
 
-  <!-- Impressum Modal -->
-  <div class="modal" id="impressumModal" aria-hidden="true">
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Impressum">
-      <div class="modalTop">
-        <div class="modalTitle">Impressum</div>
-        <button class="modalClose" type="button" data-close-modal aria-label="Schließen">✕</button>
-      </div>
-      <div class="modalBody">
-        <h3>Räumdienst Borken</h3>
-        <div class="legalBox">
-          <p><strong>Inhaber:</strong> Maksut Saciri<br>
-          <strong>Adresse:</strong> Graf Friedrich Straße 34, 46325 Borken, Deutschland</p>
-
-          <p><strong>Kontakt:</strong><br>
-            Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a><br>
-            E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a>
-          </p>
-
-          <p><strong>Unternehmensform:</strong> Einzelunternehmen</p>
-          <p><strong>Umsatzsteuer:</strong> Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
-        </div>
-
-        <h4>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h4>
-        <p>Maksut Saciri (Adresse wie oben)</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Datenschutz Modal -->
-  <div class="modal" id="datenschutzModal" aria-hidden="true">
-    <div class="modalPanel" role="dialog" aria-modal="true" aria-label="Datenschutz">
-      <div class="modalTop">
-        <div class="modalTitle">Datenschutzerklärung</div>
-        <button class="modalClose" type="button" data-close-modal aria-label="Schließen">✕</button>
-      </div>
-      <div class="modalBody">
-        <h3>Datenschutzerklärung</h3>
-
-        <h4>1. Verantwortlicher</h4>
-        <div class="legalBox">
-          <p>
-            Räumdienst Borken<br>
-            Inhaber: Maksut Saciri<br>
-            Graf Friedrich Straße 34<br>
-            46325 Borken, Deutschland
-          </p>
-          <p>
-            Telefon / WhatsApp: <a href="tel:+4917646620710">0176 46620710</a><br>
-            E-Mail: <a href="mailto:Rauemdienst.Borken@gmail.com">Rauemdienst.Borken@gmail.com</a>
-          </p>
-        </div>
-
-        <h4>2. Allgemeine Hinweise</h4>
-        <p>
-          Wir verarbeiten personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO) sowie den einschlägigen nationalen Datenschutzvorschriften
-          (insbesondere BDSG). Diese Erklärung informiert über Art, Umfang und Zweck der Verarbeitung personenbezogener Daten beim Besuch dieser Website
-          und bei Kontaktaufnahme.
-        </p>
-
-        <h4>3. Zugriffsdaten / Server-Logfiles</h4>
-        <p>
-          Beim Aufruf dieser Website können durch den Hosting-/Server-Anbieter Informationen in sogenannten Server-Logfiles erhoben werden (z. B. IP-Adresse,
-          Datum und Uhrzeit des Zugriffs, aufgerufene Seite/Datei, Referrer-URL, Browser/OS). Die Verarbeitung erfolgt zur Gewährleistung der technischen
-          Sicherheit (z. B. Abwehr von Angriffen) und zur Stabilität der Website.
-        </p>
-        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).</p>
-
-        <h4>4. Kontaktaufnahme</h4>
-        <p>
-          Wenn Sie uns per Telefon, WhatsApp oder E-Mail kontaktieren oder das Formular nutzen (derzeit per <strong>mailto</strong>), verarbeiten wir die von Ihnen
-          übermittelten Daten (z. B. Name, Telefonnummer, E-Mail, Inhalte der Anfrage) zur Bearbeitung Ihrer Anfrage und zur Kommunikation mit Ihnen.
-        </p>
-        <p><strong>Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche/vertragliche Maßnahmen) und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Kommunikation).</p>
-
-        <h4>5. Empfänger / Weitergabe von Daten</h4>
-        <p>
-          Eine Weitergabe Ihrer Daten an Dritte erfolgt nur, wenn dies zur Durchführung vorvertraglicher Maßnahmen oder zur Vertragserfüllung erforderlich ist,
-          eine gesetzliche Verpflichtung besteht oder Sie eingewilligt haben.
-        </p>
-
-        <h4>6. Speicherdauer</h4>
-        <p>
-          Wir speichern personenbezogene Daten nur so lange, wie dies für die genannten Zwecke erforderlich ist. Darüber hinaus speichern wir Daten,
-          soweit gesetzliche Aufbewahrungspflichten bestehen (z. B. handels- oder steuerrechtliche Pflichten).
-        </p>
-
-        <h4>7. Ihre Rechte</h4>
-        <p>Sie haben nach der DSGVO insbesondere folgende Rechte:</p>
-        <ul>
-          <li>Auskunft (Art. 15 DSGVO)</li>
-          <li>Berichtigung (Art. 16 DSGVO)</li>
-          <li>Löschung (Art. 17 DSGVO)</li>
-          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-          <li>Widerspruch gegen bestimmte Verarbeitungen (Art. 21 DSGVO)</li>
-          <li>Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
-        </ul>
-
-        <h4>8. Beschwerderecht</h4>
-        <p>
-          Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die Verarbeitung Ihrer personenbezogenen
-          Daten gegen die DSGVO verstößt.
-        </p>
-
-        <h4>9. Cookies / Tracking</h4>
-        <p>
-          Diese Website setzt nach aktuellem Stand keine Analyse- oder Tracking-Tools ein. Soweit zukünftig Tools (z. B. Analytics/Pixel) eingebunden werden,
-          erfolgt dies – sofern erforderlich – erst nach vorheriger Einwilligung über ein Consent-Banner.
-        </p>
-        <p><strong>Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. c DSGVO (rechtliche Pflichten), Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse) sowie – bei einwilligungspflichtigen Tools – Art. 6 Abs. 1 lit. a DSGVO.</p>
-
-        <h4>10. Datensicherheit</h4>
-        <p>
-          Wir treffen angemessene technische und organisatorische Maßnahmen, um Ihre Daten gegen Verlust, Missbrauch und unbefugten Zugriff zu schützen.
-        </p>
-
-        <h4>11. Stand</h4>
-        <p>Stand: Januar 2026</p>
-      </div>
+  <div id="datenschutz" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('datenschutz')">✕</button>
+      <h3>Datenschutzerklärung</h3>
+      <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften.</p>
+      <h4>Kontaktformular</h4>
+      <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
     </div>
   </div>
 
   <script>
-    // Footer year
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // Update Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile drawer
-    const burger = document.getElementById('burger');
-    const drawer = document.getElementById('drawer');
-    const closeDrawer = document.getElementById('closeDrawer');
+    // Scroll Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
 
-    function openDrawer(){
-      burger.classList.add('active');
-      drawer.classList.add('open');
-      drawer.setAttribute('aria-hidden','false');
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mouse Spotlight Effect on Cards (Igloo/Reactbits Style)
+    const cardsContainer = document.getElementById("cards-container");
+    const cards = document.querySelectorAll(".card");
+
+    cardsContainer.onmousemove = e => {
+      for(const card of cards) {
+        const rect = card.getBoundingClientRect(),
+              x = e.clientX - rect.left,
+              y = e.clientY - rect.top;
+
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+      };
+    }
+
+    // Modal Logic
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-    function closeDrawerFn(){
-      burger.classList.remove('active');
-      drawer.classList.remove('open');
-      drawer.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = 'auto';
     }
-    burger?.addEventListener('click', () => {
-      drawer.classList.contains('open') ? closeDrawerFn() : openDrawer();
-    });
-    closeDrawer?.addEventListener('click', closeDrawerFn);
-    drawer?.addEventListener('click', (e) => {
-      if(e.target === drawer) closeDrawerFn();
-    });
-
-    // Reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => { if(en.isIntersecting) en.target.classList.add('in'); });
-    }, {threshold: 0.15});
-    revealEls.forEach(el => io.observe(el));
-
-    // Carousel
-    const track = document.getElementById('track');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const dotsWrap = document.getElementById('dots');
-    const slides = track ? Array.from(track.querySelectorAll('.slide')) : [];
-
-    function slideWidth(){
-      if(!slides.length) return 0;
-      const r0 = slides[0].getBoundingClientRect();
-      const r1 = slides[1] ? slides[1].getBoundingClientRect() : null;
-      const gap = r1 ? Math.max(0, r1.left - r0.right) : 14;
-      return r0.width + gap;
-    }
-
-    function scrollToIndex(i){
-      const w = slideWidth();
-      track.scrollTo({ left: w * i, behavior: 'smooth' });
-    }
-
-    // Dots
-    function buildDots(){
-      if(!dotsWrap) return;
-      dotsWrap.innerHTML = '';
-      slides.forEach((_, i) => {
-        const b = document.createElement('button');
-        b.className = 'dotBtn';
-        b.type = 'button';
-        b.setAttribute('aria-label', 'Zu Slide ' + (i+1));
-        b.addEventListener('click', () => { pauseAutoplay(true); scrollToIndex(i); });
-        dotsWrap.appendChild(b);
-      });
-      setActiveDot(0);
-    }
-
-    function setActiveDot(idx){
-      if(!dotsWrap) return;
-      const dots = Array.from(dotsWrap.querySelectorAll('.dotBtn'));
-      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-    }
-
-    function currentIndex(){
-      const w = slideWidth();
-      if(!w) return 0;
-      return Math.round(track.scrollLeft / w);
-    }
-
-    prevBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.max(0, currentIndex() - 1);
-      scrollToIndex(i);
-    });
-    nextBtn?.addEventListener('click', () => {
-      pauseAutoplay(true);
-      const i = Math.min(slides.length - 1, currentIndex() + 1);
-      scrollToIndex(i);
-    });
-
-    let t;
-    track?.addEventListener('scroll', () => {
-      window.clearTimeout(t);
-      t = window.setTimeout(() => setActiveDot(currentIndex()), 60);
-    });
-
-    buildDots();
-
-    // Lightbox (Click = Bild groß)
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbTitle = document.getElementById('lbTitle');
-    const lbClose = document.getElementById('lbClose');
-
-    function openLb(src, title){
-      lbImg.src = src;
-      lbTitle.textContent = title || 'Vorschau';
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      pauseAutoplay(false); // wenn offen: Autoplay aus
-    }
-    function closeLb(){
-      lightbox.classList.remove('open');
-      lightbox.setAttribute('aria-hidden','true');
-      lbImg.src = '';
-      document.body.style.overflow = '';
-      resumeAutoplay(); // nach close wieder an
-    }
-
-    slides.forEach(s => {
-      const img = s.querySelector('img');
-      img?.addEventListener('click', () => {
-        openLb(s.dataset.img || img.src, s.dataset.title || 'Vorschau');
-      });
-    });
-
-    lbClose?.addEventListener('click', closeLb);
-    lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
-    window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLb(); });
-
-    // ===== Autoplay: läuft nur wenn Carousel im Viewport ist, pausiert bei Interaktion =====
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let autoplayTimer = null;
-    let autoplayEnabled = !prefersReduced;
-    let userPausedUntil = 0;
-    let carouselInView = false;
-
-    function nextIndexLoop(){
-      const i = currentIndex();
-      return (i + 1) % Math.max(1, slides.length);
-    }
-
-    function startAutoplay(){
-      if(!autoplayEnabled || !track || slides.length < 2) return;
-      if(autoplayTimer) return;
-      autoplayTimer = window.setInterval(() => {
-        if(!carouselInView) return;
-        if(lightbox.classList.contains('open')) return;
-        if(Date.now() < userPausedUntil) return;
-        scrollToIndex(nextIndexLoop());
-      }, 3600);
-    }
-
-    function stopAutoplay(){
-      if(autoplayTimer){
-        window.clearInterval(autoplayTimer);
-        autoplayTimer = null;
+    
+    // Close modal on click outside
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.classList.remove('open');
+        document.body.style.overflow = 'auto';
       }
     }
-
-    function pauseAutoplay(withResumeDelay){
-      stopAutoplay();
-      if(withResumeDelay){
-        userPausedUntil = Date.now() + 6000; // 6s Ruhe nach Interaktion
-      } else {
-        userPausedUntil = Date.now() + 999999999; // praktisch "aus"
-      }
-    }
-
-    function resumeAutoplay(){
-      if(!autoplayEnabled) return;
-      userPausedUntil = Date.now() + 900; // kurzer Buffer
-      startAutoplay();
-    }
-
-    // Interaktionen = Pause
-    const pauseEvents = ['pointerdown','touchstart','wheel','keydown'];
-    pauseEvents.forEach(ev => {
-      track?.addEventListener(ev, () => pauseAutoplay(true), {passive:true});
-    });
-
-    // Nur wenn Carousel sichtbar
-    const carouselEl = document.getElementById('refCarousel');
-    const inViewIO = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        carouselInView = !!en.isIntersecting;
-        if(carouselInView) startAutoplay();
-      });
-    }, {threshold: 0.25});
-    if(carouselEl) inViewIO.observe(carouselEl);
-
-    // Start
-    startAutoplay();
-
-    // ===== Swipe-Hint: bei jedem Re-Entry in den Viewport neu abspielen (nur Mobile) =====
-    const prefersReducedSwipe = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function restartSwipeHint(el){
-      el.classList.remove('swipeHint--play');
-      void el.offsetWidth; // reflow erzwingen
-      el.classList.add('swipeHint--play');
-      window.setTimeout(() => el.classList.remove('swipeHint--play'), 3900);
-    }
-
-    if(!prefersReducedSwipe){
-      const swipeHints = Array.from(document.querySelectorAll('.swipeHint'));
-
-      const swipeIO = new IntersectionObserver((entries) => {
-        entries.forEach(en => {
-          const el = en.target;
-          if(en.isIntersecting){
-            if(el.dataset.swipePlayed !== "1"){
-              el.dataset.swipePlayed = "1";
-              restartSwipeHint(el);
-            }
-          } else {
-            el.dataset.swipePlayed = "0";
-            el.classList.remove('swipeHint--play');
-          }
-        });
-      }, { threshold: 0.35 });
-
-      swipeHints.forEach(el => {
-        el.dataset.swipePlayed = "0";
-        swipeIO.observe(el);
-      });
-    }
-
-    // ===== Legal Modals (Impressum / Datenschutz) =====
-    const modalEls = Array.from(document.querySelectorAll('.modal'));
-    const openModalBtns = Array.from(document.querySelectorAll('[data-open-modal]'));
-    const closeModalBtns = Array.from(document.querySelectorAll('[data-close-modal]'));
-
-    function openModalById(id){
-      const m = document.getElementById(id);
-      if(!m) return;
-      m.classList.add('open');
-      m.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(m){
-      if(!m) return;
-      m.classList.remove('open');
-      m.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-    }
-
-    openModalBtns.forEach(btn => {
-      btn.addEventListener('click', () => openModalById(btn.getAttribute('data-open-modal')));
-    });
-
-    closeModalBtns.forEach(btn => {
-      btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
-    });
-
-    modalEls.forEach(m => {
-      m.addEventListener('click', (e) => {
-        if(e.target === m) closeModal(m);
-      });
-    });
-
-    window.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape'){
-        modalEls.forEach(m => { if(m.classList.contains('open')) closeModal(m); });
-      }
-    });
   </script>
 </body>
 </html>
