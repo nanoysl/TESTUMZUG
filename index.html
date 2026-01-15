@@ -34,10 +34,9 @@
         /* --- GLOBAL RESET --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* FIX: Strict Overflow Control */
         html, body { 
             width: 100%; 
-            max-width: 100%; /* Changed from 100vw to 100% to prevent scrollbar jitter */
+            max-width: 100%; 
             overflow-x: hidden; 
             scroll-behavior: smooth;
             position: relative;
@@ -95,21 +94,22 @@
         .btn-secondary { background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); }
         .btn-secondary:hover { background: var(--primary-blue); color: white; }
 
-        /* --- HEADER (Fixed Positioning) --- */
+        /* --- HEADER --- */
         header {
             position: fixed; 
             top: 0; 
             left: 0; 
-            width: 100%; /* Ensures it fits the viewport exactly */
+            width: 100%; 
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95); /* Slightly higher opacity for mobile readability */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0,0,0,0.05); 
             padding: 12px 0;
+            transition: all 0.3s ease;
         }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; }
         
-        .logo { height: 50px; width: auto; max-width: 180px; object-fit: contain; }
+        .logo { height: 50px; width: auto; max-width: 200px; object-fit: contain; }
         
         .nav-links { display: flex; gap: 32px; align-items: center; }
         .nav-link { font-weight: 600; color: var(--text-main); position: relative; }
@@ -122,20 +122,22 @@
 
         .mobile-toggle { 
             display: none; 
-            font-size: 2rem; /* Larger touch target */
+            font-size: 2rem; 
             color: var(--primary-blue); 
             cursor: pointer; 
             line-height: 1;
         }
 
+        /* Mobile-Only Logo in Hero (Hidden by default) */
+        .mobile-hero-logo { display: none; }
+
         /* --- HERO --- */
         .hero {
-            padding-top: 140px; padding-bottom: 80px;
+            padding-top: 160px; padding-bottom: 80px;
             background: radial-gradient(circle at 80% 20%, #eff6ff 0%, #ffffff 60%);
             overflow: hidden; 
             width: 100%;
         }
-        /* Abstract Background Shape */
         .hero::before {
             content: ''; position: absolute; top: -100px; right: -100px;
             width: 600px; height: 600px; background: linear-gradient(135deg, rgba(0,48,143,0.05), rgba(225,37,27,0.05));
@@ -231,32 +233,46 @@
         .footer-legal a:hover { border-bottom-color: var(--accent-red); color: var(--accent-red); }
         .copyright { opacity: 0.6; font-size: 0.9rem; }
 
-        /* --- RESPONSIVE CSS (Strict Mobile Fix) --- */
+        /* --- RESPONSIVE CSS (MOBILE: LOGO MOVES TO BODY) --- */
         @media (max-width: 968px) {
             h1 { font-size: 2.8rem; }
-            
-            /* Reduced padding on container to give navigation more width */
             .container { padding: 0 20px; }
             
-            .hero { padding-top: 110px; text-align: center; }
+            /* Hero padding adjusted */
+            .hero { padding-top: 100px; text-align: center; }
             
-            /* Stack columns vertically */
+            /* Stack columns */
             .hero-grid, .about-grid, .contact-box { grid-template-columns: 1fr; gap: 40px; }
-            
-            /* Fix Hero Image overflowing */
             .hero-img-card { max-width: 100%; margin: 20px auto 0; transform: rotate(0); }
-            
             .trust-metrics { justify-content: center; gap: 20px; }
             
-            /* Mobile Nav */
-            .mobile-toggle { display: block; margin-left: auto; }
+            /* --- HEADER LOGIC --- */
+            header { padding: 15px 0; }
             
+            /* Hide Logo in Header on Mobile */
+            .header-logo-link { display: none; }
+            
+            /* Align Hamburger to the Right */
+            .nav-inner { justify-content: flex-end; }
+            
+            /* Show Hamburger */
+            .mobile-toggle { display: block; }
+            
+            /* --- BODY LOGIC --- */
+            /* Show Logo in Hero Section on Mobile */
+            .mobile-hero-logo { 
+                display: block; 
+                margin: 0 auto 30px; 
+                width: 220px; /* Big and visible */
+                height: auto;
+            }
+            
+            /* Dropdown Menu */
             .nav-links {
                 display: none; 
                 position: fixed; 
-                top: 74px; 
-                left: 0; 
-                right: 0; /* Ensures full width */
+                top: 100%; 
+                left: 0; right: 0;
                 width: 100%;
                 background: white; 
                 padding: 30px 24px; 
@@ -269,10 +285,9 @@
             }
             .nav-links.active { display: flex; }
             
-            /* Adjust padding for mobile */
+            /* General Mobile Padding */
             .contact-info, .contact-form { padding: 40px 24px; }
             .section-py { padding: 60px 0; }
-            
             .card, .gallery-item { min-width: 100%; }
         }
     </style>
@@ -281,7 +296,7 @@
 
     <header>
         <div class="container nav-inner">
-            <a href="index.html">
+            <a href="index.html" class="header-logo-link">
                 <img src="logo.png" alt="Räumdienst Borken Logo" class="logo">
             </a>
             
@@ -300,6 +315,9 @@
         <section class="hero">
             <div class="container hero-grid">
                 <div class="hero-content fade-up">
+                    
+                    <img src="logo.png" alt="Räumdienst Borken" class="mobile-hero-logo">
+
                     <span style="background:#e0eaff; color:var(--primary-blue); padding:8px 16px; border-radius:50px; font-weight:700; font-size:0.85rem; display:inline-block; margin-bottom:20px;">In Borken & Umgebung</span>
                     <h1>Wir schaffen Platz für <span style="color: var(--accent-red);">Neues Leben.</span></h1>
                     <p>Ihre Experten für Haushaltsauflösung und Entrümpelung. Wir arbeiten schnell, diskret und hinterlassen alles besenrein.</p>
@@ -421,12 +439,10 @@
     <footer>
         <div class="container">
             <img src="logo.png" alt="Logo Footer" class="footer-logo">
-            
             <div class="footer-legal">
                 <a href="impressum.html">Impressum</a>
                 <a href="datenschutz.html">Datenschutz</a>
             </div>
-
             <p class="copyright">&copy; 2024 Räumdienst Borken. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
