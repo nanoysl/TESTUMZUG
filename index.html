@@ -19,18 +19,17 @@
     :root {
       /* Grundeinstellungen Dark Mode */
       --bg: #0a0a0a;
-      --card-bg: rgba(20, 25, 35, 0.7); /* Leicht bläulich-dunkel */
+      --card-bg: rgba(20, 25, 35, 0.7);
       --card-border: rgba(255, 255, 255, 0.1);
       --text-main: #ffffff;
       --text-muted: #94a3b8;
       
       /* BRAND COLORS (Aus deinem Logo) */
-      --brand-blue: #004ebc;   /* Das kräftige Blau */
-      --brand-red: #e1251b;    /* Das Signal-Rot */
+      --brand-blue: #004ebc;
+      --brand-red: #e1251b;
       
       /* Animationen */
       --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -44,7 +43,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       font-size: 16px;
-      overscroll-behavior-y: none; /* Verhindert das "Federn" auf iOS */
+      overscroll-behavior-y: none;
     }
 
     /* --- Hintergrund-Effekte --- */
@@ -54,7 +53,6 @@
       pointer-events: none;
     }
     
-    /* Farbige Blobs im Hintergrund */
     .blob {
       position: fixed; border-radius: 50%; filter: blur(90px); z-index: -2; opacity: 0.25;
       animation: breathe 10s ease-in-out infinite alternate;
@@ -75,11 +73,6 @@
       -webkit-background-clip: text; color: transparent;
     }
     
-    /* Highlight Wort "Borken" etc. */
-    .text-highlight {
-      color: var(--brand-red);
-    }
-
     h2 { 
       font-size: 2rem; margin-bottom: 1.5rem; 
       padding-left: 16px; border-left: 4px solid var(--brand-red); 
@@ -109,7 +102,7 @@
       background: var(--brand-blue); color: white;
       box-shadow: 0 10px 30px rgba(0, 78, 188, 0.4);
     }
-    /* Shine Effekt auf dem Button */
+    
     .btn-primary::after {
       content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
@@ -123,27 +116,17 @@
     }
 
     /* --- Hero Section --- */
-    header {
-      padding: 20px 0; position: absolute; width: 100%; top: 0; z-index: 10;
-      display: flex; justify-content: center;
-    }
-    .top-pill {
-      background: rgba(0,0,0,0.6); backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      padding: 8px 20px; border-radius: 99px;
-      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-      color: var(--brand-red);
-    }
-
+    /* Header entfernt, Padding angepasst damit Logo nicht klebt */
     .hero {
       min-height: 95vh; display: flex; flex-direction: column; 
       justify-content: center; align-items: center; text-align: center;
-      padding-top: 60px; position: relative;
+      padding-top: 40px; position: relative;
     }
 
     .brand-logo-img {
       width: 280px; max-width: 80%; height: auto; 
       margin-bottom: 20px;
+      /* Schein nach unten für bessere Lesbarkeit auf dunklem Grund */
       filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
     }
 
@@ -175,7 +158,7 @@
     }
     .slider::-webkit-scrollbar { display: none; }
     .slide {
-      min-width: 85%; /* Mobile: man sieht den nächsten Slide leicht */
+      min-width: 85%;
       aspect-ratio: 4/3;
       scroll-snap-align: center;
       border-radius: 20px; overflow: hidden; position: relative;
@@ -208,7 +191,7 @@
         scrollbar-width: none;
       }
       .card { min-width: 85vw; scroll-snap-align: center; }
-      h1 { font-size: 3rem; } /* Etwas kleiner für lange Wörter */
+      h1 { font-size: 3rem; }
       .stat-row { gap: 15px; }
     }
 
@@ -255,10 +238,6 @@
   <div class="bg-noise"></div>
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
-
-  <header>
-    <div class="top-pill">Räumdienst Borken</div>
-  </header>
 
   <main>
     <section class="hero container">
