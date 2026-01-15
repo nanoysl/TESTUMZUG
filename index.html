@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Räumdienst Borken | Professionelle Haushaltsauflösung</title>
     <meta name="description" content="Ihr Partner für Entrümpelung, Haushaltsauflösung und Wohnungsauflösung in Borken. Besenrein, diskret und zum Festpreis.">
     
@@ -33,14 +33,21 @@
 
         /* --- GLOBAL RESET --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
+        
+        /* FIX: Strict Overflow Control */
+        html, body { 
+            width: 100%; 
+            max-width: 100%; /* Changed from 100vw to 100% to prevent scrollbar jitter */
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+            position: relative;
+        }
         
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden; /* Prevents side-scrolling on mobile */
             -webkit-font-smoothing: antialiased;
         }
 
@@ -49,12 +56,15 @@
         h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
         p { margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.125rem; }
         
-        /* IMAGE RESPONSIVENESS FIX */
         img { max-width: 100%; height: auto; display: block; }
-
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         
-        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; width: 100%; }
+        .container { 
+            max-width: var(--container-width); 
+            margin: 0 auto; 
+            padding: 0 24px; 
+            width: 100%; 
+        }
 
         /* --- ANIMATIONS --- */
         .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -68,7 +78,7 @@
             padding: 16px 32px; font-weight: 700; font-size: 1rem;
             border-radius: 50px; cursor: pointer; position: relative; overflow: hidden;
             border: none; transition: all 0.3s ease; text-align: center;
-            white-space: nowrap; /* Prevents text breaking on small phones */
+            white-space: nowrap;
         }
         .btn-primary { 
             background: var(--accent-red); color: white; 
@@ -85,16 +95,21 @@
         .btn-secondary { background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); }
         .btn-secondary:hover { background: var(--primary-blue); color: white; }
 
-        /* --- HEADER --- */
+        /* --- HEADER (Fixed Positioning) --- */
         header {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05); padding: 12px 0;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; /* Ensures it fits the viewport exactly */
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95); /* Slightly higher opacity for mobile readability */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05); 
+            padding: 12px 0;
         }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; }
         
-        /* Logo sizing fixed for mobile */
-        .logo { height: 50px; width: auto; max-width: 200px; object-fit: contain; }
+        .logo { height: 50px; width: auto; max-width: 180px; object-fit: contain; }
         
         .nav-links { display: flex; gap: 32px; align-items: center; }
         .nav-link { font-weight: 600; color: var(--text-main); position: relative; }
@@ -105,13 +120,20 @@
         .nav-link:hover { color: var(--accent-red); }
         .nav-link:hover::after { width: 100%; }
 
-        .mobile-toggle { display: none; font-size: 1.8rem; color: var(--primary-blue); cursor: pointer; }
+        .mobile-toggle { 
+            display: none; 
+            font-size: 2rem; /* Larger touch target */
+            color: var(--primary-blue); 
+            cursor: pointer; 
+            line-height: 1;
+        }
 
         /* --- HERO --- */
         .hero {
             padding-top: 140px; padding-bottom: 80px;
             background: radial-gradient(circle at 80% 20%, #eff6ff 0%, #ffffff 60%);
-            overflow: hidden;
+            overflow: hidden; 
+            width: 100%;
         }
         /* Abstract Background Shape */
         .hero::before {
@@ -194,7 +216,7 @@
         input, textarea { width: 100%; padding: 16px; background: #f1f5f9; border: 2px solid transparent; border-radius: 12px; margin-bottom: 20px; font-family: inherit; transition: 0.3s; }
         input:focus, textarea:focus { background: white; border-color: var(--primary-blue); outline: none; box-shadow: 0 0 0 4px rgba(0,48,143,0.1); }
         
-        /* --- FOOTER (Improved Visibility) --- */
+        /* --- FOOTER --- */
         footer { background: #0f172a; color: white; padding: 80px 0 40px; text-align: center; }
         .footer-logo { height: 60px; margin: 0 auto 40px; display: block; }
         
@@ -209,10 +231,14 @@
         .footer-legal a:hover { border-bottom-color: var(--accent-red); color: var(--accent-red); }
         .copyright { opacity: 0.6; font-size: 0.9rem; }
 
-        /* --- RESPONSIVE CSS (FIXED) --- */
+        /* --- RESPONSIVE CSS (Strict Mobile Fix) --- */
         @media (max-width: 968px) {
             h1 { font-size: 2.8rem; }
-            .hero { padding-top: 100px; text-align: center; }
+            
+            /* Reduced padding on container to give navigation more width */
+            .container { padding: 0 20px; }
+            
+            .hero { padding-top: 110px; text-align: center; }
             
             /* Stack columns vertically */
             .hero-grid, .about-grid, .contact-box { grid-template-columns: 1fr; gap: 40px; }
@@ -222,19 +248,24 @@
             
             .trust-metrics { justify-content: center; gap: 20px; }
             
-            /* Mobile Nav - Fixed positioning to stay on screen */
-            .mobile-toggle { display: block; }
+            /* Mobile Nav */
+            .mobile-toggle { display: block; margin-left: auto; }
+            
             .nav-links {
                 display: none; 
-                position: fixed; /* Fixed so it doesn't scroll away */
-                top: 74px; /* Height of header */
-                left: 0; right: 0;
+                position: fixed; 
+                top: 74px; 
+                left: 0; 
+                right: 0; /* Ensures full width */
+                width: 100%;
                 background: white; 
                 padding: 30px 24px; 
                 flex-direction: column;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
                 border-top: 1px solid #eee;
-                max-height: 80vh; overflow-y: auto;
+                max-height: 85vh; 
+                overflow-y: auto;
+                z-index: 999;
             }
             .nav-links.active { display: flex; }
             
