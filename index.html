@@ -448,6 +448,15 @@
     </footer>
 
     <script>
+        // --- PROBLEM LÖSUNG: STARTET SEITE IMMER OBEN ---
+        // Verhindert, dass der Browser sich die alte Scrollposition merkt
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        // Zwingt den Browser nach oben
+        window.scrollTo(0, 0);
+        // ------------------------------------------------
+
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }});
         }, { threshold: 0.1 });
