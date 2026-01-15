@@ -4,35 +4,39 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <meta name="theme-color" content="#020408" />
-  <meta name="description" content="Räumdienst Borken: Kleines, motiviertes Team. Entrümpelung & Haushaltsauflösung zum Festpreis." />
-  <title>Räumdienst Borken | Premium Entrümpelung</title>
+  <meta name="description" content="Räumdienst Borken: Wir packen an. Entrümpelung & Haushaltsauflösung zum Festpreis." />
+  <title>Räumdienst Borken | Wir machen Platz.</title>
 
   <link rel="icon" href="IMG_7436.jpg" />
 
   <style>
     :root {
-      /* --- THEME: Dark "Cyber/Modern" (Dein Favorit) --- */
-      --bg: #020408;
-      --surface: #0f111a;
-      --surface-highlight: #1a1d2d;
+      /* --- Colors (Logo Adapted) --- */
+      /* Deep Navy Background for Professionalism */
+      --bg: #020408; 
       
-      --border: rgba(255, 255, 255, 0.08);
-      --border-light: rgba(255, 255, 255, 0.15);
+      /* Surface colors with slight blue tint */
+      --surface: #0a0c12;
+      --surface-highlight: #151820;
       
+      --border: rgba(255, 255, 255, 0.06);
+      
+      /* Typography */
       --text-main: #ffffff;
-      --text-muted: #94a3b8; 
+      --text-muted: #94a3b8; /* Cool gray */
       
-      /* Brand Colors - Neon Accents */
-      --accent: #3b82f6;      /* Electric Blue */
-      --accent-glow: rgba(59, 130, 246, 0.5);
-      --orange: #f97316;      /* Action Color */
-      --red: #ef4444;         /* Logo Accent */
+      /* Brand Colors extracted from "Räumdienst" vibe */
+      --brand-blue: #1e3a8a;  /* Trust/Base */
+      --brand-orange: #f97316; /* Action/Work */
+      --brand-red: #ef4444;    /* Alert/Logo Accent */
 
-      /* Spacing & Radius */
+      /* Spacing */
       --space-s: 16px;
       --space-m: 24px;
       --space-l: 40px;
-      --radius-md: 24px;
+      --space-xl: 80px;
+      
+      --radius-md: 20px;
       
       --ease: cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -49,56 +53,87 @@
       overflow-x: hidden;
       font-size: 16px;
       overscroll-behavior-y: none;
-      padding-bottom: 100px; /* Platz für Dock */
     }
 
-    /* --- HINTERGRUND (Der "coole" Look) --- */
+    /* --- BACKGROUND: Improved "Mesh Gradient" --- */
+    /* This uses the logo colors but keeps it dark/subtle */
     .ambient-light {
       position: fixed; inset: 0; z-index: -1; pointer-events: none;
       background: 
-        radial-gradient(circle at 15% 15%, rgba(30, 58, 138, 0.2), transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(249, 115, 22, 0.1), transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(2, 4, 8, 0.8), transparent 100%);
+        radial-gradient(circle at 15% 15%, rgba(30, 58, 138, 0.15), transparent 40%), /* Blue Top Left */
+        radial-gradient(circle at 85% 85%, rgba(249, 115, 22, 0.08), transparent 40%), /* Orange Bottom Right */
+        radial-gradient(circle at 50% 50%, rgba(2, 4, 8, 1), transparent 100%); /* Center Darkness */
     }
+    
+    /* Subtle noise texture for "grip" (makes it feel real, not digital) */
     .texture-overlay {
-      position: fixed; inset: 0; z-index: -1; opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      position: fixed; inset: 0; z-index: -1; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* --- LAYOUT --- */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+    /* --- Typography & Layout --- */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--space-m); }
+    section { padding: var(--space-xl) 0; border-bottom: 1px solid var(--border); }
     
     h1 { 
-      font-size: clamp(2.5rem, 8vw, 4.5rem); 
-      line-height: 1.05; margin-bottom: 24px; font-weight: 800; letter-spacing: -0.03em;
-      background: linear-gradient(180deg, #fff, #94a3b8); -webkit-background-clip: text; color: transparent;
+      font-size: clamp(2.8rem, 9vw, 4.5rem); 
+      line-height: 1.05; margin-bottom: var(--space-m); font-weight: 800; letter-spacing: -0.03em;
+      color: white;
     }
-    h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 20px; font-weight: 700; color: #fff; }
-    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; color: #fff; }
-    p { color: var(--text-muted); margin-bottom: 24px; font-size: 1.05rem; }
+    /* Highlight specific words to emphasize "Service" */
+    .highlight { color: var(--brand-orange); }
 
-    /* --- HEADER (Sticky & Glass) --- */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-      padding: 15px 0;
-      background: rgba(2, 4, 8, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: var(--space-s); font-weight: 700; }
+    h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+    p { color: var(--text-muted); margin-bottom: var(--space-m); font-size: 1.05rem; }
+
+    /* --- "Service" Badges --- */
+    .service-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: 6px;
+      background: rgba(249, 115, 22, 0.1); /* Slight orange tint */
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      color: var(--brand-orange);
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: var(--space-m);
     }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
-    .logo { 
-      display: flex; align-items: center; gap: 12px; 
-      font-weight: 700; font-size: 1.1rem; text-decoration: none; color: #fff; 
-    }
-    .logo img { height: 40px; border-radius: 10px; border: 1px solid var(--border-light); }
     
-    /* Desktop Nav */
-    .desktop-links { display: none; gap: 30px; }
-    .desktop-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: 0.2s; }
-    .desktop-links a:hover { color: #fff; }
-    @media(min-width: 768px) { .desktop-links { display: flex; } }
+    /* Pulsing Dot for "Active Service" */
+    .live-dot {
+      width: 8px; height: 8px; background: var(--brand-red); border-radius: 50%;
+      box-shadow: 0 0 0 rgba(239, 68, 68, 0.4);
+      animation: pulse-red 2s infinite;
+    }
+    @keyframes pulse-red {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
 
-    /* --- BENTO GRID (Layout-System) --- */
+    /* --- Hero Brand Integration --- */
+    .brand-hero-wrapper {
+      position: relative; margin-bottom: var(--space-l); display: inline-block;
+    }
+    .brand-hero {
+      width: 120px; height: 120px;
+      border-radius: 32px;
+      /* Using the image as the core identity */
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7);
+      z-index: 2; position: relative;
+    }
+    .brand-hero img { width: 100%; height: 100%; object-fit: cover; }
+    
+    /* Subtle glow using logo colors */
+    .brand-hero-wrapper::before {
+      content:''; position: absolute; inset: -15px; z-index: 1;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.6), transparent 60%);
+      filter: blur(20px); opacity: 0.8;
+    }
+
+    /* --- Cards (Bento Style) --- */
     .bento-grid {
       display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;
     }
@@ -107,109 +142,79 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 24px;
-      display: flex; flex-direction: column; 
-      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
     }
-    /* Shine Effect on Cards */
-    .card::after {
-      content:''; position: absolute; top:0; left:-100%; width:50%; height:100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-      transform: skewX(-20deg); pointer-events: none;
-    }
-    
     .span-12 { grid-column: span 12; }
-    .span-6 { grid-column: span 12; } /* Mobile */
-    @media (min-width: 768px) { 
-      .span-6 { grid-column: span 6; } 
-      .span-4 { grid-column: span 4; }
-    }
+    .span-6 { grid-column: span 12; } /* Mobile default */
+    @media (min-width: 768px) { .span-6 { grid-column: span 6; } }
 
-    /* --- SPECIFIC LIST STYLES (Aus Screenshot) --- */
-    .custom-list { list-style: none; padding: 0; margin: 0; }
-    .custom-list li {
-      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-      color: var(--text-muted); display: flex; gap: 10px; align-items: center;
+    /* --- "Before/After" Visuals (Service Proof) --- */
+    .comparison-slider {
+      display: flex; gap: 16px; overflow-x: auto; 
+      margin: 0 -24px; padding: 0 24px 24px 24px; /* Bleed layout */
+      scroll-snap-type: x mandatory; scrollbar-width: none;
     }
-    .custom-list li:last-child { border-bottom: none; }
-    .bullet { color: var(--orange); font-size: 1.2rem; line-height: 0; }
+    .comparison-card {
+      min-width: 85vw; scroll-snap-align: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-md); overflow: hidden;
+      position: relative;
+    }
+    .comp-img { height: 220px; width: 100%; object-fit: cover; display: block; }
+    .comp-label {
+      position: absolute; bottom: 12px; left: 12px;
+      background: rgba(0,0,0,0.7); color: #fff;
+      padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 700;
+      backdrop-filter: blur(4px);
+    }
+    .comp-label.before { border-left: 3px solid var(--brand-red); }
+    .comp-label.after { border-left: 3px solid var(--brand-blue); }
 
-    /* --- GALLERIE (Fixed Stretching) --- */
-    .gallery-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
-    }
-    @media (min-width: 768px) { .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } }
-
-    .gallery-item {
-      aspect-ratio: 4/3; /* Festes Verhältnis */
-      border-radius: 16px; overflow: hidden;
-      border: 1px solid var(--border);
-      position: relative; cursor: pointer;
-    }
-    .gallery-item img {
-      width: 100%; height: 100%; 
-      object-fit: cover; /* WICHTIG: Verhindert Verzerren */
-      transition: transform 0.5s ease;
-    }
-    .gallery-item:hover img { transform: scale(1.05); }
-    .gallery-badge {
-      position: absolute; bottom: 8px; left: 8px;
-      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-      padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;
-    }
-
-    /* --- LIGHTBOX (Bild vergrößern) --- */
-    .lightbox {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
-      display: none; align-items: center; justify-content: center;
-      padding: 20px;
-    }
-    .lightbox.active { display: flex; animation: fadeIn 0.3s; }
-    .lightbox img {
-      max-width: 100%; max-height: 85vh; border-radius: 12px;
-      box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    }
-    .close-lb {
-      position: absolute; top: 20px; right: 20px;
-      background: rgba(255,255,255,0.1); border: none; color: white;
-      width: 40px; height: 40px; border-radius: 50%; font-size: 20px; cursor: pointer;
-    }
-
-    /* --- BUTTONS --- */
+    /* --- Buttons --- */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 24px; border-radius: 99px; font-weight: 600; text-decoration: none;
-      transition: transform 0.2s; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 28px; border-radius: 99px; font-weight: 600; text-decoration: none;
+      transition: transform 0.2s; border: none; width: 100%;
     }
+    .btn:active { transform: scale(0.97); }
+    
+    /* Primary Action - Orange for "Work/Action" */
     .btn-primary { 
-      background: linear-gradient(135deg, #f97316, #ea580c); color: white; 
-      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+      background: linear-gradient(135deg, #f97316, #ea580c); 
+      color: white; 
+      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.25);
     }
-    .btn-glass { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid var(--border); }
-    .btn:active { transform: scale(0.96); }
+    .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
 
-    /* --- MOBILE DOCK (Das Feature das du mochtest) --- */
+    /* --- Checklist (Visualizing Service) --- */
+    .checklist { display: flex; flex-direction: column; gap: 12px; }
+    .check-item { display: flex; gap: 12px; align-items: center; font-size: 0.95rem; color: var(--text-muted); }
+    .check-icon { color: var(--brand-blue); font-weight: bold; }
+
+    /* --- Bottom Dock --- */
     .dock {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-      background: rgba(15, 17, 26, 0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 12, 18, 0.9); backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,0.1);
-      padding: 6px; border-radius: 24px;
+      padding: 8px; border-radius: 24px;
       display: flex; gap: 8px; align-items: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6); z-index: 100;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 100;
       width: max-content;
     }
-    .dock-btn {
+    .dock-icon {
       width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); border-radius: 18px; transition: 0.2s;
+      color: var(--text-muted); border-radius: 16px; transition: 0.2s;
     }
-    .dock-btn.active { color: #fff; background: rgba(255,255,255,0.1); }
+    .dock-icon.active { color: #fff; background: rgba(255,255,255,0.1); }
     .dock-cta {
       background: #fff; color: #000; padding: 0 20px; height: 44px;
-      border-radius: 18px; display: flex; align-items: center;
+      border-radius: 16px; display: flex; align-items: center;
       font-weight: 700; text-decoration: none; font-size: 14px;
     }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    
+    /* --- Modals --- */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: var(--surface); padding: 30px; border-radius: 24px; border: 1px solid var(--border); max-width: 500px; width: 100%; }
   </style>
 </head>
 
@@ -217,101 +222,100 @@
   <div class="ambient-light"></div>
   <div class="texture-overlay"></div>
 
-  <header>
-    <div class="container nav-inner">
-      <a href="#" class="logo">
-        <img src="IMG_7436.jpg" alt="Logo">
-        Räumdienst Borken
-      </a>
-      <nav class="desktop-links">
-        <a href="#team">Über Uns</a>
-        <a href="#leistungen">Leistungen</a>
-        <a href="#galerie">Projekte</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-    </div>
-  </header>
-
   <main>
-    <section style="padding-top: 120px; padding-bottom: 60px;">
+    <section style="padding-top: 100px; padding-bottom: 60px; text-align: center;">
       <div class="container">
-        <div class="card" style="display:inline-block; padding: 10px; margin-bottom: 20px; border-radius: 24px;">
-          <img src="IMG_7441.png" alt="Räumdienst Borken Logo Groß" style="width: 140px; border-radius: 16px; display:block;">
+        
+        <div class="brand-hero-wrapper">
+          <div class="brand-hero">
+            <img src="IMG_7436.jpg" alt="Räumdienst Borken">
+          </div>
         </div>
 
-        <h1>Platz schaffen.<br>Ganz ohne Stress.</h1>
-        <p style="max-width: 500px;">
-          Ihr zuverlässiger Partner für Entrümpelungen und Aufräumarbeiten aller Art in 46325 Borken & Umgebung.
-          Kostenlose Besichtigung, fairer Festpreis.
+        <div>
+          <div class="service-badge">
+            <div class="live-dot"></div>
+            Wir sind im Einsatz
+          </div>
+        </div>
+
+        <h1>Wir machen<br><span class="highlight">reinen Tisch.</span></h1>
+        
+        <p style="max-width: 460px; margin: 0 auto 32px auto;">
+          Ihr Fachbetrieb für Entrümpelung & Haushaltsauflösung. 
+          Diskret, besenrein und mit <strong style="color:white">Festpreis-Garantie.</strong>
         </p>
-        
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="#kontakt" class="btn btn-primary">Kostenlose Besichtigung</a>
-          <a href="#galerie" class="btn btn-glass">Ergebnisse ansehen</a>
+
+        <div style="display: grid; gap: 12px; max-width: 320px; margin: 0 auto;">
+          <a href="#kontakt" class="btn btn-primary">
+            Kostenloses Angebot
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#projekte" class="btn btn-secondary">Ergebnisse ansehen</a>
         </div>
       </div>
     </section>
 
-    <section id="team">
+    <section>
       <div class="container">
         <div class="bento-grid">
-          <div class="card span-12" style="background: linear-gradient(180deg, var(--surface), #131620);">
-            <h3 style="color: var(--accent);">Über unser Team</h3>
-            <p style="color: #fff; font-size: 1.1rem; line-height: 1.7;">
-              "Wir sind ein kleines, motiviertes Team aus Borken und unterstützen Privatpersonen bei der Räumung von Wohnungen, Häusern und Nebenräumen. Wir arbeiten sorgfältig, ordentlich und diskret – ganz ohne Stress für Sie."
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="leistungen">
-      <div class="container">
-        <h2>Unsere Hilfe umfasst</h2>
-        
-        <div class="bento-grid">
-          <div class="card span-6">
-            <div style="margin-bottom:15px; font-size: 24px;">🏠</div>
-            <h3>Objekt-Räumung</h3>
-            <ul class="custom-list">
-              <li><span class="bullet">•</span> Entrümpelung von Wohnungen & Häusern</li>
-              <li><span class="bullet">•</span> Haushaltsauflösungen</li>
-              <li><span class="bullet">•</span> Räumungen nach Umzug oder Auszug</li>
-            </ul>
+          <div class="card span-12" style="background: linear-gradient(180deg, var(--surface), #0f1219);">
+            <div style="margin-bottom: 16px; color: var(--brand-orange);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3>Die "Hände-Weg"-Garantie</h3>
+            <p style="margin-bottom: 20px;">Sie müssen nichts vorbereiten. Keine Kisten packen, nichts sortieren. Geben Sie uns den Schlüssel, wir erledigen den Rest komplett.</p>
+            <div class="checklist">
+              <div class="check-item"><span class="check-icon">✓</span> Abbau von Möbeln & Küchen</div>
+              <div class="check-item"><span class="check-icon">✓</span> Entfernen von Teppichen</div>
+              <div class="check-item"><span class="check-icon">✓</span> Besenreine Übergabe</div>
+            </div>
           </div>
 
           <div class="card span-6">
-            <div style="margin-bottom:15px; font-size: 24px;">📦</div>
-            <h3>Entrümpelung & Spezial</h3>
-            <ul class="custom-list">
-              <li><span class="bullet">•</span> Keller-, Dachboden- & Garagenräumung</li>
-              <li><span class="bullet">•</span> Sperrmüll und Trödel</li>
-              <li><span class="bullet">•</span> Unterstützung bei stark vollgestellten Wohnungen ("Messi")</li>
-            </ul>
+            <h3 style="color: var(--brand-blue);">Schnell</h3>
+            <p style="font-size: 0.9rem; margin: 0;">Termine oft innerhalb von 48 Stunden möglich.</p>
+          </div>
+
+          <div class="card span-6">
+            <h3 style="color: var(--brand-blue);">Fair</h3>
+            <p style="font-size: 0.9rem; margin: 0;">Wertanrechnung für gut erhaltene Stücke.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="galerie">
+    <section id="projekte">
       <div class="container">
-        <h2>Einblick in unsere Arbeit</h2>
-        <div class="gallery-grid">
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="IMG_7439.jpg" alt="Nachher Wohnzimmer">
-            <div class="gallery-badge">Nachher</div>
+        <h2>Ordnung statt Chaos</h2>
+        <p>Echte Beispiele unserer Arbeit in Borken.</p>
+      </div>
+
+      <div class="comparison-slider">
+        <div class="comparison-card">
+          <img src="IMG_7437.jpg" loading="lazy" class="comp-img" alt="Vorher">
+          <div class="comp-label before">Vorher: Chaos</div>
+          <div style="padding: 16px;">
+            <p style="font-size: 0.9rem; margin-bottom: 6px; color:#fff;">Wohnungsauflösung 3-Zimmer</p>
+            <p style="font-size: 0.8rem; margin: 0;">Komplett möbliert übernommen.</p>
           </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="IMG_7437.jpg" alt="Vorher Chaos">
-            <div class="gallery-badge">Vorher</div>
+        </div>
+
+        <div class="comparison-card">
+          <img src="IMG_7439.jpg" loading="lazy" class="comp-img" alt="Nachher">
+          <div class="comp-label after">Nachher: Sauber</div>
+          <div style="padding: 16px;">
+            <p style="font-size: 0.9rem; margin-bottom: 6px; color:#fff;">Übergabefertig</p>
+            <p style="font-size: 0.8rem; margin: 0;">Tapeten entfernt, besenrein.</p>
           </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="IMG_7440.jpg" alt="Besenrein">
-            <div class="gallery-badge">Besenrein</div>
-          </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="IMG_7438.jpg" alt="Leergeräumt">
-            <div class="gallery-badge">Leer</div>
+        </div>
+        
+        <div class="comparison-card">
+          <img src="IMG_7440.jpg" loading="lazy" class="comp-img" alt="Leer">
+          <div class="comp-label after">Nachher: Leer</div>
+          <div style="padding: 16px;">
+            <p style="font-size: 0.9rem; margin-bottom: 6px; color:#fff;">Keller-Entrümpelung</p>
+            <p style="font-size: 0.8rem; margin: 0;">Alles fachgerecht entsorgt.</p>
           </div>
         </div>
       </div>
@@ -319,64 +323,49 @@
 
     <section id="kontakt" style="padding-bottom: 120px;">
       <div class="container">
-        <h2>Kontakt aufnehmen</h2>
-        <div class="bento-grid">
+        <div class="card" style="border-color: rgba(249, 115, 22, 0.3);">
+          <h2 style="margin-bottom: 10px;">Jetzt anfragen</h2>
+          <p>Kostenlose Besichtigung vereinbaren.</p>
           
-          <div class="card span-6">
-            <h3>Der Ablauf</h3>
-            <p>1. <strong>Kostenlos & Unverbindlich:</strong> Wir schauen uns alles vor Ort an.</p>
-            <p>2. <strong>Fairer Festpreis:</strong> Sie wissen genau, womit Sie rechnen können.</p>
-            <p>3. <strong>Sauber & Zügig:</strong> Wir erledigen alles und übergeben ordentlich.</p>
-          </div>
-
-          <div class="card span-6" style="border-color: var(--orange);">
-            <h3>Schreiben Sie uns</h3>
-            <p>Wir melden uns zeitnah zurück. Kurzfristige Termine sind nach Absprache möglich.</p>
+          <form action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="Name" placeholder="Ihr Name" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 16px; border-radius: 12px; width: 100%; color: white; margin-bottom: 10px;">
+            <input type="tel" name="Tel" placeholder="Telefonnummer" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 16px; border-radius: 12px; width: 100%; color: white; margin-bottom: 10px;">
+            <textarea name="Msg" rows="3" placeholder="Kurze Info (z.B. Haus in Borken)..." style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 16px; border-radius: 12px; width: 100%; color: white; margin-bottom: 16px;"></textarea>
             
-            <div style="margin-bottom: 20px;">
-              <div style="font-size: 0.9rem; color: var(--text-muted);">Telefon / WhatsApp</div>
-              <a href="tel:+4917646620710" style="font-size: 1.5rem; font-weight: 700; color: #fff; text-decoration: none;">0176 46620710</a>
-            </div>
-            
-            <a href="mailto:?subject=Anfrage Räumdienst" class="btn btn-primary" style="width:100%">Nachricht senden</a>
-          </div>
-
+            <button type="submit" class="btn btn-primary">Anfrage absenden</button>
+            <p style="font-size: 12px; text-align: center; margin-top: 12px; opacity: 0.6;">Öffnet Ihr E-Mail Programm.</p>
+          </form>
         </div>
       </div>
     </section>
-
   </main>
 
   <nav class="dock">
-    <a href="#team" class="dock-btn"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
-    <a href="#galerie" class="dock-btn"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></a>
-    <a href="https://wa.me/4917646620710" class="dock-btn" style="color: #25D366;"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></path></svg></a>
-    <a href="tel:+4917646620710" class="dock-cta">Anrufen</a>
+    <a href="#top" class="dock-icon active" aria-label="Startseite">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    </a>
+    <a href="https://wa.me/4917646620710" class="dock-icon" aria-label="WhatsApp" style="color: #25D366;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></path></svg>
+    </a>
+    <a href="tel:+4917646620710" class="dock-cta">
+      Anrufen
+    </a>
   </nav>
 
-  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-    <button class="close-lb" onclick="closeLightbox(event)">✕</button>
-    <img id="lightbox-img" src="" alt="Großansicht">
+  <footer style="text-align: center; font-size: 12px; color: var(--text-muted); padding-bottom: 20px;">
+    <button onclick="document.getElementById('legal').style.display='flex'" style="background:none; border:none; color:inherit; text-decoration:underline;">Impressum & Datenschutz</button>
+  </footer>
+
+  <div id="legal" class="modal" onclick="if(event.target==this)this.style.display='none'">
+    <div class="modal-box">
+      <h3>Rechtliches</h3>
+      <p>Räumdienst Borken<br>Maksut Saciri<br>Graf Friedrich Str. 34<br>46325 Borken</p>
+      <button class="btn btn-secondary" onclick="document.getElementById('legal').style.display='none'" style="width:100%">Schließen</button>
+    </div>
   </div>
 
   <script>
-    // Lightbox Logic
-    function openLightbox(element) {
-      const imgSrc = element.querySelector('img').src;
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      lightboxImg.src = imgSrc;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden'; 
-    }
-    function closeLightbox(e) {
-      if (e.target.id === 'lightbox' || e.target.classList.contains('close-lb')) {
-        document.getElementById('lightbox').classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    }
-
-    // Scroll Animation
+    // Fade-in animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting) {
@@ -386,9 +375,8 @@
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.card, h1, h2, p').forEach(el => {
-      el.style.opacity = 0; 
-      el.style.transform = 'translateY(20px)';
+    document.querySelectorAll('section > .container > *').forEach(el => {
+      el.style.opacity = 0; el.style.transform = 'translateY(15px)';
       el.style.transition = 'all 0.6s var(--ease)';
       observer.observe(el);
     });
