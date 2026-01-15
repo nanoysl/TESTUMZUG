@@ -3,44 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <meta name="theme-color" content="#050505" />
-  <meta name="description" content="Räumdienst Borken: Premium Entrümpelung & Haushaltsauflösung. Diskret, schnell, Festpreis." />
-  <title>Räumdienst Borken | Expertise für Haushaltsauflösungen</title>
+  <meta name="theme-color" content="#020408" />
+  <meta name="description" content="Räumdienst Borken: Wir packen an. Entrümpelung & Haushaltsauflösung zum Festpreis." />
+  <title>Räumdienst Borken | Wir machen Platz.</title>
 
   <link rel="icon" href="IMG_7436.jpg" />
 
   <style>
     :root {
-      /* --- Colors --- */
-      --bg: #020202;
-      --surface: #0f0f0f;
-      --surface-highlight: #1a1a1a;
+      /* --- Colors (Logo Adapted) --- */
+      /* Deep Navy Background for Professionalism */
+      --bg: #020408; 
       
-      --border: rgba(255, 255, 255, 0.08);
-      --border-light: rgba(255, 255, 255, 0.15);
+      /* Surface colors with slight blue tint */
+      --surface: #0a0c12;
+      --surface-highlight: #151820;
       
+      --border: rgba(255, 255, 255, 0.06);
+      
+      /* Typography */
       --text-main: #ffffff;
-      --text-muted: #a1a1aa;
-      --text-dim: #52525b;
+      --text-muted: #94a3b8; /* Cool gray */
       
-      /* Accents */
-      --accent: #3b82f6; 
-      --accent-glow: rgba(59, 130, 246, 0.4);
-      --orange: #f97316;
-      --green: #10b981;
+      /* Brand Colors extracted from "Räumdienst" vibe */
+      --brand-blue: #1e3a8a;  /* Trust/Base */
+      --brand-orange: #f97316; /* Action/Work */
+      --brand-red: #ef4444;    /* Alert/Logo Accent */
 
-      /* --- Spacing System (Perfektes Spacing) --- */
-      --space-xs: 8px;
+      /* Spacing */
       --space-s: 16px;
       --space-m: 24px;
       --space-l: 40px;
       --space-xl: 80px;
-      --space-xxl: 120px;
       
-      --radius-sm: 12px;
       --radius-md: 20px;
-      --radius-lg: 32px;
-
+      
       --ease: cubic-bezier(0.25, 1, 0.5, 1);
     }
 
@@ -49,7 +46,7 @@
     
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", Roboto, sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
       line-height: 1.6;
@@ -58,508 +55,329 @@
       overscroll-behavior-y: none;
     }
 
-    /* --- Background FX --- */
-    .bg-noise {
-      position: fixed; inset: 0; z-index: -1; opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      pointer-events: none;
+    /* --- BACKGROUND: Improved "Mesh Gradient" --- */
+    /* This uses the logo colors but keeps it dark/subtle */
+    .ambient-light {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background: 
+        radial-gradient(circle at 15% 15%, rgba(30, 58, 138, 0.15), transparent 40%), /* Blue Top Left */
+        radial-gradient(circle at 85% 85%, rgba(249, 115, 22, 0.08), transparent 40%), /* Orange Bottom Right */
+        radial-gradient(circle at 50% 50%, rgba(2, 4, 8, 1), transparent 100%); /* Center Darkness */
     }
     
-    .blob {
-      position: fixed; border-radius: 50%; filter: blur(100px); z-index: -2; opacity: 0.3;
-      will-change: transform;
+    /* Subtle noise texture for "grip" (makes it feel real, not digital) */
+    .texture-overlay {
+      position: fixed; inset: 0; z-index: -1; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
-    .blob-1 { width: 400px; height: 400px; background: var(--accent); top: -10%; left: -10%; opacity: 0.2; }
-    .blob-2 { width: 300px; height: 300px; background: var(--orange); bottom: -10%; right: -10%; opacity: 0.15; }
 
-    /* --- Layout --- */
+    /* --- Typography & Layout --- */
     .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--space-m); }
-    section { padding: var(--space-xl) 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
-    section:last-of-type { border-bottom: none; }
-
-    /* --- Typography --- */
-    h1, h2, h3, h4 { margin: 0; font-weight: 700; letter-spacing: -0.02em; color: var(--text-main); }
+    section { padding: var(--space-xl) 0; border-bottom: 1px solid var(--border); }
     
     h1 { 
-      font-size: clamp(3rem, 10vw, 4.5rem); 
-      line-height: 1.05; 
-      margin-bottom: var(--space-m);
-      background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
-      -webkit-background-clip: text; color: transparent;
+      font-size: clamp(2.8rem, 9vw, 4.5rem); 
+      line-height: 1.05; margin-bottom: var(--space-m); font-weight: 800; letter-spacing: -0.03em;
+      color: white;
     }
-    
-    h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: var(--space-s); }
-    h3 { font-size: 1.25rem; margin-bottom: var(--space-xs); }
-    
-    p { color: var(--text-muted); margin-bottom: var(--space-m); font-size: 1.05rem; line-height: 1.6; }
-    .text-small { font-size: 0.9rem; color: var(--text-dim); }
+    /* Highlight specific words to emphasize "Service" */
+    .highlight { color: var(--brand-orange); }
 
-    /* --- Badge --- */
-    .pill {
+    h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: var(--space-s); font-weight: 700; }
+    h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+    p { color: var(--text-muted); margin-bottom: var(--space-m); font-size: 1.05rem; }
+
+    /* --- "Service" Badges --- */
+    .service-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px; border-radius: 99px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      font-size: 13px; font-weight: 600; color: var(--text-muted);
+      padding: 6px 12px; border-radius: 6px;
+      background: rgba(249, 115, 22, 0.1); /* Slight orange tint */
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      color: var(--brand-orange);
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
       margin-bottom: var(--space-m);
-      backdrop-filter: blur(10px);
     }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+    
+    /* Pulsing Dot for "Active Service" */
+    .live-dot {
+      width: 8px; height: 8px; background: var(--brand-red); border-radius: 50%;
+      box-shadow: 0 0 0 rgba(239, 68, 68, 0.4);
+      animation: pulse-red 2s infinite;
+    }
+    @keyframes pulse-red {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* --- Hero Brand Integration --- */
+    .brand-hero-wrapper {
+      position: relative; margin-bottom: var(--space-l); display: inline-block;
+    }
+    .brand-hero {
+      width: 120px; height: 120px;
+      border-radius: 32px;
+      /* Using the image as the core identity */
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.7);
+      z-index: 2; position: relative;
+    }
+    .brand-hero img { width: 100%; height: 100%; object-fit: cover; }
+    
+    /* Subtle glow using logo colors */
+    .brand-hero-wrapper::before {
+      content:''; position: absolute; inset: -15px; z-index: 1;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.6), transparent 60%);
+      filter: blur(20px); opacity: 0.8;
+    }
+
+    /* --- Cards (Bento Style) --- */
+    .bento-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-6 { grid-column: span 12; } /* Mobile default */
+    @media (min-width: 768px) { .span-6 { grid-column: span 6; } }
+
+    /* --- "Before/After" Visuals (Service Proof) --- */
+    .comparison-slider {
+      display: flex; gap: 16px; overflow-x: auto; 
+      margin: 0 -24px; padding: 0 24px 24px 24px; /* Bleed layout */
+      scroll-snap-type: x mandatory; scrollbar-width: none;
+    }
+    .comparison-card {
+      min-width: 85vw; scroll-snap-align: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-md); overflow: hidden;
+      position: relative;
+    }
+    .comp-img { height: 220px; width: 100%; object-fit: cover; display: block; }
+    .comp-label {
+      position: absolute; bottom: 12px; left: 12px;
+      background: rgba(0,0,0,0.7); color: #fff;
+      padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 700;
+      backdrop-filter: blur(4px);
+    }
+    .comp-label.before { border-left: 3px solid var(--brand-red); }
+    .comp-label.after { border-left: 3px solid var(--brand-blue); }
 
     /* --- Buttons --- */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 16px 32px; border-radius: 99px;
-      font-weight: 600; font-size: 16px; text-decoration: none;
-      transition: transform 0.2s var(--ease);
-      border: none; cursor: pointer; width: fit-content;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 28px; border-radius: 99px; font-weight: 600; text-decoration: none;
+      transition: transform 0.2s; border: none; width: 100%;
     }
-    .btn:active { transform: scale(0.96); }
-    .btn-primary { background: #fff; color: #000; box-shadow: 0 4px 20px rgba(255,255,255,0.15); }
-    .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid var(--border); }
-    .btn-full { width: 100%; }
-
-    /* --- Hero Logo Integrated --- */
-    .hero-brand {
-      width: 140px; height: 140px;
-      margin-bottom: var(--space-l);
-      position: relative;
-      border-radius: 40px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-light);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 20px 60px -10px rgba(0,0,0,0.8);
-    }
-    .hero-brand img { width: 100%; height: 100%; object-fit: cover; border-radius: 40px; opacity: 0.9; }
-    .hero-brand::after {
-      content:''; position: absolute; inset: -20px; z-index: -1;
-      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
-      filter: blur(30px); opacity: 0.6;
-    }
-
-    /* --- Bento Grid (The "Complex" Part) --- */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: minmax(180px, auto);
-      gap: var(--space-s);
-    }
+    .btn:active { transform: scale(0.97); }
     
-    .bento-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: var(--space-m);
-      display: flex; flex-direction: column; justify-content: space-between;
-      overflow: hidden; position: relative;
-      transition: border-color 0.3s;
+    /* Primary Action - Orange for "Work/Action" */
+    .btn-primary { 
+      background: linear-gradient(135deg, #f97316, #ea580c); 
+      color: white; 
+      box-shadow: 0 4px 20px rgba(249, 115, 22, 0.25);
     }
-    .bento-card:hover { border-color: var(--border-light); }
-    
-    /* Grid Spans for Mobile first (stacked), then desktop */
-    .span-12 { grid-column: span 12; }
-    .span-6 { grid-column: span 12; } /* Mobile: full width */
-    .span-4 { grid-column: span 12; } /* Mobile: full width */
+    .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--border); }
 
-    /* Desktop Grid Overrides */
-    @media (min-width: 768px) {
-      .span-6 { grid-column: span 6; }
-      .span-4 { grid-column: span 4; }
-      .bento-card { padding: var(--space-l); }
-    }
+    /* --- Checklist (Visualizing Service) --- */
+    .checklist { display: flex; flex-direction: column; gap: 12px; }
+    .check-item { display: flex; gap: 12px; align-items: center; font-size: 0.95rem; color: var(--text-muted); }
+    .check-icon { color: var(--brand-blue); font-weight: bold; }
 
-    .card-icon {
-      width: 48px; height: 48px; border-radius: 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; margin-bottom: var(--space-m);
-    }
-
-    /* --- Service List (Clean & Detailed) --- */
-    .service-list { display: grid; gap: var(--space-xs); }
-    .service-item {
-      display: flex; gap: var(--space-m); align-items: flex-start;
-      padding: var(--space-m);
-      background: rgba(255,255,255,0.02);
-      border-radius: var(--radius-md);
-      border: 1px solid transparent;
-      transition: background 0.3s;
-    }
-    .service-item:hover { background: rgba(255,255,255,0.05); border-color: var(--border); }
-    .service-icon { flex-shrink: 0; color: var(--accent); padding-top: 4px; }
-
-    /* --- Horizontal Slider (Mobile Friendly) --- */
-    .slider-wrap {
-      margin: 0 calc(var(--space-m) * -1); /* Break container */
-      padding: 0 var(--space-m) var(--space-l) var(--space-m);
-      display: flex; gap: var(--space-s);
-      overflow-x: auto; scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-    .slider-wrap::-webkit-scrollbar { display: none; }
-    
-    .slide-card {
-      min-width: 85vw;
-      scroll-snap-align: center;
-      border-radius: var(--radius-md);
-      overflow: hidden; border: 1px solid var(--border);
-      position: relative; aspect-ratio: 16/10;
-    }
-    .slide-card img { width: 100%; height: 100%; object-fit: cover; }
-    .slide-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: var(--space-m);
-      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    }
-
-    @media (min-width: 768px) {
-      .slide-card { min-width: 400px; }
-    }
-
-    /* --- FAQ Accordion --- */
-    details {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      margin-bottom: var(--space-xs);
-      overflow: hidden;
-      transition: background 0.3s;
-    }
-    details[open] { background: var(--surface-highlight); }
-    summary {
-      padding: var(--space-m);
-      cursor: pointer; font-weight: 600;
-      display: flex; justify-content: space-between; align-items: center;
-      list-style: none;
-    }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: '+'; font-size: 20px; color: var(--text-muted); }
-    details[open] summary::after { content: '−'; }
-    .faq-content { padding: 0 var(--space-m) var(--space-m) var(--space-m); color: var(--text-muted); font-size: 0.95rem; }
-
-    /* --- Floating Dock --- */
+    /* --- Bottom Dock --- */
     .dock {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-      background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 6px; border-radius: 24px;
-      display: flex; gap: 6px; align-items: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      z-index: 100; max-width: 95vw;
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: rgba(10, 12, 18, 0.9); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px; border-radius: 24px;
+      display: flex; gap: 8px; align-items: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 100;
+      width: max-content;
     }
-    .dock a {
-      width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 18px; color: var(--text-muted);
-      transition: background 0.2s, color 0.2s;
+    .dock-icon {
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); border-radius: 16px; transition: 0.2s;
     }
-    .dock a.active { color: #fff; background: rgba(255,255,255,0.1); }
-    .dock a svg { width: 22px; height: 22px; fill: currentColor; }
+    .dock-icon.active { color: #fff; background: rgba(255,255,255,0.1); }
     .dock-cta {
-      background: #fff; color: #000 !important;
-      padding: 0 20px; width: auto !important;
-      font-weight: 700; font-size: 14px; text-decoration: none;
+      background: #fff; color: #000; padding: 0 20px; height: 44px;
+      border-radius: 16px; display: flex; align-items: center;
+      font-weight: 700; text-decoration: none; font-size: 14px;
     }
-
-    /* --- Form --- */
-    input, textarea {
-      width: 100%; background: var(--surface); border: 1px solid var(--border);
-      padding: var(--space-m); border-radius: var(--radius-sm);
-      color: #fff; font-size: 16px; margin-bottom: var(--space-s);
-      transition: border-color 0.3s;
-    }
-    input:focus, textarea:focus { outline: none; border-color: var(--accent); }
-
-    /* --- Footer --- */
-    footer { padding: var(--space-xl) 0 var(--space-xxl) 0; border-top: 1px solid var(--border); text-align: center; }
-    .legal-link { color: var(--text-muted); text-decoration: underline; background: none; border: none; font-size: 0.9rem; cursor: pointer; }
-
+    
     /* --- Modals --- */
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 200; padding: var(--space-m); align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-    .modal-box { background: #111; padding: var(--space-l); border-radius: var(--radius-md); border: 1px solid var(--border); max-width: 500px; width: 100%; max-height: 80vh; overflow-y: auto; }
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .modal-box { background: var(--surface); padding: 30px; border-radius: 24px; border: 1px solid var(--border); max-width: 500px; width: 100%; }
   </style>
 </head>
 
 <body>
-  <div class="bg-noise"></div>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
+  <div class="ambient-light"></div>
+  <div class="texture-overlay"></div>
 
   <main>
-    <section style="display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 90vh; justify-content: center;">
+    <section style="padding-top: 100px; padding-bottom: 60px; text-align: center;">
       <div class="container">
-        <div style="display: flex; justify-content: center;">
-          <div class="hero-brand">
-            <img src="IMG_7436.jpg" alt="Räumdienst Borken Logo">
+        
+        <div class="brand-hero-wrapper">
+          <div class="brand-hero">
+            <img src="IMG_7436.jpg" alt="Räumdienst Borken">
           </div>
         </div>
 
-        <div class="pill">
-          <span class="status-dot"></span>
-          Jetzt Termine für Januar verfügbar
+        <div>
+          <div class="service-badge">
+            <div class="live-dot"></div>
+            Wir sind im Einsatz
+          </div>
         </div>
 
-        <h1>Wir schaffen Platz<br>für Neues.</h1>
-        <p style="max-width: 500px; margin: 0 auto var(--space-l) auto;">
-          Ihr Premium-Partner für Haushaltsauflösungen in Borken. 
-          Wir kümmern uns um den kompletten Prozess – von der Wertanrechnung bis zur besenreinen Übergabe.
+        <h1>Wir machen<br><span class="highlight">reinen Tisch.</span></h1>
+        
+        <p style="max-width: 460px; margin: 0 auto 32px auto;">
+          Ihr Fachbetrieb für Entrümpelung & Haushaltsauflösung. 
+          Diskret, besenrein und mit <strong style="color:white">Festpreis-Garantie.</strong>
         </p>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-s);">
-          <a href="#kontakt" class="btn btn-primary">Kostenlose Besichtigung</a>
-          <a href="#why" class="btn btn-secondary">Warum wir?</a>
-        </div>
-
-        <div style="margin-top: var(--space-xl); display: flex; gap: var(--space-l); justify-content: center; opacity: 0.5;">
-          <div style="text-align: center;">
-            <div style="font-weight: 700; color: #fff; font-size: 1.2rem;">150+</div>
-            <div class="text-small">Projekte</div>
-          </div>
-          <div style="text-align: center;">
-            <div style="font-weight: 700; color: #fff; font-size: 1.2rem;">100%</div>
-            <div class="text-small">Kundenzufriedenheit</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="why">
-      <div class="container">
-        <h2>Warum Räumdienst Borken?</h2>
-        <p>Wir arbeiten anders als die anderen. Transparent, modern und respektvoll.</p>
-        
-        <div class="bento-grid">
-          <div class="bento-card span-12" style="background: linear-gradient(145deg, #151515, #0a0a0a);">
-            <div>
-              <div class="card-icon" style="color: var(--accent);">💎</div>
-              <h3>Faire Wertanrechnung</h3>
-              <p style="margin-bottom: 0;">Wir werfen Wertsachen nicht weg. Gut erhaltene Möbel, Porzellan oder Technik rechnen wir auf den Festpreis an. Das senkt Ihre Kosten spürbar.</p>
-            </div>
-          </div>
-
-          <div class="bento-card span-6">
-            <div class="card-icon" style="color: var(--orange);">⚡</div>
-            <h3>Express Service</h3>
-            <p>Zeitdruck bei der Wohnungsübergabe? Wir bieten Termine innerhalb von 48 Stunden.</p>
-          </div>
-
-          <div class="bento-card span-6">
-            <div class="card-icon" style="color: var(--green);">🌱</div>
-            <h3>Nachhaltigkeit</h3>
-            <p>Wir trennen Müll strikt und spenden brauchbare Textilien & Möbel an lokale Einrichtungen.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="leistungen">
-      <div class="container">
-        <h2>Unser Leistungsspektrum</h2>
-        <p>Mehr als nur Entrümpelung. Wir bieten Full-Service.</p>
-
-        <div class="service-list">
-          <div class="service-item">
-            <div class="service-icon">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            </div>
-            <div>
-              <h3>Komplette Haushaltsauflösung</h3>
-              <p class="text-small" style="margin:0;">Vom Dachboden bis zum Keller. Wir demontieren Möbel, entfernen Lampen und Gardinenstangen und hinterlassen alles besenrein.</p>
-            </div>
-          </div>
-
-          <div class="service-item">
-            <div class="service-icon">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
-            </div>
-            <div>
-              <h3>Entrümpelung & Entsorgung</h3>
-              <p class="text-small" style="margin:0;">Fachgerechte Entsorgung von Sperrmüll, Restmüll und Problemstoffen. Mit Entsorgungsnachweis auf Wunsch.</p>
-            </div>
-          </div>
-
-          <div class="service-item">
-            <div class="service-icon">
-              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
-            </div>
-            <div>
-              <h3>Seniorenumzüge</h3>
-              <p class="text-small" style="margin:0;">Einfühlsame Unterstützung beim Wechsel ins Pflegeheim. Wir sortieren Erinnerungsstücke und entsorgen den Rest.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="referenzen">
-      <div class="container">
-        <h2>Ergebnisse, die überzeugen</h2>
-      </div>
-      
-      <div class="slider-wrap">
-        <div class="slide-card">
-          <img src="IMG_7439.jpg" loading="lazy" alt="Wohnzimmer Nachher">
-          <div class="slide-overlay">
-            <h3>Wohnung, 85qm</h3>
-            <p class="text-small" style="margin:0; color:#ddd;">Komplettauflösung in 2 Tagen.</p>
-          </div>
-        </div>
-        
-        <div class="slide-card">
-          <img src="IMG_7440.jpg" loading="lazy" alt="Leergeräumt">
-          <div class="slide-overlay">
-            <h3>Übergabefertig</h3>
-            <p class="text-small" style="margin:0; color:#ddd;">Tapeten entfernt, besenrein.</p>
-          </div>
-        </div>
-        
-        <div class="slide-card">
-          <img src="IMG_7437.jpg" loading="lazy" alt="Chaos Vorher">
-          <div class="slide-overlay">
-            <h3>Härtefall (Vorher)</h3>
-            <p class="text-small" style="margin:0; color:#ddd;">Messi-Wohnung, diskret bereinigt.</p>
-          </div>
+        <div style="display: grid; gap: 12px; max-width: 320px; margin: 0 auto;">
+          <a href="#kontakt" class="btn btn-primary">
+            Kostenloses Angebot
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#projekte" class="btn btn-secondary">Ergebnisse ansehen</a>
         </div>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <h2>In 4 Schritten zur Ordnung</h2>
-        <div style="position: relative; border-left: 2px solid var(--border); padding-left: var(--space-m); margin-left: 10px;">
-          
-          <div style="margin-bottom: var(--space-l); position: relative;">
-            <div style="position: absolute; left: calc(var(--space-m) * -1 - 6px); top: 0; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent);"></div>
-            <h3>1. Anrufen & Termin</h3>
-            <p class="text-small">Kontaktieren Sie uns. Wir vereinbaren kurzfristig eine kostenlose Besichtigung.</p>
+        <div class="bento-grid">
+          <div class="card span-12" style="background: linear-gradient(180deg, var(--surface), #0f1219);">
+            <div style="margin-bottom: 16px; color: var(--brand-orange);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3>Die "Hände-Weg"-Garantie</h3>
+            <p style="margin-bottom: 20px;">Sie müssen nichts vorbereiten. Keine Kisten packen, nichts sortieren. Geben Sie uns den Schlüssel, wir erledigen den Rest komplett.</p>
+            <div class="checklist">
+              <div class="check-item"><span class="check-icon">✓</span> Abbau von Möbeln & Küchen</div>
+              <div class="check-item"><span class="check-icon">✓</span> Entfernen von Teppichen</div>
+              <div class="check-item"><span class="check-icon">✓</span> Besenreine Übergabe</div>
+            </div>
           </div>
 
-          <div style="margin-bottom: var(--space-l); position: relative;">
-            <div style="position: absolute; left: calc(var(--space-m) * -1 - 6px); top: 0; width: 10px; height: 10px; background: var(--surface-highlight); border: 2px solid var(--text-muted); border-radius: 50%;"></div>
-            <h3>2. Festpreis-Angebot</h3>
-            <p class="text-small">Wir begutachten das Objekt und nennen Ihnen vor Ort einen garantierten Festpreis.</p>
+          <div class="card span-6">
+            <h3 style="color: var(--brand-blue);">Schnell</h3>
+            <p style="font-size: 0.9rem; margin: 0;">Termine oft innerhalb von 48 Stunden möglich.</p>
           </div>
 
-          <div style="margin-bottom: var(--space-l); position: relative;">
-            <div style="position: absolute; left: calc(var(--space-m) * -1 - 6px); top: 0; width: 10px; height: 10px; background: var(--surface-highlight); border: 2px solid var(--text-muted); border-radius: 50%;"></div>
-            <h3>3. Die Räumung</h3>
-            <p class="text-small">Unser Team erscheint pünktlich. Wir arbeiten diskret und sauber.</p>
+          <div class="card span-6">
+            <h3 style="color: var(--brand-blue);">Fair</h3>
+            <p style="font-size: 0.9rem; margin: 0;">Wertanrechnung für gut erhaltene Stücke.</p>
           </div>
-
-          <div style="position: relative;">
-            <div style="position: absolute; left: calc(var(--space-m) * -1 - 6px); top: 0; width: 10px; height: 10px; background: var(--surface-highlight); border: 2px solid var(--text-muted); border-radius: 50%;"></div>
-            <h3>4. Schlüsselübergabe</h3>
-            <p class="text-small">Das Objekt ist leer und besenrein. Abnahme durch Sie oder den Vermieter.</p>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <section id="faq">
+    <section id="projekte">
       <div class="container">
-        <h2>Häufige Fragen</h2>
-        
-        <details>
-          <summary>Kostet die Besichtigung etwas?</summary>
-          <div class="faq-content">Nein. Die Anfahrt und die Besichtigung sind für Sie in Borken und Umgebung immer 100% kostenlos und unverbindlich.</div>
-        </details>
-        
-        <details>
-          <summary>Wie setzt sich der Preis zusammen?</summary>
-          <div class="faq-content">Der Preis hängt von der Menge des Sperrmülls, der Etage, der Zugänglichkeit und dem Personalaufwand ab. Wertgegenstände werden gegengerechnet.</div>
-        </details>
-        
-        <details>
-          <summary>Muss ich anwesend sein?</summary>
-          <div class="faq-content">Nein. Viele Kunden geben uns den Schlüssel und kommen erst zur finalen Abnahme wieder dazu. Wir halten Sie per WhatsApp/Foto auf dem Laufenden.</div>
-        </details>
+        <h2>Ordnung statt Chaos</h2>
+        <p>Echte Beispiele unserer Arbeit in Borken.</p>
+      </div>
 
-        <details>
-          <summary>Nehmen Sie auch Teppiche & Tapeten raus?</summary>
-          <div class="faq-content">Ja. Auf Wunsch entfernen wir Bodenbeläge, Tapeten, Deckenplatten und Gardinenstangen für eine wohnungsbaugesellschaft-konforme Übergabe.</div>
-        </details>
+      <div class="comparison-slider">
+        <div class="comparison-card">
+          <img src="IMG_7437.jpg" loading="lazy" class="comp-img" alt="Vorher">
+          <div class="comp-label before">Vorher: Chaos</div>
+          <div style="padding: 16px;">
+            <p style="font-size: 0.9rem; margin-bottom: 6px; color:#fff;">Wohnungsauflösung 3-Zimmer</p>
+            <p style="font-size: 0.8rem; margin: 0;">Komplett möbliert übernommen.</p>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <img src="IMG_7439.jpg" loading="lazy" class="comp-img" alt="Nachher">
+          <div class="comp-label after">Nachher: Sauber</div>
+          <div style="padding: 16px;">
+            <p style="font-size: 0.9rem; margin-bottom: 6px; color:#fff;">Übergabefertig</p>
+            <p style="font-size: 0.8rem; margin: 0;">Tapeten entfernt, besenrein.</p>
+          </div>
+        </div>
+        
+        <div class="comparison-card">
+          <img src="IMG_7440.jpg" loading="lazy" class="comp-img" alt="Leer">
+          <div class="comp-label after">Nachher: Leer</div>
+          <div style="padding: 16px;">
+            <p style="font-size: 0.9rem; margin-bottom: 6px; color:#fff;">Keller-Entrümpelung</p>
+            <p style="font-size: 0.8rem; margin: 0;">Alles fachgerecht entsorgt.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="kontakt" style="background: linear-gradient(180deg, var(--bg) 0%, #0a0a0a 100%);">
+    <section id="kontakt" style="padding-bottom: 120px;">
       <div class="container">
-        <h2>Kontakt aufnehmen</h2>
-        <p>Starten Sie jetzt. Wir melden uns umgehend.</p>
-        
-        <form action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
-          <label class="text-small" style="display:block; margin-bottom: 8px; color: var(--text-muted);">Ihr Name</label>
-          <input type="text" name="name" required placeholder="Max Mustermann">
+        <div class="card" style="border-color: rgba(249, 115, 22, 0.3);">
+          <h2 style="margin-bottom: 10px;">Jetzt anfragen</h2>
+          <p>Kostenlose Besichtigung vereinbaren.</p>
           
-          <label class="text-small" style="display:block; margin-bottom: 8px; color: var(--text-muted);">Telefonnummer</label>
-          <input type="tel" name="tel" required placeholder="Für Rückfragen">
-          
-          <label class="text-small" style="display:block; margin-bottom: 8px; color: var(--text-muted);">Nachricht</label>
-          <textarea name="msg" rows="5" placeholder="Kurze Info zum Objekt (Größe, Ort)..."></textarea>
-          
-          <button type="submit" class="btn btn-primary btn-full">Anfrage absenden</button>
-          <p class="text-small" style="text-align: center; margin-top: var(--space-s); opacity: 0.6;">Es öffnet sich Ihr E-Mail Programm.</p>
-        </form>
+          <form action="mailto:Rauemdienst.Borken@gmail.com" method="post" enctype="text/plain">
+            <input type="text" name="Name" placeholder="Ihr Name" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 16px; border-radius: 12px; width: 100%; color: white; margin-bottom: 10px;">
+            <input type="tel" name="Tel" placeholder="Telefonnummer" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 16px; border-radius: 12px; width: 100%; color: white; margin-bottom: 10px;">
+            <textarea name="Msg" rows="3" placeholder="Kurze Info (z.B. Haus in Borken)..." style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 16px; border-radius: 12px; width: 100%; color: white; margin-bottom: 16px;"></textarea>
+            
+            <button type="submit" class="btn btn-primary">Anfrage absenden</button>
+            <p style="font-size: 12px; text-align: center; margin-top: 12px; opacity: 0.6;">Öffnet Ihr E-Mail Programm.</p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
 
   <nav class="dock">
-    <a href="#top" class="active">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    <a href="#top" class="dock-icon active" aria-label="Startseite">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
     </a>
-    <a href="#leistungen">
-      <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+    <a href="https://wa.me/4917646620710" class="dock-icon" aria-label="WhatsApp" style="color: #25D366;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></path></svg>
     </a>
-    <a href="https://wa.me/4917646620710" style="color: #25D366;">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <a href="tel:+4917646620710" class="dock-cta">
+      Anrufen
     </a>
-    <a href="tel:+4917646620710" class="dock-cta">Anrufen</a>
   </nav>
 
-  <footer>
-    <div class="container">
-      <p class="text-small">© 2024 Räumdienst Borken. Alle Rechte vorbehalten.</p>
-      <div style="display: flex; gap: 20px; justify-content: center;">
-        <button class="legal-link" onclick="document.getElementById('imp').style.display='flex'">Impressum</button>
-        <button class="legal-link" onclick="document.getElementById('dsg').style.display='flex'">Datenschutz</button>
-      </div>
-    </div>
+  <footer style="text-align: center; font-size: 12px; color: var(--text-muted); padding-bottom: 20px;">
+    <button onclick="document.getElementById('legal').style.display='flex'" style="background:none; border:none; color:inherit; text-decoration:underline;">Impressum & Datenschutz</button>
   </footer>
 
-  <div id="imp" class="modal" onclick="if(event.target==this)this.style.display='none'">
+  <div id="legal" class="modal" onclick="if(event.target==this)this.style.display='none'">
     <div class="modal-box">
-      <h3>Impressum</h3>
-      <p class="text-small">Angaben gemäß § 5 TMG:<br><br>Räumdienst Borken<br>Maksut Saciri<br>Graf Friedrich Str. 34<br>46325 Borken<br><br>Kontakt:<br>0176 46620710<br>Rauemdienst.Borken@gmail.com</p>
-      <button class="btn btn-secondary btn-full" onclick="document.getElementById('imp').style.display='none'">Schließen</button>
-    </div>
-  </div>
-
-  <div id="dsg" class="modal" onclick="if(event.target==this)this.style.display='none'">
-    <div class="modal-box">
-      <h3>Datenschutz</h3>
-      <p class="text-small">Wir speichern keine Cookies zu Trackingzwecken. Daten aus dem Kontaktformular werden nur zur Beantwortung Ihrer Anfrage genutzt und nicht an Dritte weitergegeben.</p>
-      <button class="btn btn-secondary btn-full" onclick="document.getElementById('dsg').style.display='none'">Schließen</button>
+      <h3>Rechtliches</h3>
+      <p>Räumdienst Borken<br>Maksut Saciri<br>Graf Friedrich Str. 34<br>46325 Borken</p>
+      <button class="btn btn-secondary" onclick="document.getElementById('legal').style.display='none'" style="width:100%">Schließen</button>
     </div>
   </div>
 
   <script>
-    // Intersection Observer for fade-in animations
+    // Fade-in animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if(entry.isIntersecting) {
           entry.target.style.opacity = 1;
           entry.target.style.transform = 'translateY(0)';
         }
       });
     }, { threshold: 0.1 });
 
-    // Apply animation classes
     document.querySelectorAll('section > .container > *').forEach(el => {
-      el.style.opacity = 0;
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'all 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+      el.style.opacity = 0; el.style.transform = 'translateY(15px)';
+      el.style.transition = 'all 0.6s var(--ease)';
       observer.observe(el);
     });
   </script>
