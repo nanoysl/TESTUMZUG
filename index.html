@@ -1,241 +1,380 @@
-<!doctype html>
-<html lang="de">
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reflexion GmbH – Azubi-Recruiting neu gedacht</title>
-  <meta name="description" content="Reflexion verbindet Unternehmen mit ihren zukünftigen Auszubildenden direkt dort, wo Berufsorientierung stattfindet: in der Schule." />
-  <style>
-    :root{
-      --bg:#0b0b0d;
-      --bg-soft:#111216;
-      --card:#151821;
-      --line:rgba(255,255,255,.12);
-      --text:#f5f7fb;
-      --muted:#b9c0cf;
-      --green:#8dff65;
-      --violet:#7b4dff;
-      --max:1180px;
-      --radius:24px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#09090b 0%,#101117 100%);color:var(--text)}
-    a{color:inherit;text-decoration:none}
-    .container{width:min(var(--max),calc(100% - 32px));margin:0 auto}
-    .nav{position:sticky;top:0;z-index:20;background:rgba(8,8,10,.7);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-    .logo{font-weight:800;letter-spacing:.02em}
-    .logo span{color:var(--green)}
-    .nav-links{display:flex;gap:18px;color:var(--muted);font-size:14px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:999px;border:1px solid transparent;font-weight:700}
-    .btn-primary{background:var(--green);color:#0a0a0a}
-    .btn-secondary{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.04)}
-    .hero{padding:84px 0 48px}
-    .eyebrow{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;background:rgba(255,255,255,.03)}
-    h1{font-size:clamp(42px,7vw,88px);line-height:.95;letter-spacing:-.04em;margin:18px 0 18px;max-width:950px}
-    .lead{max-width:760px;font-size:20px;line-height:1.6;color:var(--muted)}
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
-    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;margin-top:46px}
-    .panel{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-    .stat{font-size:14px;color:var(--muted)}
-    .stat strong{display:block;color:var(--text);font-size:28px;margin-top:8px}
-    .section{padding:34px 0}
-    .section-head{margin-bottom:24px}
-    .section-kicker{color:var(--green);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.08em}
-    h2{font-size:clamp(30px,4vw,54px);line-height:1.02;letter-spacing:-.03em;margin:10px 0 12px}
-    .sub{max-width:760px;color:var(--muted);font-size:18px;line-height:1.6}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px}
-    .card h3{margin:0 0 10px;font-size:22px}
-    .card p,.list li,.faq p{color:var(--muted);line-height:1.6}
-    .number{width:40px;height:40px;border-radius:999px;background:rgba(141,255,101,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:16px}
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .list{display:grid;gap:14px;padding:0;margin:0;list-style:none}
-    .list li{padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:18px}
-    .price{display:grid;grid-template-columns:1fr .8fr;gap:18px;align-items:start}
-    .price-box{background:linear-gradient(180deg,rgba(123,77,255,.18),rgba(255,255,255,.04));border:1px solid rgba(123,77,255,.45);border-radius:28px;padding:28px}
-    .price-tag{font-size:48px;font-weight:800;letter-spacing:-.04em}
-    .faq{display:grid;gap:14px}
-    .faq-item{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
-    .faq-item h3{margin:0 0 8px;font-size:20px}
-    .cta{padding:50px 0 84px}
-    .cta-box{padding:34px;border-radius:28px;background:linear-gradient(135deg,rgba(141,255,101,.13),rgba(123,77,255,.16));border:1px solid var(--line);text-align:center}
-    footer{padding:28px 0 44px;color:var(--muted);border-top:1px solid rgba(255,255,255,.06)}
-    @media (max-width: 980px){
-      .hero-grid,.cards,.split,.price{grid-template-columns:1fr}
-      .nav-links{display:none}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Steinreinigung & Versiegelung | Perfektion für deine Einfahrt</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            500: '#0ea5e9', // Hydro Blue
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            900: '#0f172a', // Deep Slate
+                            800: '#1e293b',
+                            700: '#334155',
+                        }
+                    },
+                    animation: {
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 10px rgba(14, 165, 233, 0.2)' },
+                            '100%': { boxShadow: '0 0 25px rgba(14, 165, 233, 0.6)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(14, 165, 233, 0.4);
+            transform: translateY(-2px);
+            transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #ffffff, #94a3b8);
+        }
+        .text-gradient-brand {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #38bdf8, #0ea5e9);
+        }
+    </style>
 </head>
-<body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="logo">Reflexion<span>.</span></a>
-      <nav class="nav-links">
-        <a href="#leistung">Leistung</a>
-        <a href="#prozess">Prozess</a>
-        <a href="#vorteile">Vorteile</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-      <a class="btn btn-primary" href="#kontakt">Anfrage stellen</a>
-    </div>
-  </header>
+<body class="bg-dark-900 text-slate-300 font-sans antialiased selection:bg-brand-500 selection:text-white">
 
-  <main id="top">
-    <section class="hero">
-      <div class="container">
-        <span class="eyebrow">Azubi-Recruiting neu gedacht</span>
-        <h1>Wir bringen Unternehmen mit ihren zukünftigen Auszubildenden direkt in der Schule zusammen.</h1>
-        <p class="lead">Reflexion positioniert Ausbildungsbetriebe genau dort, wo Berufsorientierung passiert: im Schulalltag. So werden Ausbildungsplätze sichtbar, modern präsentiert und für Schülerinnen und Schüler leichter zugänglich.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#kontakt">Jetzt anfragen</a>
-          <a class="btn btn-secondary" href="#leistung">Mehr erfahren</a>
+    <nav class="fixed w-full z-50 glass border-b-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="h-10 w-auto" src="mtlogo.png" alt="Steinreinigung Logo">
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#prozess" class="text-sm font-medium hover:text-white transition">Der Prozess</a>
+                    <a href="#beweise" class="text-sm font-medium hover:text-white transition">Ergebnisse</a>
+                    <a href="#faq" class="text-sm font-medium hover:text-white transition">FAQ</a>
+                    <a href="#kontakt" class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-2.5 rounded-full font-semibold transition shadow-lg animate-glow">
+                        Jetzt Angebot sichern
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="hero-grid">
-          <div class="panel">
-            <div class="section-kicker">Mission</div>
-            <h2 style="font-size:36px;margin-top:12px">Fachkräftemangel an der Wurzel angehen.</h2>
-            <p class="sub" style="font-size:17px">Reflexion entstand mit dem Ziel, den Weg von der Schule in die Ausbildung direkter, sichtbarer und wirksamer zu machen. Moderne Werbeträger wie die Azubi-Stele sorgen dafür, dass Unternehmen früher im Entscheidungsprozess präsent sind.</p>
-          </div>
-          <div class="panel">
-            <div class="stat">Fokus<strong>Schulen als echter Touchpoint</strong></div>
-            <div style="height:16px"></div>
-            <div class="stat">Lösung<strong>Azubi-Stele & digitale Inhalte</strong></div>
-            <div style="height:16px"></div>
-            <div class="stat">Ziel<strong>Mehr passende Azubis für Betriebe</strong></div>
-          </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-600/20 rounded-full blur-[120px]"></div>
         </div>
-      </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass mb-8 text-sm font-medium text-brand-500">
+                <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+                Termine für dieses Jahr fast ausgebucht
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white">
+                Wir bringen deine Steine <br/>
+                <span class="text-gradient-brand">zurück ins Leben.</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10">
+                Vergiss Schmutz, Moos und Flechten. Mit unserer Hochdruck-Tiefenreinigung und Nano-Versiegelung sieht deine Einfahrt wieder aus wie am ersten Tag.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#kontakt" class="bg-white text-dark-900 hover:bg-slate-200 px-8 py-4 rounded-full font-bold text-lg transition flex items-center justify-center gap-2">
+                    Kostenlose Analyse anfragen
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+        </div>
     </section>
 
-    <section class="section" id="prozess">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Prozess</div>
-          <h2>So funktioniert moderne Azubi-Gewinnung mit Reflexion.</h2>
-          <p class="sub">Kein Streuverlust-Geballer, kein verstaubtes Recruiting-Gerät aus der Mottenkiste. Sondern ein klarer Weg in drei Schritten.</p>
+    <section id="beweise" class="py-20 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">Ergebnisse, die man nicht faken kann.</h2>
+                <p class="text-slate-400">Keine leeren Versprechen. Harte Vorher-Nachher Beweise.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+                <div class="glass glass-card rounded-3xl p-8 flex flex-col justify-center items-center text-center">
+                    <div class="text-5xl font-extrabold text-brand-500 mb-2">4.9/5</div>
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-white font-medium">Basierend auf über 500+ gereinigten Objekten in der Region.</p>
+                </div>
+
+                <div class="md:col-span-2 rounded-3xl overflow-hidden relative group">
+                    <img src="m2m.jpg" alt="Vorher Nachher Steinreinigung 1" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <span class="bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Terrasse</span>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 rounded-3xl overflow-hidden relative group">
+                    <img src="m3m.jpg" alt="Vorher Nachher Steinreinigung 2" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <span class="bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Einfahrt</span>
+                    </div>
+                </div>
+
+                <div class="glass glass-card rounded-3xl p-8 flex flex-col justify-between">
+                    <svg class="w-10 h-10 text-slate-500 mb-4" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.896 3.456-8.352 9.12-8.352 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/></svg>
+                    <p class="text-slate-300 italic mb-6">"Ich dachte ernsthaft, wir müssten die komplette Einfahrt neu pflastern lassen. Nach einem Tag sah alles aus wie neu verlegt. Wahnsinn!"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-white">M.K</div>
+                        <div>
+                            <div class="text-white font-semibold">Michael K.</div>
+                            <div class="text-brand-500 text-sm">Verifizierter Kunde</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden md:grid grid-cols-2 gap-6 mt-6 h-[300px]">
+                <div class="rounded-3xl overflow-hidden relative group h-full">
+                    <img src="m4m.jpg" alt="Vorher Nachher Steinreinigung 3" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                </div>
+                <div class="rounded-3xl overflow-hidden relative group h-full">
+                    <img src="m5m.jpg" alt="Vorher Nachher Steinreinigung 4" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                </div>
+            </div>
         </div>
-        <div class="cards">
-          <div class="card">
-            <div class="number">1</div>
-            <h3>Präsenz aufbauen</h3>
-            <p>Ihr Unternehmen wird dort sichtbar, wo junge Menschen sich mit ihrer Zukunft beschäftigen: direkt in der Schule.</p>
-          </div>
-          <div class="card">
-            <div class="number">2</div>
-            <h3>Inhalte ausspielen</h3>
-            <p>Ausbildungsangebote und Informationen werden modern, verständlich und digital aufbereitet.</p>
-          </div>
-          <div class="card">
-            <div class="number">3</div>
-            <h3>Talente erreichen</h3>
-            <p>Schülerinnen und Schüler entdecken passende Ausbildungsplätze früher und mit deutlich geringerer Hürde.</p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="leistung">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Leistung</div>
-          <h2>Was Reflexion Unternehmen konkret bringt.</h2>
-          <p class="sub">Die Website beschreibt Reflexion als Marketingagentur mit Fokus auf Azubi-Recruiting in Schulen und auf moderne, interaktive Sichtbarkeit durch die Azubi-Stele.</p>
+    <section class="py-24 bg-dark-800 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">Warum wir? Der Technologie-Vorsprung.</h2>
+                <p class="text-slate-400 max-w-2xl">Wir spritzen nicht einfach ein bisschen Wasser auf den Boden. Wir nutzen industrielle Technik und smarte Chemie, um die Poren des Steins tiefenrein zu spülen und dauerhaft zu schützen.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass glass-card p-8 rounded-3xl">
+                    <div class="w-12 h-12 bg-brand-500/20 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-white text-xl font-bold mb-3">500 Bar Hochdruck</h3>
+                    <p class="text-slate-400 text-sm">Unsere Industrie-Geräte holen tiefsitzenden Schmutz aus den Poren, wo herkömmliche Baumarkt-Kärcher versagen.</p>
+                </div>
+                <div class="glass glass-card p-8 rounded-3xl">
+                    <div class="w-12 h-12 bg-brand-500/20 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-white text-xl font-bold mb-3">Nano-Versiegelung</h3>
+                    <p class="text-slate-400 text-sm">Nach der Reinigung verschließen wir die Poren. Wasser perlt ab, Moos findet keinen Halt mehr. Für jahrelange Ruhe.</p>
+                </div>
+                <div class="glass glass-card p-8 rounded-3xl">
+                    <div class="w-12 h-12 bg-brand-500/20 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-white text-xl font-bold mb-3">Fugen-Füllung</h3>
+                    <p class="text-slate-400 text-sm">Ausgespülte Fugen füllen wir mit wasserdurchlässigem, unkrauthemmendem Spezialsand direkt wieder auf.</p>
+                </div>
+                <div class="glass glass-card p-8 rounded-3xl">
+                    <div class="w-12 h-12 bg-brand-500/20 rounded-2xl flex items-center justify-center mb-6 text-brand-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-white text-xl font-bold mb-3">Schnell & Sauber</h3>
+                    <p class="text-slate-400 text-sm">Kein Dreck an den Fassaden. Wir arbeiten mit speziellen Flächenreinigern, die das Spritzwasser komplett abschotten.</p>
+                </div>
+            </div>
         </div>
-        <div class="split">
-          <ul class="list">
-            <li><strong>Sichtbarkeit im Schulalltag</strong><br>Unternehmen sind nicht erst am Ende der Entscheidungskette sichtbar, sondern genau dann, wenn Orientierung entsteht.</li>
-            <li><strong>Digitale Anpassbarkeit</strong><br>Inhalte lassen sich flexibel aktualisieren, statt monatelang in starren Printflächen festzuhängen.</li>
-            <li><strong>Direkterer Weg zur Ausbildung</strong><br>Schüler finden schneller passende Angebote, Unternehmen senken die Hürde zur ersten Kontaktaufnahme.</li>
-          </ul>
-          <ul class="list">
-            <li><strong>Moderner Auftritt</strong><br>Die Lösung wirkt nicht wie Recruiting aus 2009, sondern zeitgemäß und nah an der Zielgruppe.</li>
-            <li><strong>Lokale Stärke</strong><br>Reflexion sitzt in Rheine und positioniert sich klar als spezialisierter Partner für Ausbildungsbetriebe.</li>
-            <li><strong>Klares Problem-Solution-Fit</strong><br>Der Kernfokus ist nicht allgemeines Marketing, sondern die konkrete Gewinnung zukünftiger Auszubildender.</li>
-          </ul>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="vorteile">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Vorteile</div>
-          <h2>Warum dieses Modell deutlich stärker ist als Standard-Recruiting.</h2>
-          <p class="sub">Wer Azubis erst sucht, wenn alle anderen auch losrennen, kommt oft zu spät. Reflexion setzt früher an: dort, wo Aufmerksamkeit, Orientierung und Entscheidung beginnen.</p>
+    <section id="prozess" class="py-24 bg-dark-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-12">Das 3-Stufen-System zur perfekten Einfahrt</h2>
+            
+            <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-700 before:to-transparent">
+                
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-dark-900 bg-slate-800 text-brand-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 font-bold">1</div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass p-6 rounded-2xl text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Die Tiefenreinigung</h3>
+                        <p class="text-slate-400 text-sm">Mit unserem Heißwasser-Hochdrucksystem lösen wir tiefsitzenden Schmutz, Schwarzalgen und festsitzendes Moos, ohne die Steinoberfläche aufzurauen.</p>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-dark-900 bg-slate-800 text-brand-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 font-bold">2</div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass p-6 rounded-2xl text-left">
+                        <h3 class="text-xl font-bold text-white mb-2">Fugensanierung</h3>
+                        <p class="text-slate-400 text-sm">Leere Fugen sind ein Magnet für neues Unkraut. Wir füllen alles sauber mit hochwertigem Quarzsand oder fester Fuge auf – für eine makellose Optik.</p>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-dark-900 bg-brand-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 font-bold">3</div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass p-6 rounded-2xl text-left ring-1 ring-brand-500/50">
+                        <div class="text-xs text-brand-500 font-bold uppercase tracking-wider mb-1">Das Geheimnis</div>
+                        <h3 class="text-xl font-bold text-white mb-2">Premium Nano-Versiegelung</h3>
+                        <p class="text-slate-400 text-sm">Der wichtigste Schritt: Wir imprägnieren den Stein. Wasser perlt ab (Lotuseffekt), Algen finden keinen Halt mehr. So bleibt das Ergebnis nicht Wochen, sondern Jahre erhalten.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class="cards">
-          <div class="card">
-            <h3>Frühe Aufmerksamkeit</h3>
-            <p>Früh sichtbar zu sein schlägt spätes Hinterherrennen. Genau darin liegt der strategische Hebel.</p>
-          </div>
-          <div class="card">
-            <h3>Weniger Hürde</h3>
-            <p>Wenn Informationen zugänglich und präsent sind, steigt die Chance, dass Schüler sich überhaupt mit einem Betrieb beschäftigen.</p>
-          </div>
-          <div class="card">
-            <h3>Spezialisierter Fokus</h3>
-            <p>Keine beliebige Agentur-Floskelmaschine, sondern klares Angebot rund um Ausbildungsgewinnung im Schulumfeld.</p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="angebot">
-      <div class="container price">
-        <div>
-          <div class="section-kicker">Angebot</div>
-          <h2>Startseite im Limitless-Stil, aber mit Reflexion-Inhalten.</h2>
-          <p class="sub">Das hier ist bewusst als saubere Testversion gebaut, damit du sie direkt auf GitHub Pages prüfen kannst. Danach kann man Bilder, Farben, CTA, Formulare und weitere Unterseiten ergänzen.</p>
+    <section id="faq" class="py-24 bg-dark-800 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">Noch Zweifel? Lass uns Tacheles reden.</h2>
+            </div>
+
+            <div x-data="{ activeTab: 1 }" class="space-y-4">
+                
+                <div class="glass rounded-2xl overflow-hidden">
+                    <button @click="activeTab = activeTab === 1 ? null : 1" class="w-full text-left px-6 py-5 focus:outline-none flex justify-between items-center">
+                        <span class="text-lg font-semibold text-white">Wie lange bleibt meine Einfahrt danach sauber?</span>
+                        <svg class="w-5 h-5 text-brand-500 transform transition-transform duration-300" :class="activeTab === 1 ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="activeTab === 1" x-collapse.duration.300ms>
+                        <div class="px-6 pb-5 text-slate-400">
+                            Durch unsere abschließende Nano-Versiegelung dringen Wasser und Schmutz nicht mehr in den Stein ein. Je nach Witterung und Steinart hast du 3 bis 5 Jahre Ruhe vor massivem Moos- und Algenbefall.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl overflow-hidden">
+                    <button @click="activeTab = activeTab === 2 ? null : 2" class="w-full text-left px-6 py-5 focus:outline-none flex justify-between items-center">
+                        <span class="text-lg font-semibold text-white">Werden meine Hauswand oder Pflanzen schmutzig?</span>
+                        <svg class="w-5 h-5 text-brand-500 transform transition-transform duration-300" :class="activeTab === 2 ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="activeTab === 2" x-collapse.duration.300ms style="display: none;">
+                        <div class="px-6 pb-5 text-slate-400">
+                            Nein. Wir arbeiten mit speziellen Flächenreinigern (Hauben), die das Spritzwasser zu 99% unter sich halten. Zudem decken wir empfindliche Bereiche ab und spülen Pflanzen und Wände danach vorsorglich mit klarem Wasser ab.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl overflow-hidden">
+                    <button @click="activeTab = activeTab === 3 ? null : 3" class="w-full text-left px-6 py-5 focus:outline-none flex justify-between items-center">
+                        <span class="text-lg font-semibold text-white">Muss ich während der Reinigung zuhause sein?</span>
+                        <svg class="w-5 h-5 text-brand-500 transform transition-transform duration-300" :class="activeTab === 3 ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="activeTab === 3" x-collapse.duration.300ms style="display: none;">
+                        <div class="px-6 pb-5 text-slate-400">
+                            Nicht zwingend. Solange wir Zugang zu einem Außenwasseranschluss (oder einem geeigneten Anschluss) haben, können wir die Arbeit komplett autark erledigen. Du kommst abends nach Hause und stehst vor einer neuen Einfahrt.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#kontakt" class="inline-block bg-white text-dark-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-200 transition">Alle Klarheiten beseitigt? Let's go.</a>
+            </div>
         </div>
-        <div class="price-box">
-          <div class="eyebrow">Testversion</div>
-          <div style="height:14px"></div>
-          <div class="price-tag">Ready for GitHub</div>
-          <p class="sub" style="font-size:16px">Eine einzige index.html. Kein Framer-Ballast, kein 15-MB-Monster. Einfach hochladen und schauen, ob die Richtung passt.</p>
-          <div style="height:16px"></div>
-          <a class="btn btn-primary" href="#kontakt">Nächsten Schritt starten</a>
-        </div>
-      </div>
     </section>
 
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">FAQ</div>
-          <h2>Wichtige Fragen zum ersten Testaufbau.</h2>
+    <section id="kontakt" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-brand-900/40 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-[url('m5m.jpg')] bg-cover bg-center opacity-20 grayscale"></div>
         </div>
-        <div class="faq">
-          <div class="faq-item">
-            <h3>Ist das schon die finale Reflexion-Seite?</h3>
-            <p>Nein. Das ist eine saubere erste Startseite auf Basis des Limitless-Aufbaus mit den Inhalten und dem Angebot von Reflexion.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Kann das direkt auf GitHub Pages laufen?</h3>
-            <p>Ja. Diese Datei ist absichtlich als einfache statische HTML-Datei gebaut.</p>
-          </div>
-          <div class="faq-item">
-            <h3>Kann man später Bilder, Videos und Formulare ergänzen?</h3>
-            <p>Ja. Genau dafür ist dieser Aufbau gedacht: erst testen, dann sauber ausbauen.</p>
-          </div>
+        
+        <div class="max-w-3xl mx-auto px-4 relative z-10 text-center glass p-10 md:p-16 rounded-3xl border border-brand-500/30">
+            <h2 class="text-4xl font-extrabold text-white mb-6">Zeit, den Wert deiner Immobilie zu steigern.</h2>
+            <p class="text-lg text-slate-300 mb-10">Schreib uns kurz, wie viele Quadratmeter du ca. hast. Wir melden uns innerhalb von 24 Stunden mit einer ehrlichen Einschätzung.</p>
+            
+            <form class="space-y-4 text-left">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Dein Name" class="w-full bg-dark-900/80 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500">
+                    <input type="text" placeholder="Telefonnummer" class="w-full bg-dark-900/80 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500">
+                </div>
+                <div class="relative">
+                    <select class="w-full bg-dark-900/80 border border-slate-700 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 appearance-none">
+                        <option value="">Was soll gereinigt werden?</option>
+                        <option value="einfahrt">Einfahrt</option>
+                        <option value="terrasse">Terrasse</option>
+                        <option value="wege">Gartenwege</option>
+                        <option value="komplett">Alles zusammen</option>
+                    </select>
+                </div>
+                <button type="button" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold text-lg py-4 rounded-xl transition shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_30px_rgba(14,165,233,0.5)]">
+                    Kostenloses Angebot anfordern
+                </button>
+            </form>
+            <p class="mt-4 text-xs text-slate-400">Wir hassen Spam genauso wie du. Deine Daten sind sicher.</p>
         </div>
-      </div>
     </section>
 
-    <section class="cta" id="kontakt">
-      <div class="container">
-        <div class="cta-box">
-          <h2 style="margin-top:0">Bereit für den Test?</h2>
-          <p class="sub" style="margin:0 auto 22px">Lade diese Datei als <strong>index.html</strong> auf GitHub hoch. Danach siehst du sofort, ob die Richtung für Reflexion passt.</p>
-          <a class="btn btn-primary" href="mailto:info@reflexion-gmbh.de">Kontakt aufnehmen</a>
+    <footer class="bg-dark-950 border-t border-white/5 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <img src="mlogo.jpg" alt="Logo" class="h-12 mb-6 rounded-lg">
+                    <p class="text-slate-400 max-w-sm">
+                        Premium Steinreinigung für Anspruchsvolle. Wir machen das, was andere nicht können: Nachhaltige Sauberkeit mit Tiefenwirkung.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-brand-500 transition">Startseite</a></li>
+                        <li><a href="#prozess" class="text-slate-400 hover:text-brand-500 transition">Der Prozess</a></li>
+                        <li><a href="#beweise" class="text-slate-400 hover:text-brand-500 transition">Ergebnisse</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Rechtliches</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Impressum</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Datenschutz</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm">© 2024 Premium Steinreinigung. Alle Rechte vorbehalten.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-slate-500 hover:text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+                    <a href="#" class="text-slate-500 hover:text-white"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer>
-    <div class="container">© Reflexion GmbH – Testaufbau für GitHub Pages</div>
-  </footer>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
